@@ -1,0 +1,21 @@
+---
+/* ProjectPage layout — for long-form project case studies.
+ * Renders the status line + maturity badge, then the MDX content. */
+import type { CollectionEntry } from 'astro:content';
+import BaseLayout from './BaseLayout.astro';
+import MaturityBadge from '../components/MaturityBadge.astro';
+
+interface Props { entry: CollectionEntry<'projects'>; }
+const { entry } = Astro.props;
+const { title, description, status, maturity } = entry.data;
+---
+<BaseLayout title={`${title} — Nicholas Sisco`} description={description}>
+  <article>
+    <h1>{title}</h1>
+    <p class="status-line">
+      <span><strong>Status:</strong> {status}</span>
+      <MaturityBadge maturity={maturity} />
+    </p>
+    <slot />
+  </article>
+</BaseLayout>

@@ -1,0 +1,53 @@
+---
+title: Operational-Decay & Growth Simulator (ODGS)
+description: A draft specification package asking whether operating productivity adds predictive information beyond conventional financial and market variables — specification and source-feasibility stage only, no model or result claimed.
+status: Draft specification package
+maturity: Concept / specification
+date: 2026-09-23
+last_updated: 2026-09-23
+source_notion_pages:
+  - https://app.notion.com/p/3e4c6b28dc0181f580d2f5fd39370726
+evidence_reviewed_through: 2026-09-23
+unresolved_questions:
+  - Authorized return-data source with historical active-and-inactive security coverage
+  - Operational numerator/denominator definition, exact-vs-proxy rules, and domain review
+  - Mechanically defined historical universe rule and observation grain
+  - Frozen label horizons, benchmark definitions, and publication-maturity rules
+tags:
+  - odgs
+  - specification
+  - validation-design
+  - panel-methods
+---
+
+{/*Section 1 ("Public case study") reconstructed: on the previous site this
+     section linked back to the canonical case-study concept (inventory §3.3).
+     Verify wording against the live site.*/}
+
+## Public case study
+
+This page is the specification case study for the Operational-Decay &amp; Growth Simulator.
+
+## Research question
+
+Does operating productivity add predictive information beyond conventional financial and market variables about subsequent business outcomes or shareholder returns? These are separate claims. Evidence about business deterioration would not, by itself, establish negative future returns or an attractive short.
+
+## Current specification
+
+The initial proposed universe is U.S. public medical-technology/device companies with a measurable relationship between installed systems/capacity and recurring utilization, procedures, consumables, service, or related revenue. The target families include utilization change, recurring productivity change, external financing, share expansion, and benchmark-relative total returns. Proposed horizons differ by target; the 12-month horizon applies to financing and return targets, while operational outcomes use fiscal-period windows.
+
+The current source package includes a charter and Ground 0 review v0.1, outcome specification v0.1, measurement contract v0.2, universe/data contract v0.1, data dictionary v0.1, validation protocol v0.1, and a draft experiment manifest. The newer measurement contract supersedes conflicting definitions in the retained conceptual drafts. The manifest remains `DRAFT_NOT_READY_TO_RUN`.
+
+## Validation design
+
+The written protocol proposes same-row comparisons of conventional baselines and versions augmented with operating variables; point-in-time features and label-publication maturity; common-calendar chronological splits; nested tuning; a separately protected final holdout; issuer/calendar-aware uncertainty; separate discrimination and calibration diagnostics; and explicit abstention. These are requirements on paper, not implemented or tested behavior.
+
+## Evidence and limits
+
+The Ground 0 review dated 2026-09-21 judged the package ready for domain review and an outcome-blind source-feasibility audit, not model training. No company dataset, extraction, fitted model, folds, backtest, calibrated forecast, transaction-cost analysis, trade, or predictive result is claimed.
+
+Universe membership, historical security coverage, operational denominator availability, data providers, benchmark, exact dates, sample-support gates, and some thresholds remain unresolved. No outcome analysis should begin until sources and decision rules are frozen.
+
+## Next research gate
+
+Generate a candidate register mechanically without inspecting outcomes. Measure source coverage, exact versus proxy denominators, reporting discontinuities, inactive-issuer coverage, and label maturity. Use the audit to choose a defensible period and make a proceed/revise/stop decision. Domain review precedes model training and holdout access.

@@ -1,0 +1,43 @@
+---
+/* MaturityBadge — renders the house maturity vocabulary as a pastel chip.
+ * Vocabulary (confirmed): Concept → Prototype → Internally Validated →
+ * Stable → Archived. Compound labels such as "Concept / specification" or
+ * "Concept / protocol proposal" map to their leading stage. */
+interface Props { maturity?: string; }
+const { maturity } = Astro.props;
+
+const STAGES = [
+  { key: 'concept', label: 'Concept', bg: 'var(--pastel-sky)' },
+  { key: 'prototype', label: 'Prototype', bg: 'var(--pastel-lilac)' },
+  { key: 'internally validated', label: 'Internally Validated', bg: 'var(--pastel-sage)' },
+  { key: 'stable', label: 'Stable', bg: 'var(--pastel-sand)' },
+  { key: 'archived', label: 'Archived', bg: 'var(--pastel-gray)' },
+];
+
+function resolve(raw?: string) {
+  if (!raw) return null;
+  const lower = raw.toLowerCase();
+  return STAGES.find((s) => lower.startsWith(s.key)) ?? null;
+}
+
+const stage = resolve(maturity);
+---
+{stage && (
+  <span class="badge" style={`background:${stage.bg}`} title={maturity}>
+    {stage.label}
+  </span>
+)}
+<style>
+  .badge {
+    display: inline-block;
+    font-size: 0.78rem;
+    font-weight: 600;
+    letter-spacing: 0.04em;
+    text-transform: uppercase;
+    color: var(--ink);
+    border: 1px solid var(--line);
+    border-radius: 999px;
+    padding: 0.15rem 0.7rem;
+    white-space: nowrap;
+  }
+</style>

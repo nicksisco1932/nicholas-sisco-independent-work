@@ -1,0 +1,29 @@
+---
+/* Dynamic route for content-collection pages.
+ * With `build.format: 'file'`, /literature → literature.html, preserving the
+ * legacy .html URL style. Draft entries (status: draft) are excluded from the
+ * build and from all listings — they exist in the collection as stubs only. */
+import { getCollection, render } from 'astro:content';
+import ProjectPage from '../layouts/ProjectPage.astro';
+import NoteArticle from '../layouts/NoteArticle.astro';
+
+export async function getStaticPaths() {
+  const published = ({ data }: { data: { status: string } }) => data.status !== 'draft';
+  const paths = [];
+  for (const entry of await getCollection('projects', published)) {
+    // Strip the .mdx extension: entry.id is "literature.mdx", URL is /literature.html
+    paths.push({ params: { slug: entry.id.replace(/\.mdx$/, '') }, props: { kind: 'project' as const, entry } });
+  }
+  for (const entry of await getCollection('notes', published)) {
+    paths.push({ params: { slug: entry.id.replace(/\.mdx$/, '') }, props: { kind: 'note' as const, entry } });
+  }
+  return paths;
+}
+
+const { kind, entry } = Astro.props;
+const { Content } = await render(entry);
+const Layout = kind === 'project' ? ProjectPage : NoteArticle;
+---
+<Layout entry={entry}>
+  <Content />
+</Layout>

@@ -1,0 +1,25 @@
+---
+/* NoteArticle layout — for research/methods notes.
+ * Canonical note pattern (confirmed): status/maturity block → Question →
+ * Evidence → Analysis → Limitations → Takeaway → Sources. The status block
+ * is rendered here from front matter; the body follows the pattern. */
+import type { CollectionEntry } from 'astro:content';
+import BaseLayout from './BaseLayout.astro';
+import MaturityBadge from '../components/MaturityBadge.astro';
+
+interface Props { entry: CollectionEntry<'notes'>; }
+const { entry } = Astro.props;
+const { title, description, status, maturity } = entry.data;
+---
+<BaseLayout title={`${title} — Nicholas Sisco`} description={description}>
+  <article>
+    <h1>{title}</h1>
+    <blockquote>
+      <p>
+        <strong>Status:</strong> {status}{maturity ? <> · <strong>Maturity:</strong> {maturity}</> : null}
+        {' '}<MaturityBadge maturity={maturity} />
+      </p>
+    </blockquote>
+    <slot />
+  </article>
+</BaseLayout>

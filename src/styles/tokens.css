@@ -1,0 +1,43 @@
+/* Design tokens — soft pastel theme.
+ *
+ * NOTE: the exact palette, fonts, and spacing of the previous site were never
+ * recovered (inventory §8: "Live HTML/CSS" UNKNOWN). These tokens are a
+ * tasteful soft-pastel reconstruction chosen to match the documented theme
+ * ("soft pastel, text-only, responsive"). Adjust freely — every visual choice
+ * on the site derives from the tokens below.
+ */
+
+:root {
+  /* Surfaces */
+  --bg: #faf7f1;          /* warm ivory page background */
+  --surface: #fffdf8;     /* cards / raised panels */
+  --surface-tint: #f4eee2;/* subtle tinted panels */
+
+  /* Text */
+  --ink: #35322c;         /* primary text */
+  --muted: #7d7468;       /* secondary text, bylines */
+  --faint: #a89e8f;       /* tertiary text */
+
+  /* Lines & borders */
+  --line: #e8dfd1;
+
+  /* Accent (dusty blue) */
+  --accent: #4f6b87;
+  --accent-soft: #dfe9f2;
+  --accent-ink: #3c5469;
+
+  /* Pastel family — used for maturity badges, callouts, section washes */
+  --pastel-rose: #f6dfe1;
+  --pastel-sage: #e2ebda;
+  --pastel-sky: #dde8f2;
+  --pastel-lilac: #e7e1f3;
+  --pastel-sand: #f3e8d3;
+  --pastel-gray: #e9e4d9;
+
+  /* Shape & type */
+  --radius: 10px;
+  --maxw: 46rem;
+  --font-body: system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
+  --font-head: Georgia, "Times New Roman", serif;
+  --font-mono: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
+}

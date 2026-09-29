@@ -1,0 +1,52 @@
+---
+title: Scientific Literature Intelligence Agent
+description: A local literature workflow that makes query approval, retrieval, source snapshots, normalization, deduplication, and later appraisal inspectable — with provenance-first records and human-authored appraisal.
+status: Active development
+maturity: Prototype
+date: 2026-09-23
+last_updated: 2026-09-23
+source_notion_pages:
+  - https://app.notion.com/p/3e4c6b28dc01815fadfcd5ccc55d3967
+evidence_reviewed_through: 2026-09-23
+unresolved_questions:
+  - Code and example-artifact release ownership and reuse terms
+  - Rights-reviewed source/demo artifact release
+tags:
+  - literature-intelligence
+  - provenance
+  - pubmed
+  - appraisal
+---
+
+{/*Section 1 ("Public case study") reconstructed: on the previous site this
+     section linked back to the canonical case-study concept (inventory §3.2).
+     Verify wording against the live site.*/}
+
+## Public case study
+
+This page is the public case study for the Scientific Literature Intelligence Agent.
+
+## Problem and approach
+
+Build a local literature workflow that makes query approval, retrieval, source snapshots, normalization, deduplication, and later appraisal inspectable. Stage 2A accepts a human-authored PubMed query and produces a normalized candidate corpus with retained raw responses/provenance, resumable caching, and immutable artifacts. A separate appraisal foundation validates human-authored records and renders them without making scientific judgments.
+
+## Appraisal foundation
+
+Structured records can hold source snapshots and hashes, quoted passages, measurements, participant accounting, claim appraisals, citation-use audits, reviewer assessments, uncertainty, and reasoned checks. This is a data and review structure, not automated appraisal. No screening, scientific synthesis, live full-text or citation retrieval, or LLM appraisal is implemented.
+
+## Evidence
+
+A recorded live acquisition returned 68 records: 61 with abstracts and 68 with DOI values, with no retrieval failures; one exact-title collision with differing identifiers was retained as uncertain. Its Stage 2A acceptance record reports 23 offline tests and one live integration test passing. A later offline run after duplicate grouping reports 25 tests passing and unchanged hashes for acquisition files. These are historical results, not rerun for this portfolio update. On 2026-09-23, the focused appraisal test file passed (14 tests); this is software validation for those cases, not scientific validation or full-suite/live evidence.
+
+## Schema/version note
+
+{/*The Notion export rendered the filenames below as broken link artifacts
+     (appraisal_[demo.py](http://demo.py)); they are filenames, shown as code.*/}
+
+The appraisal model accepts record schema versions 1.0 and 1.1, defaulting to 1.1. The v1.2 path is the demo fixture directory set in `appraisal_demo.py`, and `tests/test_appraisal.py` asserts that the CLI demo writes there. It is a fixture-directory label and does not indicate supported appraisal schema 1.2. The focused appraisal test file passed 14 tests on 2026-09-23; broader and live validation remain separate.
+
+## Limits and next
+
+No public code repository URL is attached. The private corpus and raw source text are not published. Abstract redistribution rights are not assumed. Appraisal quality still depends on human source selection and judgment.
+
+Next: prepare a synthetic-free, rights-reviewed artifact or source release. Confirm code/example ownership and reuse terms before publication; keep the private corpus and raw source text out of the release.

@@ -1,0 +1,94 @@
+---
+/* Homepage.
+ *
+ * NOTE: homepage copy and section order were not recovered from the previous
+ * site (inventory §8). What is confirmed: the positioning intent (independent
+ * scientist-builder across biophysics, imaging, computation, quantitative
+ * systems, and scientific tooling), the three flagship project summaries
+ * (computational photography = bounded text only, no images/repo links), and
+ * a notes listing. Everything below is restrained scaffolding built only
+ * from confirmed facts — verify against the live site before finalizing. */
+import { getCollection } from 'astro:content';
+import BaseLayout from '../layouts/BaseLayout.astro';
+import MaturityBadge from '../components/MaturityBadge.astro';
+
+const projects = await getCollection('projects', ({ data }) => data.status !== 'draft');
+const notes = await getCollection('notes', ({ data }) => data.status !== 'draft');
+
+const projectOrder = ['literature', 'odgs'];
+const ordered = [...projects].sort(
+  (a, b) => projectOrder.indexOf(a.id) - projectOrder.indexOf(b.id)
+);
+// Base-aware links for the GitHub Pages project subpath.
+const _base = import.meta.env.BASE_URL;
+const base = _base.endsWith('/') ? _base : _base + '/';
+---
+<BaseLayout
+  title="Nicholas Sisco — Independent Research & Engineering"
+  description="Durable public record of independent scientific, technical, and creative work: evidence over performance, trajectory over snapshot."
+>
+  <h1>Nicholas Sisco — Independent Research &amp; Engineering</h1>
+
+  <!-- Positioning statement reconstructed from the Notion hub's Site Identity
+       (confirmed intent, not verbatim homepage copy). Verify against live site. -->
+  <p>
+    Independent scientist-builder working across biophysics, imaging, computation,
+    quantitative systems, and scientific tooling. This site is a durable public
+    record of independent work: evidence over performance, trajectory over snapshot.
+  </p>
+
+  <h2 class="section-label">Projects</h2>
+
+  <!-- Computational Photography: bounded text summary only. Confirmed: no
+       images, raw data, or repository links until rights are established.
+       Copy below is verbatim from the Notion project page. -->
+  <section class="card" aria-labelledby="comp-photo">
+    <h2 id="comp-photo">Computational Photography &amp; Image Registration</h2>
+    <p class="status-line">
+      <span><strong>Status:</strong> Active private development</span>
+      <MaturityBadge maturity="Prototype / architecture development" />
+    </p>
+    <p>
+      Develop a defensible, reusable computational-photography pipeline that can
+      combine heterogeneous image stacks while preserving evidence, uncertainty,
+      and the option to abstain when alignment or fusion is not trustworthy.
+    </p>
+    <p>
+      Real photographic stacks often differ in field of view, pose, focal point,
+      exposure, and local image quality. A useful reconstruction system should
+      not merely produce an attractive composite; it should know what evidence
+      supports the result.
+    </p>
+    <p class="fine">
+      Bounded text summary only — no images, raw data, or repository links are
+      published here until rights and a clean evidence destination are established.
+    </p>
+  </section>
+
+  {ordered.map((p) => (
+    <a class="card card-link" href={`${base}${p.id.replace(/\.mdx$/,"")}.html`} aria-label={p.data.title}>
+      <h2>{p.data.title}</h2>
+      <p class="status-line">
+        <span><strong>Status:</strong> {p.data.status}</span>
+        <MaturityBadge maturity={p.data.maturity} />
+      </p>
+      <p>{p.data.description}</p>
+    </a>
+  ))}
+
+  <h2 class="section-label" id="notes">Research notes</h2>
+
+  {notes.map((n) => (
+    <a class="card card-link" href={`${base}${n.id.replace(/\.mdx$/,"")}.html`} aria-label={n.data.title}>
+      <h3>{n.data.title}</h3>
+      <p class="status-line">
+        <span><strong>Status:</strong> {n.data.status}</span>
+        <MaturityBadge maturity={n.data.maturity} />
+      </p>
+      <p>{n.data.description}</p>
+    </a>
+  ))}
+</BaseLayout>
+<style>
+  .fine { color: var(--muted); font-size: 0.9rem; }
+</style>

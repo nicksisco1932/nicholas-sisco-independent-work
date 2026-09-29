@@ -1,0 +1,61 @@
+---
+title: Why panel outcomes need publication-maturity checks
+description: A methods note on separating feature availability, outcome occurrence, and label maturity in historical prediction studies — with a proposed audit checklist.
+status: Published methods note
+maturity: Concept / protocol proposal
+date: 2026-09-23
+last_updated: 2026-09-23
+source_notion_pages:
+  - https://app.notion.com/p/3e4c6b28dc0181fab3f6fb9e91104c9a
+evidence_reviewed_through: 2026-09-23
+unresolved_questions:
+  - The checklist has not been applied to ODGS data; ODGS remains at specification and source-feasibility stage
+  - Domain-specific horizon, maturity window, missingness, and threshold choices require domain review
+tags:
+  - methods-note
+  - publication-maturity
+  - panel-studies
+  - temporal-leakage
+---
+
+{/*The original page opened with the status/maturity blockquote rendered
+     above by the NoteArticle layout; it is omitted here to avoid duplication.*/}
+
+A quarter-end date is not the date the result became knowable. Historical prediction studies need to track when inputs were available and when outcomes became complete enough to use.
+
+## Three timelines
+
+For a prediction made at (t_0), keep separate:
+
+1. **Feature availability:** when a source value became public or otherwise accessible, including revisions.
+2. **Outcome occurrence:** the period during which the target event or measurement takes place.
+3. **Label maturity:** when follow-up and reporting are complete enough to assign the prespecified target.
+
+For a model fitted at cutoff (C), a row can enter training only if its features reflect information available at the row's prediction time and its required label was mature and available by (C). A label learned later can evaluate a past prediction; it cannot be treated as known in an earlier fit. This distinction is my protocol synthesis of temporal-leakage and look-ahead concerns, not terminology asserted by the cited studies.
+
+## Why the checks matter
+
+Davis and Matheny's framework describes clinical prediction leakage as temporal and dependent on data cadence and latency; event time alone may not establish when information was usable. Kothari, Sabino, and Zach show that survival and data trimming can distort relations between ex ante variables and later returns. ter Horst, Nijman, and Verbeek study look-ahead bias from non-random fund disappearance and ex-post conditioning.
+
+The papers motivate the general checks; the following checklist is a proposed operationalization for a future panel study, not a reproduction of their methods or results.
+
+## Proposed audit checklist
+
+- Define the prediction date, feature cutoff, outcome window, ascertainment rule, and label-maturity rule before constructing rows.
+- Record each feature and universe-membership source, including earliest verified availability and revisions.
+- Record each outcome's event period, publication/report date, capture date, follow-up completeness, and unresolved/censored state.
+- At every training cutoff, include only labels mature and available by that date. Unknown or not-yet-mature is not a negative label.
+- Use chronological evaluation splits. If outcome windows overlap, measure the overlap and prevent shared periods crossing the training/test boundary.
+- Use a common calendar cutoff across panel members and report exclusions caused by survival, delay, or source coverage.
+- Compare baseline and augmented models on the same eligible rows. Fit imputation, scaling, selection, and calibration within each training window.
+- Report discrimination, calibration, coverage, and abstention separately.
+
+## Limits
+
+This note does not set the right horizon, maturity window, acceptable missingness, or thresholds for every question. Those choices require domain review and must be frozen before outcome analysis. The checklist has not been applied to ODGS data; ODGS remains at specification and source-feasibility stage.
+
+## References
+
+1. Davis SE, Matheny ME. [A framework for understanding label leakage in machine learning for health care](https://doi.org/10.1093/jamia/ocad178). *JAMIA*. 2024;31(1):274–280.
+2. Kothari SP, Sabino J, Zach T. [Implications of survival and data trimming for tests of market efficiency](https://doi.org/10.1016/j.jacceco.2004.02.003). *Journal of Accounting and Economics*. 2005;39(1):129–161.
+3. ter Horst JR, Nijman TE, Verbeek M. [Eliminating look-ahead bias in evaluating persistence in mutual fund performance](https://doi.org/10.1016/S0927-5398(01)00032-9). *Journal of Empirical Finance*. 2001.

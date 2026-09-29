@@ -1,0 +1,127 @@
+@import "./tokens.css";
+
+/* Base reset + typography. No images anywhere on the site (confirmed
+ * text-only); the pastel theme carries the visual identity. */
+
+*, *::before, *::after { box-sizing: border-box; }
+
+html {
+  -webkit-text-size-adjust: 100%;
+}
+
+body {
+  margin: 0;
+  background: var(--bg);
+  color: var(--ink);
+  font-family: var(--font-body);
+  font-size: 1.0625rem;
+  line-height: 1.7;
+}
+
+/* Soft pastel wash at the top of the page */
+body::before {
+  content: "";
+  display: block;
+  height: 6px;
+  background: linear-gradient(90deg,
+    var(--pastel-rose), var(--pastel-sand), var(--pastel-sage),
+    var(--pastel-sky), var(--pastel-lilac));
+}
+
+main {
+  max-width: var(--maxw);
+  margin: 0 auto;
+  padding: 2rem 1.25rem 4rem;
+}
+
+h1, h2, h3 {
+  font-family: var(--font-head);
+  font-weight: 600;
+  line-height: 1.3;
+  letter-spacing: -0.01em;
+}
+
+h1 { font-size: 2rem; margin: 1.5rem 0 1rem; }
+h2 { font-size: 1.45rem; margin: 2.25rem 0 0.75rem; }
+h3 { font-size: 1.15rem; margin: 1.75rem 0 0.5rem; }
+
+p { margin: 0 0 1rem; }
+
+a { color: var(--accent); text-decoration-thickness: 1px; text-underline-offset: 2px; }
+a:hover { color: var(--accent-ink); }
+
+blockquote {
+  margin: 1.25rem 0;
+  padding: 0.9rem 1.1rem;
+  background: var(--accent-soft);
+  border-left: 4px solid var(--accent);
+  border-radius: 0 var(--radius) var(--radius) 0;
+}
+blockquote p { margin: 0; }
+
+hr { border: 0; border-top: 1px solid var(--line); margin: 2rem 0; }
+
+code { font-family: var(--font-mono); font-size: 0.9em; }
+pre {
+  background: var(--surface-tint);
+  border: 1px solid var(--line);
+  border-radius: var(--radius);
+  padding: 1rem;
+  overflow-x: auto;
+}
+
+ul, ol { padding-left: 1.4rem; }
+li { margin-bottom: 0.35rem; }
+
+table { border-collapse: collapse; width: 100%; margin: 1rem 0; font-size: 0.95rem; }
+th, td { border: 1px solid var(--line); padding: 0.5rem 0.75rem; text-align: left; }
+th { background: var(--surface-tint); font-family: var(--font-head); }
+
+.status-line {
+  color: var(--muted);
+  font-size: 0.95rem;
+  margin: 0.25rem 0 1.25rem;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+  align-items: center;
+}
+
+.card {
+  background: var(--surface);
+  border: 1px solid var(--line);
+  border-radius: var(--radius);
+  padding: 1.25rem 1.4rem;
+  margin: 1rem 0;
+}
+.card h2, .card h3 { margin-top: 0; }
+.card p:last-child { margin-bottom: 0; }
+
+.card-link { text-decoration: none; color: inherit; display: block; }
+.card-link:hover { border-color: var(--accent); }
+.card-link:hover h2, .card-link:hover h3 { color: var(--accent-ink); }
+
+.section-label {
+  font-size: 0.8rem;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  color: var(--faint);
+  margin: 2.5rem 0 0.5rem;
+}
+
+.skip-link {
+  position: absolute;
+  left: -9999px;
+  top: 0;
+  background: var(--ink);
+  color: #fff;
+  padding: 0.5rem 1rem;
+  z-index: 100;
+}
+.skip-link:focus { left: 0; }
+
+@media (max-width: 560px) {
+  body { font-size: 1rem; }
+  h1 { font-size: 1.65rem; }
+  main { padding: 1.25rem 1rem 3rem; }
+}
