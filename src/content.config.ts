@@ -27,4 +27,35 @@ const notes = defineCollection({
   schema: synthesisSchema,
 });
 
-export const collections = { projects, notes };
+const courseWeekSchema = z.object({
+  title: z.string(),
+  description: z.string(),
+  status: z.string(),
+  maturity: z.string().optional(),
+  week: z.number().int().positive(),
+  source_site_url: z.string().url(),
+  evidence_reviewed_through: z.coerce.string().nullable().optional(),
+  tags: z.array(z.string()).default([]),
+});
+
+const resourceSchema = z.object({
+  title: z.string(),
+  description: z.string(),
+  status: z.string(),
+  resource_type: z.string(),
+  source_site_url: z.string().url(),
+  printable: z.boolean().default(true),
+  tags: z.array(z.string()).default([]),
+});
+
+const courseWeeks = defineCollection({
+  type: 'content',
+  schema: courseWeekSchema,
+});
+
+const courseResources = defineCollection({
+  type: 'content',
+  schema: resourceSchema,
+});
+
+export const collections = { projects, notes, courseWeeks, courseResources };

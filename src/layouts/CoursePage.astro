@@ -1,0 +1,28 @@
+---
+import type { CollectionEntry } from 'astro:content';
+import BaseLayout from './BaseLayout.astro';
+import MaturityBadge from '../components/MaturityBadge.astro';
+
+interface Props {
+  entry: CollectionEntry<'courseWeeks'> | CollectionEntry<'courseResources'>;
+  kind: 'week' | 'resource';
+}
+
+const { entry, kind } = Astro.props;
+const { title, description, status, source_site_url } = entry.data;
+const maturity = 'maturity' in entry.data ? entry.data.maturity : undefined;
+---
+<BaseLayout title={title + ' — Forged Fitness'} description={description}>
+  <article class="course-page">
+    <p class="section-label">Forged Fitness · {kind === 'week' ? 'Course week' : 'Printable resource'}</p>
+    <h1>{title}</h1>
+    <p class="status-line">
+      <span><strong>Status:</strong> {status}</span>
+      {maturity ? <MaturityBadge maturity={maturity} /> : null}
+    </p>
+    <p class="course-source">
+      <a href={source_site_url}>View the production course version</a>
+    </p>
+    <slot />
+  </article>
+</BaseLayout>
