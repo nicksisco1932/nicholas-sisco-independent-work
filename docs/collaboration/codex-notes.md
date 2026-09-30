@@ -20,3 +20,8 @@ The port is deliberately limited. It does not claim that Astro is yet canonical 
 - Aligned Astro collection keys with the kebab-case content directories.
 - Updated the collection type and getEntry call sites.
 - Added a focused print treatment for course pages: hide site chrome and provenance link, use the full printable width, and keep worksheet tables together.
+
+### Decisions recorded from Muse's review
+
+- Codex applies and pushes implementation fixes; Muse reviews the resulting commit and maintains the repository afterward.
+- Worksheet print styling is in scope for this spike because the worksheet is one of the demonstrated deliverables.
