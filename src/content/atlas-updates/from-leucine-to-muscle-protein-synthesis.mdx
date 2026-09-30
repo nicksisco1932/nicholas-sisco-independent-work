@@ -1,0 +1,269 @@
+---
+title: From Leucine to Muscle Protein Synthesis
+description: Follow a dietary amino acid through sensing, localization, translation,
+  and the limits of inference about muscle growth.
+kicker: Mechanism Explainer
+lead: Follow a dietary amino acid through sensing, localization, translation, and
+  the limits of inference about muscle growth.
+date: '2026-09-26'
+topics:
+- nutrition-substrate-biology
+- signaling-pathways
+- essays-research-updates
+facts: {}
+source_site_url: https://nicholas-sisco-independent-work.nicksisco1932.chatgpt.site/molecular-physiology/updates/from-leucine-to-muscle-protein-synthesis/
+---
+
+## The scientific question
+
+How does leucine availability become a cellular response, and where does the evidence stop short of hypertrophy?
+
+### What changed
+
+Foundational synthesis for the atlas launch; this article is not reporting a newly published study.
+
+<aside class="callout"><h2>The foundation</h2><p>Muscle cells need raw materials, energy, and instructions to make proteins. Leucine participates as both a building block and a signal. Neither role replaces the need for other amino acids, and new protein can support repair rather than growth.</p></aside>
+
+<nav class="contents" aria-label="Article contents"><h2>Inside this explainer</h2><ol><li><a href="#what-leucine-is">What leucine is</a></li><li><a href="#why-sensing-exists">Why amino-acid sensing exists</a></li><li><a href="#sestrin2">Sestrin2</a></li><li><a href="#rag-gtpases">Rag GTPases</a></li><li><a href="#lysosomal-localization">Lysosomal localization of mTORC1</a></li><li><a href="#rheb">Rheb and permissive activation</a></li><li><a href="#s6k1-4ebp1">S6K1 / 4E-BP1</a></li><li><a href="#translation-initiation">Translation initiation</a></li><li><a href="#signaling-is-not-growth">Why signaling is not the same as hypertrophy</a></li><li><a href="#all-essential-amino-acids">Why total essential amino acids still matter</a></li><li><a href="#energetic-state">Interaction with energetic state</a></li><li><a href="#resistance-training">Interaction with resistance training</a></li><li><a href="#human-evidence">What is strongly supported in humans</a></li><li><a href="#open-questions">What remains mechanistically uncertain</a></li></ol><p><a href="#appraisal">Evidence & limits</a> · <a href="#references">References</a></p></nav>
+
+<section class="pathway" id="pathway"><p class="kicker">Mechanism map</p><h2>Two inputs, a shared regulatory network</h2><p>A selected mechanism map, not a complete pathway. Arrows describe the labeled relationship in its evidence context; they do not imply a deterministic human outcome.</p><p class="small">→ contributes · ⇢ permits · ⊣ inhibits · dashed arrow: uncertain transfer. Numbers identify the evidence records below. On small screens, scroll the map horizontally or use its text equivalent.</p><div class="map-scroll" tabindex="0" role="region" aria-label="Scrollable mechanism map"><svg viewBox="0 0 1254 592" aria-labelledby="leucine-loading-title leucine-loading-desc"><title id="leucine-loading-title">Two inputs, a shared regulatory network</title><desc id="leucine-loading-desc">A selected mechanism map, not a complete pathway. Arrows describe the labeled relationship in its evidence context; they do not imply a deterministic human outcome. Every numbered connection has a text equivalent and provenance below.</desc><defs><marker id="leucine-loading-arrow" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse"><path d="M0 0 L10 5 L0 10z" fill="context-stroke"/></marker><marker id="leucine-loading-bar" viewBox="0 0 10 10" refX="5" refY="5" markerWidth="8" markerHeight="8" orient="auto"><path d="M5 0 L5 10" stroke="context-stroke" stroke-width="2"/></marker></defs><g class="edge contributes"><title>Ligand sensing. Binding and perturbation support</title><path d="M199,53 L229,53" marker-end="url(#leucine-loading-arrow)"/><circle cx="214" cy="53" r="11"/><text x="214" y="57">1</text></g><g class="edge contributes"><title>Via GATOR network. Cellular pathway support</title><path d="M404,53 L434,53" marker-end="url(#leucine-loading-arrow)"/><circle cx="419" cy="53" r="11"/><text x="419" y="57">2</text></g><g class="edge permits"><title>Lysosomal recruitment. Structural and cellular support</title><path d="M609,53 L639,201" marker-end="url(#leucine-loading-arrow)"/><circle cx="624" cy="127" r="11"/><text x="624" y="131">3</text></g><g class="edge contributes"><title>Force transduction. Candidate routes in isolated muscle</title><path d="M199,201 L229,201" marker-end="url(#leucine-loading-arrow)"/><circle cx="214" cy="201" r="11"/><text x="214" y="205">4</text></g><g class="edge uncertain"><title>Multiple candidate routes. Incomplete human mediation evidence</title><path d="M404,201 L639,201" marker-end="url(#leucine-loading-arrow)"/><circle cx="521.5" cy="201" r="11"/><text x="521.5" y="205">5</text></g><g class="edge inhibits"><title>Regulates TSC restraint. Cellular perturbation support</title><path d="M199,349 L229,349" marker-end="url(#leucine-loading-bar)"/><circle cx="214" cy="349" r="11"/><text x="214" y="353">6</text></g><g class="edge inhibits"><title>Promotes GTP hydrolysis. Cellular and biochemical support</title><path d="M404,349 L434,349" marker-end="url(#leucine-loading-bar)"/><circle cx="419" cy="349" r="11"/><text x="419" y="353">7</text></g><g class="edge contributes"><title>Allosteric activation. Direct structural and kinase evidence</title><path d="M609,349 L639,201" marker-end="url(#leucine-loading-arrow)"/><circle cx="624" cy="275" r="11"/><text x="624" y="279">8</text></g><g class="edge inhibits"><title>Via RAPTOR; context matters. Cellular perturbation support</title><path d="M726.5,468 L726.5,230" marker-end="url(#leucine-loading-bar)"/><circle cx="726.5" cy="349" r="11"/><text x="726.5" y="353">9</text></g><g class="edge contributes"><title>Kinase regulation. Pathway and biopsy support</title><path d="M814,201 L844,53" marker-end="url(#leucine-loading-arrow)"/><circle cx="829" cy="127" r="11"/><text x="829" y="131">10</text></g><g class="edge contributes"><title>Phosphorylation regulation. Cellular translation evidence</title><path d="M814,201 L844,349" marker-end="url(#leucine-loading-arrow)"/><circle cx="829" cy="275" r="11"/><text x="829" y="279">11</text></g><g class="edge contributes"><title>Translation-associated control. Network-level interpretation</title><path d="M1019,53 L1049,201" marker-end="url(#leucine-loading-arrow)"/><circle cx="1034" cy="127" r="11"/><text x="1034" y="131">12</text></g><g class="edge permits"><title>eIF4E availability. Cellular perturbation support</title><path d="M1019,349 L1049,201" marker-end="url(#leucine-loading-arrow)"/><circle cx="1034" cy="275" r="11"/><text x="1034" y="279">13</text></g><g class="edge permits"><title>Needs substrates + elongation. Process relationship</title><path d="M1136.5,230 L1136.5,468" marker-end="url(#leucine-loading-arrow)"/><circle cx="1136.5" cy="349" r="11"/><text x="1136.5" y="353">14</text></g><g class="edge uncertain"><title>Balance over repeated exposures. Conditional human association</title><path d="M1049,497 L1019,497" marker-end="url(#leucine-loading-arrow)"/><circle cx="1034" cy="497" r="11"/><text x="1034" y="501">15</text></g><a href="../concepts/leucine.html" aria-label="Leucine availability concept"><rect class="node" x="24" y="24" width="175" height="58" rx="8"/><text class="node-label" x="111.5" y="58">Leucine availability</text></a><a href="../concepts/sestrin2.html" aria-label="Sestrin2 / GATOR concept"><rect class="node" x="229" y="24" width="175" height="58" rx="8"/><text class="node-label" x="316.5" y="58">Sestrin2 / GATOR</text></a><a href="../concepts/rag-gtpases.html" aria-label="Rag recruitment concept"><rect class="node" x="434" y="24" width="175" height="58" rx="8"/><text class="node-label" x="521.5" y="58">Rag recruitment</text></a><a href="../concepts/mechanical-tension.html" aria-label="Training / tension concept"><rect class="node" x="24" y="172" width="175" height="58" rx="8"/><text class="node-label" x="111.5" y="206">Training / tension</text></a><a href="../concepts/mechanical-tension.html" aria-label="Mechanotransduction concept"><rect class="node" x="229" y="172" width="175" height="58" rx="8"/><text class="node-label" x="316.5" y="206">Mechanotransduction</text></a><a href="../concepts/mtorc1.html" aria-label="mTORC1 concept"><rect class="node" x="639" y="172" width="175" height="58" rx="8"/><text class="node-label" x="726.5" y="206">mTORC1</text></a><a href="../concepts/s6k1.html" aria-label="S6K1 concept"><rect class="node" x="844" y="24" width="175" height="58" rx="8"/><text class="node-label" x="931.5" y="58">S6K1</text></a><a href="../concepts/4e-bp1.html" aria-label="4E-BP1 regulation concept"><rect class="node" x="844" y="320" width="175" height="58" rx="8"/><text class="node-label" x="931.5" y="354">4E-BP1 regulation</text></a><a href="../concepts/translation-initiation.html" aria-label="Translation initiation concept"><rect class="node" x="1049" y="172" width="175" height="58" rx="8"/><text class="node-label" x="1136.5" y="206">Translation initiation</text></a><a href="../concepts/akt.html" aria-label="AKT concept"><rect class="node" x="24" y="320" width="175" height="58" rx="8"/><text class="node-label" x="111.5" y="354">AKT</text></a><a href="../concepts/tsc1-2.html" aria-label="TSC1/2 concept"><rect class="node" x="229" y="320" width="175" height="58" rx="8"/><text class="node-label" x="316.5" y="354">TSC1/2</text></a><a href="../concepts/rheb.html" aria-label="Rheb–GTP concept"><rect class="node" x="434" y="320" width="175" height="58" rx="8"/><text class="node-label" x="521.5" y="354">Rheb–GTP</text></a><a href="../concepts/ampk.html" aria-label="AMPK concept"><rect class="node" x="639" y="468" width="175" height="58" rx="8"/><text class="node-label" x="726.5" y="502">AMPK</text></a><a href="../concepts/muscle-protein-synthesis.html" aria-label="Protein synthesis concept"><rect class="node" x="1049" y="468" width="175" height="58" rx="8"/><text class="node-label" x="1136.5" y="502">Protein synthesis</text></a><a href="../concepts/hypertrophy.html" aria-label="Net accretion → growth concept"><rect class="node" x="844" y="468" width="175" height="58" rx="8"/><text class="node-label" x="931.5" y="502">Net accretion → growth</text></a></svg></div><details class="edge-records"><summary>Read all 15 connections and their evidence</summary><ol><li><h3>Leucine availability → Sestrin2 / GATOR</h3><p><strong>contributes:</strong> Ligand sensing. Binding and perturbation support.</p><div class="evidence"><div class="badges"><span>Cell culture</span></div><p class="small">Model: Cellular · Directness: Direct</p><p>A nutrient-sensing interaction, not a human growth endpoint. <span class="citations"><a href="#ref-wolfson2016">Wolfson RL 2016</a></span></p></div></li><li><h3>Sestrin2 / GATOR → Rag recruitment</h3><p><strong>contributes:</strong> Via GATOR network. Cellular pathway support.</p><div class="evidence"><div class="badges"><span>Cell culture</span></div><p class="small">Model: Cellular · Directness: Direct</p><p>Intervening complexes are condensed in this diagram. <span class="citations"><a href="#ref-wolfson2016">Wolfson RL 2016</a></span></p></div></li><li><h3>Rag recruitment → mTORC1</h3><p><strong>permits:</strong> Lysosomal recruitment. Structural and cellular support.</p><div class="evidence"><div class="badges"><span>Biochemical reconstitution</span><span>Cell culture</span></div><p class="small">Model: Mixed · Directness: Direct</p><p>Recruitment differs from catalytic activation. <span class="citations"><a href="#ref-docking2019">Rogala KB 2019</a></span></p></div></li><li><h3>Training / tension → Mechanotransduction</h3><p><strong>contributes:</strong> Force transduction. Candidate routes in isolated muscle.</p><div class="evidence"><div class="badges"><span>Ex vivo</span></div><p class="small">Model: Animal · Directness: Direct</p><p>Isolated-muscle experiments support mechanical regulation. <span class="citations"><a href="#ref-hornberger2006">Hornberger TA 2006</a></span></p></div></li><li><h3>Mechanotransduction → mTORC1</h3><p><strong>uncertain:</strong> Multiple candidate routes. Incomplete human mediation evidence.</p><div class="evidence"><div class="badges"><span>Mechanistic inference</span></div><p class="small">Model: Human · Directness: Inferred</p><p>A single dominant route is not established for human training. <span class="citations"><a href="#ref-hornberger2006">Hornberger TA 2006</a></span></p></div></li><li><h3>AKT ⊣ TSC1/2</h3><p><strong>inhibits:</strong> Regulates TSC restraint. Cellular perturbation support.</p><div class="evidence"><div class="badges"><span>Cell culture</span></div><p class="small">Model: Cellular · Directness: Direct</p><p>AKT-associated phosphorylation can relieve TSC-mediated restraint. <span class="citations"><a href="#ref-inoki2002">Inoki K 2002</a></span></p></div></li><li><h3>TSC1/2 ⊣ Rheb–GTP</h3><p><strong>inhibits:</strong> Promotes GTP hydrolysis. Cellular and biochemical support.</p><div class="evidence"><div class="badges"><span>Cell culture</span><span>Biochemical reconstitution</span></div><p class="small">Model: Mixed · Directness: Direct</p><p>TSC regulates the Rheb nucleotide state. <span class="citations"><a href="#ref-garami2003">Garami A 2003</a></span></p></div></li><li><h3>Rheb–GTP → mTORC1</h3><p><strong>contributes:</strong> Allosteric activation. Direct structural and kinase evidence.</p><div class="evidence"><div class="badges"><span>Biochemical reconstitution</span></div><p class="small">Model: Biochemical · Directness: Direct</p><p>Rheb can stimulate mTORC1 catalysis in defined assays. <span class="citations"><a href="#ref-yang2017">Yang H 2017</a></span></p></div></li><li><h3>AMPK ⊣ mTORC1</h3><p><strong>inhibits:</strong> Via RAPTOR; context matters. Cellular perturbation support.</p><div class="evidence"><div class="badges"><span>Cell culture</span></div><p class="small">Model: Cellular · Directness: Direct</p><p>This edge does not predict concurrent-training outcomes. <span class="citations"><a href="#ref-gwinn2008">Gwinn DM 2008</a></span></p></div></li><li><h3>mTORC1 → S6K1</h3><p><strong>contributes:</strong> Kinase regulation. Pathway and biopsy support.</p><div class="evidence"><div class="badges"><span>Human biopsy</span></div><p class="small">Model: Human · Directness: Indirect</p><p>A phosphosite readout is not a synthesis measurement. <span class="citations"><a href="#ref-drummond2009">Drummond MJ 2009</a></span></p></div></li><li><h3>mTORC1 → 4E-BP1 regulation</h3><p><strong>contributes:</strong> Phosphorylation regulation. Cellular translation evidence.</p><div class="evidence"><div class="badges"><span>Cell culture</span></div><p class="small">Model: Cellular · Directness: Direct</p><p>Regulates relief of eIF4E restraint. <span class="citations"><a href="#ref-thoreen2012">Thoreen CC 2012</a></span></p></div></li><li><h3>S6K1 → Translation initiation</h3><p><strong>contributes:</strong> Translation-associated control. Network-level interpretation.</p><div class="evidence"><div class="badges"><span>Mechanistic inference</span></div><p class="small">Model: Cellular · Directness: Indirect</p><p>A condensed branch; S6K1 is not the only translation regulator. <span class="citations"><a href="#ref-thoreen2012">Thoreen CC 2012</a></span></p></div></li><li><h3>4E-BP1 regulation → Translation initiation</h3><p><strong>permits:</strong> eIF4E availability. Cellular perturbation support.</p><div class="evidence"><div class="badges"><span>Cell culture</span></div><p class="small">Model: Cellular · Directness: Direct</p><p>Reduced restraint permits initiation-factor assembly. <span class="citations"><a href="#ref-thoreen2012">Thoreen CC 2012</a></span></p></div></li><li><h3>Translation initiation → Protein synthesis</h3><p><strong>permits:</strong> Needs substrates + elongation. Process relationship.</p><div class="evidence"><div class="badges"><span>Mechanistic inference</span></div><p class="small">Model: Cellular · Directness: Inferred</p><p>Initiation is required, but completion has additional constraints. <span class="citations"><a href="#ref-thoreen2012">Thoreen CC 2012</a></span></p></div></li><li><h3>Protein synthesis → Net accretion → growth</h3><p><strong>uncertain:</strong> Balance over repeated exposures. Conditional human association.</p><div class="evidence"><div class="badges"><span>Human intervention</span><span>Tracer study</span></div><p class="small">Model: Human · Directness: Indirect</p><p>Growth depends on sustained net balance, including breakdown; acute synthesis alone does not predict it. <span class="citations"><a href="#ref-damas2016">Damas F 2016</a>; <a href="#ref-mitchell2014">Mitchell CJ 2014</a></span></p></div></li></ol></details></section>
+
+<p class="kicker">01</p>
+
+<h2 id="what-leucine-is">What leucine is</h2>
+
+### Level 1 · Foundations
+
+Leucine is an essential amino acid: a chemical building block that the human body cannot make in adequate amounts. Dietary proteins deliver leucine together with other amino acids.
+
+### Level 2 · Mechanism
+
+Digestion and transport determine availability to tissues. Inside cells, leucine can enter protein synthesis or participate in metabolism and sensing.
+
+<details class="advanced"><summary>Level 3 · Advanced — What leucine is</summary><p>An amino acid's concentration is a state variable, not a flux. Plasma concentration, intracellular free pools, transport, oxidation, and incorporation need not change in parallel.</p></details>
+
+<p class="kicker">02</p>
+
+<h2 id="why-sensing-exists">Why amino-acid sensing exists</h2>
+
+### Level 1 · Foundations
+
+Making a protein requires a complete set of ingredients. Cells benefit from coordinating construction with what is available.
+
+### Level 2 · Mechanism
+
+The nutrient arm of mTORC1 regulation connects amino-acid availability to the location of a regulatory complex. [Sancak Y 2008](#ref-sancak2008)
+
+<details class="advanced"><summary>Level 3 · Advanced — Why amino-acid sensing exists</summary><p>A sensing pathway conveys information; a substrate pool supplies matter. A sensor responding to one amino acid cannot establish that all substrates and energy are sufficient.</p></details>
+
+<p class="kicker">03</p>
+
+<h2 id="sestrin2">Sestrin2</h2>
+
+### Level 1 · Foundations
+
+A molecule can carry information by binding to a protein. Sestrin2 is one example of a leucine-responsive binding protein. [Wolfson RL 2016](#ref-wolfson2016)
+
+### Level 2 · Mechanism
+
+Leucine occupancy changes Sestrin2's interaction with GATOR2, linking nutrient availability to regulation upstream of the Rags. [Wolfson RL 2016](#ref-wolfson2016)
+
+<details class="advanced"><summary>Level 3 · Advanced — Sestrin2</summary><p>For an ideal single-site equilibrium, fractional occupancy is θ = [free ligand] / (Kd + [free ligand]). This illustrative binding model is not a fitted description of exercising muscle: competing interactions, compartmental concentrations, kinetics, and sensor abundance can alter the cellular response. A plasma leucine concentration cannot be substituted for the free concentration at a sensor. Nor does occupancy establish that Sestrin2 is the sole relevant human muscle sensor. <span class="citations"><a href="#ref-wolfson2016">Wolfson RL 2016</a></span></p></details>
+
+<p class="kicker">04</p>
+
+<h2 id="rag-gtpases">Rag GTPases</h2>
+
+### Level 1 · Foundations
+
+Proteins often need to meet before they can influence one another. The Rags help organize such encounters.
+
+### Level 2 · Mechanism
+
+Rag heterodimers interact with RAPTOR to recruit mTORC1 in response to nutrient information. [Sancak Y 2008](#ref-sancak2008)
+
+<details class="advanced"><summary>Level 3 · Advanced — Rag GTPases</summary><p>RagA/B–GTP paired with RagC/D–GDP favors recruitment. The states of both partners matter; calling all GTPases simply 'on when GTP-bound' obscures this asymmetry. <span class="citations"><a href="#ref-docking2019">Rogala KB 2019</a></span></p></details>
+
+<p class="kicker">05</p>
+
+<h2 id="lysosomal-localization">Lysosomal localization of mTORC1</h2>
+
+### Level 1 · Foundations
+
+A lysosome is a membrane-bound recycling compartment that also serves as a signaling location.
+
+### Level 2 · Mechanism
+
+Lysosome-associated Rag machinery positions mTORC1 for productive regulatory encounters. The membrane surface is part of the mechanism. [Rogala KB 2019](#ref-docking2019)
+
+<details class="advanced"><summary>Level 3 · Advanced — Lysosomal localization of mTORC1</summary><p>Recruitment alters effective local concentration and encounter geometry. A membrane constrains movement and orientation, so bulk concentration does not completely specify productive molecular encounters. Colocalization in an image supports proximity at the assay's resolution, not necessarily binding or enzyme activity. Distinguishing recruitment from activation requires orthogonal measurements of interaction and catalysis. <span class="citations"><a href="#ref-docking2019">Rogala KB 2019</a></span></p></details>
+
+<p class="kicker">06</p>
+
+<h2 id="rheb">Rheb and permissive activation</h2>
+
+### Level 1 · Foundations
+
+Being in the right location is only part of the story. An enzyme can still need a separate activating interaction.
+
+### Level 2 · Mechanism
+
+Rheb in its GTP-bound state promotes mTORC1 catalysis. TSC provides restraint on this input and connects it to other regulatory conditions. [Yang H 2017](#ref-yang2017); [Inoki K 2002](#ref-inoki2002)
+
+<details class="advanced"><summary>Level 3 · Advanced — Rheb and permissive activation</summary><p>Rheb acts through allosteric structural change. 'Permissive' describes the cellular context; biochemically Rheb is a direct activator, not merely a passive docking factor. <span class="citations"><a href="#ref-yang2017">Yang H 2017</a></span></p></details>
+
+<p class="kicker">07</p>
+
+<h2 id="s6k1-4ebp1">S6K1 / 4E-BP1</h2>
+
+### Level 1 · Foundations
+
+mTORC1 influences other proteins that help control the protein-making machinery.
+
+### Level 2 · Mechanism
+
+S6K1 is a downstream kinase. 4E-BP1 regulates eIF4E availability and initiation-factor assembly; these are distinct branches, not consecutive steps. [Drummond MJ 2009](#ref-drummond2009); [Thoreen CC 2012](#ref-thoreen2012)
+
+<details class="advanced"><summary>Level 3 · Advanced — S6K1 / 4E-BP1</summary><p>Phosphorylation is site-specific and reversible. Protein abundance, subcellular location, substrate access, and phosphatases influence the meaning of a measured phosphosite.</p></details>
+
+<p class="kicker">08</p>
+
+<h2 id="translation-initiation">Translation initiation</h2>
+
+### Level 1 · Foundations
+
+The cell assembles machinery to start reading a messenger RNA before it can build a protein.
+
+### Level 2 · Mechanism
+
+Changes in eIF4E binding help regulate cap-dependent initiation. Regulation differs across messages. [Thoreen CC 2012](#ref-thoreen2012)
+
+<details class="advanced"><summary>Level 3 · Advanced — Translation initiation</summary><p>Initiation does not bypass elongation constraints. Charging a transfer RNA couples amino-acid attachment to ATP conversion to AMP and pyrophosphate; elongation also uses GTP-dependent steps. Thus an initiation signal cannot remove energetic or substrate constraints. Ribosome occupancy alone can also be ambiguous: more ribosomes on an RNA might reflect faster initiation or slower movement along that RNA.</p></details>
+
+<p class="kicker">09</p>
+
+<h2 id="signaling-is-not-growth">Why signaling is not the same as hypertrophy</h2>
+
+### Level 1 · Foundations
+
+A message to build is different from a completed structure, and a completed protein may replace an old one.
+
+### Level 2 · Mechanism
+
+Net accretion depends on synthesis and breakdown integrated over time. A short post-exercise response may include remodeling rather than lasting enlargement. [Damas F 2016](#ref-damas2016)
+
+<details class="advanced"><summary>Level 3 · Advanced — Why signaling is not the same as hypertrophy</summary><p>One study found that an initial acute myofibrillar synthesis response did not correlate with subsequent hypertrophy. This tests a proposed predictor, not whether synthesis is biologically required. <span class="citations"><a href="#ref-mitchell2014">Mitchell CJ 2014</a></span></p></details>
+
+<p class="kicker">10</p>
+
+<h2 id="all-essential-amino-acids">Why total essential amino acids still matter</h2>
+
+### Level 1 · Foundations
+
+A protein sequence needs many amino acids. Adding more of one ingredient does not manufacture the missing ones.
+
+### Level 2 · Mechanism
+
+Leucine can influence a feeding response, but the full amino-acid mixture and time window matter for sustained synthesis. [Churchward-Venne TA 2012](#ref-churchward2012)
+
+<details class="advanced"><summary>Level 3 · Advanced — Why total essential amino acids still matter</summary><p>Existing intracellular pools and protein recycling can temporarily supply amino acids. Their presence explains why an acute response does not establish long-term nutritional sufficiency.</p></details>
+
+<p class="kicker">11</p>
+
+<h2 id="energetic-state">Interaction with energetic state</h2>
+
+### Level 1 · Foundations
+
+Protein construction consumes energy. Cells coordinate it with other demands rather than following nutrient signals in isolation.
+
+### Level 2 · Mechanism
+
+AMPK supplies an energy-sensitive regulatory input and can restrain mTORC1 through RAPTOR phosphorylation. [Gwinn DM 2008](#ref-gwinn2008)
+
+<details class="advanced"><summary>Level 3 · Advanced — Interaction with energetic state</summary><p>This inhibitory connection is experimentally supported in cellular systems. It does not make AMPK an explanation by itself for concurrent-training outcomes or a binary antagonist of all growth. <span class="citations"><a href="#ref-gwinn2008">Gwinn DM 2008</a></span></p></details>
+
+<p class="kicker">12</p>
+
+<h2 id="resistance-training">Interaction with resistance training</h2>
+
+### Level 1 · Foundations
+
+Training loads the tissue that must adapt. Feeding supplies resources and regulatory inputs in the context of that exposure.
+
+### Level 2 · Mechanism
+
+Mechanical input has its own routes to signaling; a loading diagram should not force every response through the leucine sensor. [Hornberger TA 2006](#ref-hornberger2006)
+
+<details class="advanced"><summary>Level 3 · Advanced — Interaction with resistance training</summary><p>Ex vivo mechanical experiments can isolate candidate mechanisms. Human exercise combines recruitment, force transmission, metabolism, and systemic responses, making direct translation less simple. <span class="citations"><a href="#ref-hornberger2006">Hornberger TA 2006</a></span></p></details>
+
+<p class="kicker">13</p>
+
+<h2 id="human-evidence">What is strongly supported in humans</h2>
+
+### Level 1 · Foundations
+
+Researchers can measure newly synthesized muscle proteins after feeding or exercise using labeled tracers and biopsies. [Churchward-Venne TA 2012](#ref-churchward2012)
+
+### Level 2 · Mechanism
+
+Pharmacological inhibition with rapamycin blocked an early post-exercise synthesis increase, supporting a role for rapamycin-sensitive regulation in that protocol. [Drummond MJ 2009](#ref-drummond2009)
+
+<details class="advanced"><summary>Level 3 · Advanced — What is strongly supported in humans</summary><p>These are bounded findings: the intervention, participants, protein pool, and recovery interval define the claim. They do not identify every intervening sensor or prove a chronic supplement effect. <span class="citations"><a href="#ref-drummond2009">Drummond MJ 2009</a></span></p></details>
+
+<p class="kicker">14</p>
+
+<h2 id="open-questions">What remains mechanistically uncertain</h2>
+
+### Level 1 · Foundations
+
+We know many parts of the system, but not exactly how much each part explains a person's adaptation.
+
+### Level 2 · Mechanism
+
+Sensor contributions, spatial organization, translational capacity, and turnover must be connected across timescales. Human ribosomal associations and cell-culture necessity tests answer different questions. [Stec MJ 2016](#ref-stec2016)
+
+<details class="advanced"><summary>Level 3 · Advanced — What remains mechanistically uncertain</summary><p>A stronger translational chain would connect a specific perturbation to molecular state, measured synthesis and breakdown, repeated exposure, tissue change, and function in the same relevant population. The map is a guide to those tests, not a substitute for them.</p></details>
+
+## Advanced mechanism in context
+
+The core distinction is recruitment versus catalytic activation versus biosynthetic flux. Rag-dependent positioning, Rheb-dependent allostery, and downstream translation regulation connect these levels without making them equivalent. [Sancak Y 2008](#ref-sancak2008); [Yang H 2017](#ref-yang2017); [Thoreen CC 2012](#ref-thoreen2012)
+
+## Why it matters
+
+It prevents a plausible molecular explanation from being mistaken for proof that an intervention produces lasting human muscle growth.
+
+<h2 id="appraisal">Evidence & limits</h2>
+
+<div class="evidence"><div class="badges"><span>Human intervention</span><span>Tracer study</span></div><p class="small">Model: Human · Directness: Direct</p><p>Feeding and exercise studies measure acute synthesis responses, not the full molecular chain. <span class="citations"><a href="#ref-churchward2012">Churchward-Venne TA 2012</a>; <a href="#ref-drummond2009">Drummond MJ 2009</a></span></p></div>
+
+<div class="evidence"><div class="badges"><span>Cell culture</span><span>Biochemical reconstitution</span></div><p class="small">Model: Mixed · Directness: Direct</p><p>Binding, docking, and catalytic mechanisms are tested in experimental model systems. <span class="citations"><a href="#ref-wolfson2016">Wolfson RL 2016</a>; <a href="#ref-docking2019">Rogala KB 2019</a>; <a href="#ref-yang2017">Yang H 2017</a></span></p></div>
+
+- **What the studies demonstrated**: The cited studies establish defined cellular sensing mechanisms and acute human feeding or exercise responses. They measure different links in the proposed chain.
+- **What they did not demonstrate**: No single experiment here traces dietary leucine through every molecular node to long-term hypertrophy in humans.
+- **Study type**: Narrative synthesis of selected primary experiments; not a systematic review.
+- **Population / model**: Human feeding and training cohorts, cultured cells, isolated animal muscle, and purified protein systems; population-specific limits apply.
+- **Methods**: Tracer incorporation, biopsies, molecular perturbation, protein binding, structural biology, and longitudinal tissue measurements.
+- **Major limitations**: Selected foundational literature; no exhaustive search or quantitative synthesis. Much of the sensing mechanism comes from systems other than intact exercising human muscle.
+- **Confidence**: Well supported for the existence of the cellular mechanisms and acute human responses; limited for the quantitative contribution of each sensor to long-term human adaptation.
+
+## Neighboring concepts
+
+- **Amino acid** — [Leucine](../concepts/leucine.html): An essential amino acid used in proteins and involved in nutrient sensing.
+
+- **Molecular sensor** — [Sestrin2](../concepts/sestrin2.html): A stress-responsive protein that can bind leucine and regulate the nutrient input to mTORC1.
+
+- **Small GTPases** — [Rag GTPases](../concepts/rag-gtpases.html): Heterodimeric nucleotide-binding proteins that help recruit mTORC1 to lysosomal membranes.
+
+- **Small GTPase** — [Rheb](../concepts/rheb.html): A small GTPase that can directly stimulate the catalytic activity of mTORC1.
+
+- **Kinase complex** — [mTORC1](../concepts/mtorc1.html): A protein kinase complex integrating nutrient and regulatory inputs with cellular growth-related processes.
+
+- **Cellular process** — [Muscle protein synthesis](../concepts/muscle-protein-synthesis.html): Production of new muscle proteins from amino acids through translation.
+
+- **Tissue adaptation** — [Hypertrophy](../concepts/hypertrophy.html): A sustained increase in tissue or cell size; here, growth of skeletal muscle fibers and muscle tissue.
+
+<h2 id="references">References</h2>
+
+Selected sources supporting the linked claims; not an exhaustive literature review. Publication dates belong to the sources, not the date of this atlas entry.
+
+<ol class="references"><li id="ref-sancak2008">Sancak Y et al. (2008). <a href="https://doi.org/10.1126/science.1157535">The Rag GTPases bind raptor and mediate amino acid signaling to mTORC1</a>. <em>Science</em>.</li><li id="ref-yang2017">Yang H et al. (2017). <a href="https://doi.org/10.1038/nature25023">Mechanisms of mTORC1 activation by RHEB and inhibition by PRAS40</a>. <em>Nature</em>.</li><li id="ref-thoreen2012">Thoreen CC et al. (2012). <a href="https://doi.org/10.1038/nature11083">A unifying model for mTORC1-mediated regulation of mRNA translation</a>. <em>Nature</em>.</li><li id="ref-churchward2012">Churchward-Venne TA et al. (2012). <a href="https://doi.org/10.1113/jphysiol.2012.228833">Supplementation of a suboptimal protein dose with leucine or essential amino acids: effects on myofibrillar protein synthesis at rest and following resistance exercise in men</a>. <em>The Journal of Physiology</em>.</li><li id="ref-drummond2009">Drummond MJ et al. (2009). <a href="https://doi.org/10.1113/jphysiol.2008.163816">Rapamycin administration in humans blocks the contraction-induced increase in skeletal muscle protein synthesis</a>. <em>The Journal of Physiology</em>.</li><li id="ref-wolfson2016">Wolfson RL et al. (2016). <a href="https://pmc.ncbi.nlm.nih.gov/articles/PMC4698017/">Sestrin2 is a leucine sensor for the mTORC1 pathway</a>. <em>Science</em>.</li><li id="ref-docking2019">Rogala KB et al. (2019). <a href="https://pubmed.ncbi.nlm.nih.gov/31601708/">Structural basis for the docking of mTORC1 on the lysosomal surface</a>. <em>Science</em>.</li><li id="ref-inoki2002">Inoki K et al. (2002). <a href="https://doi.org/10.1038/ncb839">TSC2 is phosphorylated and inhibited by Akt and suppresses mTOR signalling</a>. <em>Nature Cell Biology</em>.</li><li id="ref-damas2016">Damas F et al. (2016). <a href="https://doi.org/10.1113/JP272472">Resistance training-induced changes in integrated myofibrillar protein synthesis are related to hypertrophy only after attenuation of muscle damage</a>. <em>The Journal of Physiology</em>.</li><li id="ref-mitchell2014">Mitchell CJ et al. (2014). <a href="https://pubmed.ncbi.nlm.nih.gov/24586775/">Acute post-exercise myofibrillar protein synthesis is not correlated with resistance training-induced muscle hypertrophy in young men</a>. <em>PLOS ONE</em>.</li><li id="ref-gwinn2008">Gwinn DM et al. (2008). <a href="https://doi.org/10.1016/j.molcel.2008.03.003">AMPK phosphorylation of raptor mediates a metabolic checkpoint</a>. <em>Molecular Cell</em>.</li><li id="ref-hornberger2006">Hornberger TA et al. (2006). <a href="https://pmc.ncbi.nlm.nih.gov/articles/PMC1450240/">The role of phospholipase D and phosphatidic acid in the mechanical activation of mTOR signaling in skeletal muscle</a>. <em>PNAS</em>.</li><li id="ref-stec2016">Stec MJ et al. (2016). <a href="https://pmc.ncbi.nlm.nih.gov/articles/PMC4835943/">Ribosome biogenesis may augment resistance training-induced myofiber hypertrophy and is required for myotube growth in vitro</a>. <em>American Journal of Physiology-Endocrinology and Metabolism</em>.</li><li id="ref-garami2003">Garami A et al. (2003). <a href="https://doi.org/10.1016/S1097-2765(03)00220-X">Insulin activation of Rheb, a mediator of mTOR/S6K/4E-BP signaling, is inhibited by TSC1 and 2</a>. <em>Molecular Cell</em>.</li></ol>
