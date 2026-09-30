@@ -1,0 +1,77 @@
+---
+/* Dynamic lesson pages: /forged-fitness/lessons/<slug>.html
+ * Renders the lesson heading via CoursePage, the lesson body, the sticky
+ * week nav aside, the mark-complete control, and prev/next navigation.
+ */
+import { getCollection, type CollectionEntry } from 'astro:content';
+import CoursePage from '../../../layouts/CoursePage.astro';
+
+export async function getStaticPaths() {
+  const lessons = await getCollection('course-lessons');
+  const stageOrder = { understand: 0, apply: 1, review: 2 };
+  const sorted = [...lessons].sort(
+    (a, b) => a.data.week - b.data.week || stageOrder[a.data.stage] - stageOrder[b.data.stage]
+  );
+  return sorted.map((entry) => {
+    const idx = sorted.findIndex((l) => l.id === entry.id);
+    const weekLessons = sorted.filter((l) => l.data.week === entry.data.week);
+    return {
+      params: { slug: entry.id.replace(/\.mdx$/, '') },
+      props: {
+        entry,
+        weekLessons,
+        prev: idx > 0 ? sorted[idx - 1] : null,
+        next: idx < sorted.length - 1 ? sorted[idx + 1] : null,
+      },
+    };
+  });
+}
+
+interface Props {
+  entry: CollectionEntry<'course-lessons'>;
+  weekLessons: CollectionEntry<'course-lessons'>[];
+  prev: CollectionEntry<'course-lessons'> | null;
+  next: CollectionEntry<'course-lessons'> | null;
+}
+
+const { entry, weekLessons, prev, next } = Astro.props;
+const { Content } = await entry.render();
+const stageLabel = entry.data.stage.charAt(0).toUpperCase() + entry.data.stage.slice(1);
+const eyebrow = `Week ${entry.data.week} · ${stageLabel}`;
+const lessonUrl = (id: string) => `${id.replace(/\.mdx$/, '')}.html`;
+---
+<CoursePage entry={entry} eyebrow={eyebrow}>
+  <div class="lesson-layout">
+    <article class="prose">
+      <Content />
+      <div class="completion">
+        <button data-complete={entry.data.lesson_id} hidden>Mark lesson complete</button>
+        <p class="small" data-storage-note>Optional progress is saved only on this device.</p>
+      </div>
+      <nav class="next-prev" aria-label="Lesson navigation">
+        <span>
+          {prev ? <a href={lessonUrl(prev.id)} rel="prev">← {prev.data.title}</a> : ''}
+        </span>
+        <span>
+          {next ? <a href={lessonUrl(next.id)} rel="next">{next.data.title} →</a> : ''}
+        </span>
+      </nav>
+    </article>
+    <aside class="lesson-aside" aria-label="This week's lessons">
+      <p class="week-number">Week {entry.data.week}</p>
+      <ol>
+        {weekLessons.map((l) => (
+          <li>
+            <a
+              href={lessonUrl(l.id)}
+              aria-current={l.id === entry.id ? 'page' : undefined}
+            >
+              {l.data.title}
+            </a>
+          </li>
+        ))}
+      </ol>
+      <p class="small" data-week-progress={entry.data.week} role="status"></p>
+    </aside>
+  </div>
+</CoursePage>

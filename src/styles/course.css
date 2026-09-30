@@ -1,0 +1,131 @@
+/* Course styles for Forged Fitness pages.
+ * Adapted verbatim from the production course stylesheet
+ * (nicholas-sisco-independent-work.nicksisco1932.chatgpt.site/forged-fitness/course.css),
+ * scoped under `.course` so the portfolio's global styles are untouched.
+ * Site-chrome rules from production (.site-header, .footer, .wrap, .hero, .skip)
+ * are intentionally dropped: BaseLayout provides the Astro header/footer.
+ */
+.course {
+  --paper: #f7f2f7;
+  --ink: #283140;
+  --muted: #626674;
+  --blue: #38687a;
+  --purple: #765d7f;
+  --line: #dcd4df;
+  --white: #fffcff;
+  --soft: #eee7f1;
+  background: var(--paper);
+  color: var(--ink);
+  font: 17px/1.75 Inter, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+  border-radius: 12px;
+  padding: 8px 32px 32px;
+}
+.course a { color: var(--blue); text-underline-offset: 4px; }
+.course a:hover { color: var(--purple); }
+.course :focus-visible { outline: 3px solid var(--blue); outline-offset: 4px; }
+.course button, .course input, .course select { font: inherit; }
+.course button, .course .button {
+  display: inline-block; border: 1px solid var(--blue); border-radius: 7px;
+  background: var(--blue); color: white; padding: .65rem 1rem;
+  cursor: pointer; text-decoration: none;
+}
+.course button.secondary, .course .button.secondary { background: transparent; color: var(--blue); }
+.course button:hover, .course .button:hover { background: #294f60; color: white; }
+.course .breadcrumbs { font-size: 13px; color: var(--muted); padding: 20px 0; }
+.course .eyebrow { font-size: 12px; font-weight: 700; letter-spacing: .16em; text-transform: uppercase; color: var(--purple); margin: 0 0 14px; }
+.course h1 { font-size: clamp(2rem, 4vw, 3.4rem); line-height: 1.08; letter-spacing: -.045em; margin: 0 0 24px; max-width: 900px; }
+.course h2 { font-size: 1.65rem; letter-spacing: -.025em; line-height: 1.3; margin: 0 0 18px; }
+.course h3 { font-size: 1.16rem; line-height: 1.4; margin: 0 0 10px; }
+.course .lead { font-size: 1.15rem; color: var(--muted); max-width: 700px; }
+.course .small { font-size: 14px; color: var(--muted); }
+.course .actions { display: flex; gap: 12px; flex-wrap: wrap; margin: 25px 0; }
+.course .section { padding: 38px 0; border-top: 1px solid var(--line); }
+.course .grid { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 18px; }
+.course .grid.two { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+.course .card { border: 1px solid var(--line); background: var(--white); border-radius: 10px; padding: 24px; display: flex; flex-direction: column; }
+.course .card p { margin: 0 0 18px; }
+.course .card a { font-weight: 650; }
+.course .card .small { margin-top: auto; }
+.course .week-number { font-size: 12px; text-transform: uppercase; letter-spacing: .12em; color: var(--purple); margin-bottom: 13px; }
+.course .badge { display: inline-block; padding: 3px 9px; background: var(--soft); border-radius: 4px; font-size: 12px; line-height: 1.5; }
+.course .page-heading { padding: 20px 0 28px; }
+.course .lesson-layout { display: grid; grid-template-columns: minmax(0, 780px) 260px; gap: 60px; align-items: start; }
+.course .prose { max-width: 780px; }
+.course .prose section { margin: 0 0 34px; }
+.course .prose p { margin: 0 0 18px; }
+.course .prose li { margin-bottom: 10px; }
+.course .lesson-aside { position: sticky; top: 24px; font-size: 14px; border-left: 1px solid var(--line); padding-left: 22px; }
+.course .lesson-aside ol { padding-left: 20px; }
+.course .lesson-aside a[aria-current=page] { font-weight: bold; color: var(--purple); }
+.course .callout { padding: 22px 25px; border-left: 3px solid var(--purple); background: var(--soft); border-radius: 0 8px 8px 0; margin: 26px 0; }
+.course .callout h2, .course .callout h3 { font-size: 1.05rem; }
+.course .callout p:last-child { margin-bottom: 0; }
+.course .evidence { border: 1px solid var(--line); border-radius: 8px; padding: 20px; font-size: 14px; margin: 25px 0; }
+.course .evidence p { margin: 8px 0; }
+.course .chain { list-style: none; padding: 0; display: flex; flex-wrap: wrap; gap: 8px; align-items: center; }
+.course .chain li { border: 1px solid var(--line); padding: 8px 12px; border-radius: 6px; background: var(--white); font-size: 14px; }
+.course .chain li + li:before { content: "→ "; color: var(--purple); }
+.course details { border-top: 1px solid var(--line); padding: 16px 0; }
+.course summary { cursor: pointer; font-weight: 650; color: var(--blue); }
+.course details p { margin-top: 15px !important; }
+.course .quiz { padding: 20px 0; border-top: 1px solid var(--line); }
+.course fieldset { border: 0; padding: 0; margin: 0 0 15px; min-width: 0; }
+.course legend { font-weight: 650; margin-bottom: 12px; }
+.course label.choice { display: flex; align-items: baseline; gap: 10px; padding: 10px 14px; border: 1px solid var(--line); border-radius: 6px; margin: 8px 0; background: var(--white); cursor: pointer; }
+.course input[type=radio] { accent-color: var(--purple); }
+.course .quiz-feedback { font-weight: 600; color: var(--blue); }
+.course .completion { padding: 26px; background: var(--soft); border-radius: 10px; margin: 30px 0; }
+.course .completion p { margin: 10px 0 0; }
+.course .next-prev { display: flex; justify-content: space-between; gap: 24px; border-top: 1px solid var(--line); padding: 25px 0; margin-top: 30px; }
+.course .table-scroll { overflow-x: auto; }
+.course table { width: 100%; border-collapse: collapse; font-size: 15px; margin: 18px 0; }
+.course th, .course td { padding: 12px; text-align: left; vertical-align: top; border-bottom: 1px solid var(--line); }
+.course th { background: var(--soft); }
+.course .worksheet-lines { min-height: 72px; border-bottom: 1px solid var(--line); margin-bottom: 22px; }
+.course .resource-prompt { font-weight: 600; }
+.course .progress-list { list-style: none; padding: 0; }
+.course .progress-list li { display: flex; justify-content: space-between; gap: 16px; border-bottom: 1px solid var(--line); padding: 14px 0; }
+.course .progress-meter { width: 100%; height: 15px; accent-color: var(--purple); }
+.course .reference-list li { margin-bottom: 18px; font-size: 14px; }
+.course .exercise { padding: 25px 0; border-top: 1px solid var(--line); }
+.course [hidden] { display: none !important; }
+
+@media (max-width: 900px) {
+  .course .lesson-layout { grid-template-columns: 1fr; gap: 20px; }
+  .course .lesson-aside { position: static; grid-row: 1; border-left: 0; border-bottom: 1px solid var(--line); padding: 0 0 12px; }
+  .course .lesson-aside ol { display: flex; gap: 28px; flex-wrap: wrap; }
+  .course .grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+}
+@media (max-width: 600px) {
+  .course { font-size: 16px; padding: 8px 20px 24px; }
+  .course .grid, .course .grid.two { grid-template-columns: 1fr; }
+  .course .card { padding: 21px; }
+  .course .section { padding: 28px 0; }
+  .course .next-prev { font-size: 14px; }
+  .course .lesson-aside ol { gap: 22px; }
+  .course .page-heading { padding-top: 8px; }
+  .course .callout { padding: 18px; }
+  .course .progress-list li { flex-direction: column; gap: 3px; }
+}
+
+@media print {
+  .course { background: white; color: black; font-size: 11pt; padding: 0; }
+  .course .breadcrumbs, .course .lesson-aside, .course .actions,
+  .course .completion, .course .next-prev, .course button,
+  .course .progress-controls, .course .quiz input { display: none !important; }
+  .course .lesson-layout, .course .grid, .course .grid.two { display: block; }
+  .course .card, .course .callout, .course .evidence {
+    background: white; border: 1px solid #aaa; margin: 12px 0; break-inside: avoid;
+  }
+  .course h1 { font-size: 26pt !important; }
+  .course h2 { font-size: 18pt; }
+  .course h3 { font-size: 13pt; }
+  .course a { color: black; }
+  .course .worksheet-lines { min-height: 80px; }
+  .course .table-scroll { overflow: visible; }
+  .course details { display: block; }
+  .course details > * { display: block !important; }
+  .course .quiz label { border: 0; padding: 3px; }
+  .course section { break-inside: auto; }
+  .course .reference-list { font-size: 9pt; }
+}

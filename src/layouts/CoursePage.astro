@@ -1,0 +1,67 @@
+---
+/* CoursePage — shared layout for all Forged Fitness course pages.
+ * Provides the production course styling (scoped under .course), the
+ * page heading block, the provenance link, and the course interactivity
+ * script (quiz self-checks, print buttons, progress tracking).
+ * Kind-specific structure (lesson aside, week cards, prev/next) lives in
+ * the dynamic route pages, which compose this layout.
+ */
+import BaseLayout from './BaseLayout.astro';
+import '../styles/course.css';
+
+type AnyCourseEntry = {
+  data: {
+    title: string;
+    description: string;
+    source_site_url: string;
+  };
+};
+
+interface Props {
+  entry: AnyCourseEntry;
+  eyebrow: string;
+}
+
+const { entry, eyebrow } = Astro.props;
+const { title, description, source_site_url } = entry.data;
+const base = import.meta.env.BASE_URL.endsWith('/')
+  ? import.meta.env.BASE_URL
+  : import.meta.env.BASE_URL + '/';
+---
+<BaseLayout title={title + ' — Forged Fitness'} description={description}>
+  <div class="course">
+    <nav class="breadcrumbs" aria-label="Breadcrumb">
+      <a href={`${base}forged-fitness.html`}>Forged Fitness</a>
+      {' / '}{eyebrow}
+    </nav>
+    <header class="page-heading">
+      <p class="eyebrow">{eyebrow}</p>
+      <h1>{title}</h1>
+      <p class="lead">{description}</p>
+    </header>
+    <slot />
+    <p class="small" style="margin-top: 2.5rem;">
+      <a href={source_site_url}>View the production course version</a>
+    </p>
+  </div>
+</BaseLayout>
+
+<script>
+  import '../scripts/course.js';
+</script>
+
+<style>
+  /* Hide Astro site chrome when printing, mirroring the production
+   * course print behavior. Content print rules live in course.css. */
+  @media print {
+    :global(.site-header),
+    :global(.site-footer),
+    :global(.skip-link) {
+      display: none;
+    }
+    :global(main) {
+      max-width: none;
+      padding: 0;
+    }
+  }
+</style>
