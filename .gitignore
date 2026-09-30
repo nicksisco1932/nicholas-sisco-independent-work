@@ -1,3 +1,6 @@
 node_modules/
 dist/
 .astro/
+
+# local build symlink (points at course-recovery/node_modules)
+node_modules

@@ -1,0 +1,74 @@
+---
+/* Course progress page: /forged-fitness/progress.html
+ * All progress state renders client-side from localStorage via course.js;
+ * this page provides the structure it fills in.
+ */
+import { getCollection } from 'astro:content';
+import CoursePage from '../../layouts/CoursePage.astro';
+
+const lessons = await getCollection('course-lessons');
+const weeks = (await getCollection('course-weeks')).sort((a, b) => a.data.week - b.data.week);
+const paths = await getCollection('course-paths');
+const stageOrder = { understand: 0, apply: 1, review: 2 };
+const byWeek = (w: number) =>
+  lessons
+    .filter((l) => l.data.week === w)
+    .sort((a, b) => stageOrder[a.data.stage] - stageOrder[b.data.stage]);
+
+const entry = {
+  data: {
+    title: 'Your course progress',
+    description: 'Track your progress through the Forged Fitness course. Saved only on this device.',
+    source_site_url:
+      'https://nicholas-sisco-independent-work.nicksisco1932.chatgpt.site/forged-fitness/progress/',
+  },
+};
+---
+<CoursePage entry={entry} eyebrow="Progress · this device only">
+  <p class="lead" data-total-progress role="status"></p>
+  <p><progress class="progress-meter" value="0" max="100"></progress></p>
+  <p class="small" data-storage-note></p>
+
+  <section class="section">
+    <h2>Paths</h2>
+    <ul class="progress-list">
+      {paths.map((p) => (
+        <li>
+          <a href={`paths/${p.id.replace(/\.mdx$/, '')}.html`}>{p.data.title}</a>
+          <span data-path-progress={p.id.replace(/\.mdx$/, '')}></span>
+        </li>
+      ))}
+    </ul>
+  </section>
+
+  {weeks.map((w) => (
+    <section class="section">
+      <h2>
+        <a href={`weeks/${w.id.replace(/\.mdx$/, '')}.html`}>
+          Week {w.data.week} · {w.data.title}
+        </a>
+      </h2>
+      <ul class="progress-list">
+        {byWeek(w.data.week).map((l) => (
+          <li>
+            <a href={`lessons/${l.id.replace(/\.mdx$/, '')}.html`}>{l.data.title}</a>
+            <span data-lesson-state={l.data.lesson_id}></span>
+          </li>
+        ))}
+      </ul>
+    </section>
+  ))}
+
+  <section class="section progress-controls">
+    <h2>Reset progress</h2>
+    <p class="small">Clears all marked-complete lessons on this device.</p>
+    <button data-reset hidden>Reset progress</button>
+    <div data-reset-confirm hidden>
+      <p>Are you sure? This cannot be undone.</p>
+      <div class="actions">
+        <button data-confirm-reset>Yes, reset</button>
+        <button class="secondary" data-cancel-reset>Cancel</button>
+      </div>
+    </div>
+  </section>
+</CoursePage>

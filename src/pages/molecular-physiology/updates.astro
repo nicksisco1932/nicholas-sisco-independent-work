@@ -1,0 +1,39 @@
+---
+/* Updates index: /molecular-physiology/updates.html
+ * Lists the atlas articles from the atlas-updates collection.
+ */
+import { getCollection } from 'astro:content';
+import AtlasPage from '../../layouts/AtlasPage.astro';
+
+const updates = await getCollection('atlas-updates');
+const sorted = [...updates].sort((a, b) =>
+  (b.data.date || '').localeCompare(a.data.date || '')
+);
+const base = import.meta.env.BASE_URL.endsWith('/')
+  ? import.meta.env.BASE_URL
+  : import.meta.env.BASE_URL + '/';
+const updateUrl = (id: string) => `${base}molecular-physiology/updates/${id.replace(/\.mdx$/, '')}.html`;
+---
+<AtlasPage
+  title="Essays & Research Updates"
+  description="Scientific questions, mechanisms, methods, and the boundaries of the evidence."
+  eyebrow="An ongoing publication record"
+  lead="Scientific questions, mechanisms, methods, and the boundaries of the evidence."
+  breadcrumb={[]}
+>
+  <p>The first edition includes an integrated explainer and a concept correction. These are new atlas articles about existing research, not announcements of newly published studies.</p>
+  <div class="grid">
+    {sorted.map((u) => (
+      <article class="card">
+        <p class="kicker">{u.data.kicker}{u.data.date ? ` · ${u.data.date}` : ''}</p>
+        <h3><a href={updateUrl(u.id)}>{u.data.title}</a></h3>
+        <p>{u.data.description}</p>
+      </article>
+    ))}
+  </div>
+  <section>
+    <h2>Publication formats</h2>
+    <p>Research Update · Mechanism Explainer · Evidence Review · Concept Correction · Methods Primer · Deep Dive · Literature Note</p>
+    <p>Every article identifies its question, evidence, methods, limitations, and confidence. Future updates will distinguish publication date from study date.</p>
+  </section>
+</AtlasPage>

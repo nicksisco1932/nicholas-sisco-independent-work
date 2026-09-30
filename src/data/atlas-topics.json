@@ -1,0 +1,182 @@
+[
+  {
+    "slug": "training-stimuli",
+    "title": "Training Stimuli",
+    "lead": "Begin with the physical perturbation: force, duration, recruitment, and energetic demand.",
+    "concepts": [
+      "mechanical-tension"
+    ],
+    "reading": [],
+    "planned": [
+      "Endurance exercise",
+      "Concurrent training",
+      "Hypoxia",
+      "Thermoregulation"
+    ]
+  },
+  {
+    "slug": "molecules-metabolites",
+    "title": "Molecules & Metabolites",
+    "lead": "Distinguish chemical substrates from signals and from measures of cellular state.",
+    "concepts": [
+      "leucine"
+    ],
+    "reading": [],
+    "planned": [
+      "ATP / ADP / AMP",
+      "Glucose",
+      "Glycogen",
+      "Phosphocreatine",
+      "Creatine kinase",
+      "Fatty acids",
+      "Ketones"
+    ]
+  },
+  {
+    "slug": "sensors-regulators",
+    "title": "Sensors & Regulators",
+    "lead": "How ligand binding, nucleotide state, and physical forces become regulatory information.",
+    "concepts": [
+      "sestrin2",
+      "rag-gtpases",
+      "rheb",
+      "tsc1-2",
+      "ampk"
+    ],
+    "reading": [],
+    "planned": [
+      "Integrins",
+      "Focal adhesion kinase",
+      "Calcium / CaMK",
+      "YAP / TAZ",
+      "Myostatin / activin"
+    ]
+  },
+  {
+    "slug": "signaling-pathways",
+    "title": "Signaling Pathways",
+    "lead": "Follow interacting networks, their subcellular locations, and their experimental limits.",
+    "concepts": [
+      "rag-gtpases",
+      "akt",
+      "ampk",
+      "mtorc1",
+      "s6k1",
+      "4e-bp1"
+    ],
+    "reading": [
+      "from-leucine-to-muscle-protein-synthesis"
+    ],
+    "planned": [
+      "Insulin / GLUT4",
+      "p38 MAPK",
+      "SMAD2/3",
+      "FOXO",
+      "PGC-1α / NRF1 / nuclear respiratory factor 2 / TFAM"
+    ]
+  },
+  {
+    "slug": "cellular-processes",
+    "title": "Cellular Processes",
+    "lead": "Connect regulation to material transformations, turnover, and cellular capacity.",
+    "concepts": [
+      "4e-bp1",
+      "translation-initiation",
+      "muscle-protein-synthesis",
+      "ribosome-biogenesis"
+    ],
+    "reading": [],
+    "planned": [
+      "Autophagy",
+      "Mitophagy",
+      "Mitochondrial biogenesis",
+      "Ubiquitin-proteasome system",
+      "MuRF1 / atrogin-1",
+      "Lysosomal degradation"
+    ]
+  },
+  {
+    "slug": "tissue-adaptations",
+    "title": "Tissue Adaptations",
+    "lead": "Track changes that accumulate across repeated exposures, recovery, and remodeling.",
+    "concepts": [
+      "ribosome-biogenesis",
+      "hypertrophy"
+    ],
+    "reading": [],
+    "planned": [
+      "Satellite cells / myonuclei",
+      "Extracellular matrix",
+      "Tendon adaptation",
+      "Connective tissue",
+      "Aging muscle"
+    ]
+  },
+  {
+    "slug": "performance-physiology",
+    "title": "Performance Physiology",
+    "lead": "Ask whether cellular and tissue changes transfer to strength, endurance, or task performance.",
+    "concepts": [
+      "hypertrophy"
+    ],
+    "reading": [],
+    "planned": [
+      "Strength and neural adaptation",
+      "Oxidative metabolism",
+      "Fatigue",
+      "Sex differences",
+      "Training status"
+    ]
+  },
+  {
+    "slug": "nutrition-substrate-biology",
+    "title": "Nutrition & Substrate Biology",
+    "lead": "Keep amino-acid signaling, substrate supply, and whole-body availability distinct.",
+    "concepts": [
+      "leucine"
+    ],
+    "reading": [
+      "from-leucine-to-muscle-protein-synthesis"
+    ],
+    "planned": [
+      "Essential amino acids",
+      "Creatine / phosphocreatine",
+      "Glycogen availability",
+      "Micronutrient constraints",
+      "Obesity / insulin resistance"
+    ]
+  },
+  {
+    "slug": "evidence-methods",
+    "title": "Evidence & Methods",
+    "lead": "Read tracer estimates, biopsies, perturbation experiments, and longitudinal outcomes at the scale they measure.",
+    "concepts": [
+      "muscle-protein-synthesis"
+    ],
+    "reading": [
+      "phosphorylation-is-not-hypertrophy"
+    ],
+    "planned": [
+      "Tracer assumptions",
+      "Biopsy sampling",
+      "Causal inference",
+      "Signal versus flux"
+    ]
+  },
+  {
+    "slug": "essays-research-updates",
+    "title": "Essays / Research Updates",
+    "lead": "A publication record for explainers, evidence reviews, corrections, and study appraisals.",
+    "concepts": [],
+    "reading": [
+      "from-leucine-to-muscle-protein-synthesis",
+      "phosphorylation-is-not-hypertrophy"
+    ],
+    "planned": [
+      "Sleep and recovery",
+      "Inflammation",
+      "Oxidative stress",
+      "Literature notes"
+    ]
+  }
+]

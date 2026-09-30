@@ -1,0 +1,47 @@
+---
+/* Dynamic path pages: /forged-fitness/paths/<slug>.html
+ * Week cards are generated from the collections so the path always
+ * reflects the current curriculum.
+ */
+import { getCollection, type CollectionEntry } from 'astro:content';
+import CoursePage from '../../../layouts/CoursePage.astro';
+
+export async function getStaticPaths() {
+  const paths = await getCollection('course-paths');
+  const weeks = await getCollection('course-weeks');
+  return paths.map((entry) => ({
+    params: { slug: entry.id.replace(/\.mdx$/, '') },
+    props: {
+      entry,
+      weeks: weeks
+        .filter((w) => w.data.week <= entry.data.weeks)
+        .sort((a, b) => a.data.week - b.data.week),
+    },
+  }));
+}
+
+interface Props {
+  entry: CollectionEntry<'course-paths'>;
+  weeks: CollectionEntry<'course-weeks'>[];
+}
+
+const { entry, weeks } = Astro.props;
+const { Content } = await entry.render();
+---
+<CoursePage entry={entry} eyebrow="Course path">
+  <p data-path-progress={entry.id.replace(/\.mdx$/, '')} role="status"></p>
+  <div class="grid">
+    {weeks.map((w) => (
+      <article class="card">
+        <div class="week-number">Week {w.data.week}</div>
+        <h3>
+          <a href={`../weeks/${w.id.replace(/\.mdx$/, '')}.html`}>{w.data.title}</a>
+        </h3>
+        <p>{w.data.description}</p>
+      </article>
+    ))}
+  </div>
+  <div class="prose">
+    <Content />
+  </div>
+</CoursePage>

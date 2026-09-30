@@ -1,0 +1,109 @@
+---
+/* Forged Fitness course home: /forged-fitness.html
+ * Curriculum listings are generated from the content collections so the
+ * index can never drift out of sync with the lessons. Intro copy is ported
+ * verbatim from the production course home.
+ */
+import { getCollection } from 'astro:content';
+import CoursePage from '../layouts/CoursePage.astro';
+
+const weeks = (await getCollection('course-weeks')).sort((a, b) => a.data.week - b.data.week);
+const paths = await getCollection('course-paths');
+const resources = await getCollection('course-resources');
+const guides = await getCollection('course-guides');
+const starter = guides.find((g) => g.id.startsWith('starter-program'));
+
+const entry = {
+  data: {
+    title: 'Understand your body. Build a practice.',
+    description:
+      'Learn the science of training, nutrition and recovery — and turn it into decisions you can use. An open course: 12 weeks, 36 lessons.',
+    source_site_url:
+      'https://nicholas-sisco-independent-work.nicksisco1932.chatgpt.site/forged-fitness/',
+  },
+};
+---
+<CoursePage entry={entry} eyebrow="An open course · 12 weeks · 36 lessons">
+  <div class="actions">
+    <a class="button" href="forged-fitness/guides/orientation.html">Start the course →</a>
+    <a class="button secondary" href="#curriculum">Explore the curriculum</a>
+  </div>
+  <p class="small">
+    Three short lessons each week · About 30–45 minutes of learning, plus optional
+    practice · No account or purchases required
+  </p>
+
+  <section class="section">
+    <h2>Your weekly rhythm</h2>
+    <p class="lead">From explanation to application.</p>
+    <div class="grid">
+      <article class="card">
+        <div class="week-number">Understand</div>
+        <p>Learn the physiology and its limits.</p>
+      </article>
+      <article class="card">
+        <div class="week-number">Apply</div>
+        <p>Try a manageable exercise or scenario.</p>
+      </article>
+      <article class="card">
+        <div class="week-number">Review</div>
+        <p>Check your reasoning and adapt. Go deeper when it helps. Molecular explanations are always optional.</p>
+      </article>
+    </div>
+  </section>
+
+  <section class="section">
+    <h2>Choose your route</h2>
+    <p class="lead">One course. Three useful stopping points.</p>
+    <div class="grid">
+      {paths.map((p) => (
+        <article class="card">
+          <div class="week-number">{p.data.weeks} weeks · {p.data.weeks * 3} lessons</div>
+          <h3><a href={`forged-fitness/paths/${p.id.replace(/\.mdx$/, '')}.html`}>{p.data.title}</a></h3>
+          <p>{p.data.description}</p>
+          <p class="small" data-path-progress={p.id.replace(/\.mdx$/, '')}></p>
+        </article>
+      ))}
+    </div>
+  </section>
+
+  <section class="section" id="curriculum">
+    <h2>Twelve weeks of useful questions</h2>
+    <div class="grid">
+      {weeks.map((w) => (
+        <article class="card">
+          <div class="week-number">Week {w.data.week}</div>
+          <h3>
+            <a href={`forged-fitness/weeks/${w.id.replace(/\.mdx$/, '')}.html`}>{w.data.title}</a>
+          </h3>
+          <p>{w.data.description}</p>
+          <p class="small" data-week-progress={w.data.week}></p>
+        </article>
+      ))}
+    </div>
+  </section>
+
+  {starter ? (
+    <section class="section">
+      <h2>{starter.data.title}</h2>
+      <p class="lead">{starter.data.description}</p>
+      <div class="actions">
+        <a class="button" href="forged-fitness/guides/starter-program.html">Open the starter program →</a>
+      </div>
+    </section>
+  ) : null}
+
+  <section class="section">
+    <h2>Tools you can use on paper</h2>
+    <div class="grid">
+      {resources.map((r) => (
+        <article class="card">
+          <h3>
+            <a href={`forged-fitness/resources/${r.id.replace(/\.mdx$/, '')}.html`}>{r.data.title}</a>
+          </h3>
+          <p>{r.data.description}</p>
+        </article>
+      ))}
+    </div>
+  </section>
+</CoursePage>

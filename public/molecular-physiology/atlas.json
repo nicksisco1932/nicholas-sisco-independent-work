@@ -1,0 +1,2387 @@
+{
+  "schemaVersion": "0.1",
+  "concepts": [
+    {
+      "slug": "mechanical-tension",
+      "title": "Mechanical tension",
+      "definition": "Force borne by muscle structures during active contraction or passive stretch.",
+      "systemLevel": "Physical stimulus",
+      "topics": [
+        "training-stimuli"
+      ],
+      "foundations": {
+        "text": "Working muscle bears force. Cells respond to how that force is transmitted through their structures, not simply to the number printed on a weight.",
+        "references": []
+      },
+      "mechanism": {
+        "text": "Force transmission through the cytoskeleton and membrane-associated structures can change biochemical regulation. Lipid signaling is one experimentally investigated route to mTOR-associated responses.",
+        "references": [
+          "hornberger2006"
+        ]
+      },
+      "advanced": {
+        "text": "Local strain, force duration, and structural geometry differ from external load. Integrins, cytoskeletal assemblies, and membrane lipids form candidate interacting routes; a single universal tension sensor is not established.",
+        "references": [
+          "hornberger2006"
+        ]
+      },
+      "inputs": [
+        "Motor-unit recruitment",
+        "External resistance",
+        "Muscle length and contraction geometry"
+      ],
+      "outputs": [
+        "Mechanotransduction",
+        "Remodeling signals"
+      ],
+      "compartments": [
+        "Sarcomere",
+        "Cytoskeleton",
+        "Plasma membrane"
+      ],
+      "timescales": [
+        "Milliseconds to seconds: force",
+        "Minutes to hours: responses"
+      ],
+      "causalStatus": [
+        {
+          "relationship": "Contributory",
+          "scope": "A training stimulus for adaptation; external load alone does not specify cellular force or eventual growth."
+        }
+      ],
+      "humanEvidence": [
+        {
+          "provenance": [
+            "Human intervention",
+            "Tracer study"
+          ],
+          "model": "Human",
+          "directness": "Indirect",
+          "summary": "Resistance exercise changes synthesis; these experiments do not isolate a unique molecular force sensor.",
+          "references": [
+            "drummond2009"
+          ]
+        }
+      ],
+      "modelEvidence": [
+        {
+          "provenance": [
+            "Ex vivo"
+          ],
+          "model": "Animal",
+          "directness": "Direct",
+          "summary": "Isolated muscle experiments implicate phosphatidic-acid-associated signaling under mechanical stimulation.",
+          "references": [
+            "hornberger2006"
+          ]
+        }
+      ],
+      "uncertainty": "Which force-sensing routes dominate during ordinary human training remains unresolved.",
+      "oversimplification": "Heavier weight always means more growth.",
+      "correction": "External load is only one determinant of muscle loading; adaptation also depends on exposure and recovery.",
+      "practicalRelevance": "Interpret loading in the context of the task and the muscle involved.",
+      "related": [
+        "mtorc1",
+        "hypertrophy"
+      ]
+    },
+    {
+      "slug": "leucine",
+      "title": "Leucine",
+      "definition": "An essential amino acid used in proteins and involved in nutrient sensing.",
+      "systemLevel": "Amino acid",
+      "topics": [
+        "molecules-metabolites",
+        "nutrition-substrate-biology"
+      ],
+      "foundations": {
+        "text": "Leucine is one of the building blocks in dietary and body proteins. Humans must obtain it from food; it also helps cells detect amino-acid availability.",
+        "references": []
+      },
+      "mechanism": {
+        "text": "Leucine binding to Sestrin2 influences GATOR-dependent regulation upstream of Rag GTPases and mTORC1 recruitment.",
+        "references": [
+          "wolfson2016"
+        ]
+      },
+      "advanced": {
+        "text": "Binding to a sensor and incorporation into a peptide are different chemical events. Sensor occupancy cannot supply the other amino acids needed to complete a protein sequence.",
+        "references": [
+          "wolfson2016",
+          "churchward2012"
+        ]
+      },
+      "inputs": [
+        "Protein digestion",
+        "Transport",
+        "Protein turnover"
+      ],
+      "outputs": [
+        "Amino-acid sensing",
+        "Protein substrate supply"
+      ],
+      "compartments": [
+        "Plasma",
+        "Cytosol"
+      ],
+      "timescales": [
+        "Minutes to hours after feeding"
+      ],
+      "causalStatus": [
+        {
+          "relationship": "Required",
+          "scope": "As a substrate for leucine-containing proteins."
+        },
+        {
+          "relationship": "Contributory",
+          "scope": "As a nutrient signal; leucine alone is not sufficient for sustained accretion."
+        }
+      ],
+      "humanEvidence": [
+        {
+          "provenance": [
+            "Human intervention",
+            "Tracer study"
+          ],
+          "model": "Human",
+          "directness": "Direct",
+          "summary": "Feeding experiments show acute synthesis responses depend on the amino-acid mixture and observation window.",
+          "references": [
+            "churchward2012"
+          ]
+        }
+      ],
+      "modelEvidence": [
+        {
+          "provenance": [
+            "Cell culture",
+            "Biochemical reconstitution"
+          ],
+          "model": "Cellular",
+          "directness": "Direct",
+          "summary": "Binding and perturbation experiments identify a Sestrin2-dependent sensing route.",
+          "references": [
+            "wolfson2016"
+          ]
+        }
+      ],
+      "uncertainty": "The contribution of individual sensors in adult human muscle cannot be read directly from plasma leucine.",
+      "oversimplification": "Leucine turns on muscle growth.",
+      "correction": "Nutrient sensing is one input; synthesis also requires other substrates, and growth requires sustained net accretion.",
+      "practicalRelevance": "Evaluate leucine within the full protein and dietary context.",
+      "related": [
+        "sestrin2",
+        "rag-gtpases",
+        "muscle-protein-synthesis"
+      ]
+    },
+    {
+      "slug": "sestrin2",
+      "title": "Sestrin2",
+      "definition": "A stress-responsive protein that can bind leucine and regulate the nutrient input to mTORC1.",
+      "systemLevel": "Molecular sensor",
+      "topics": [
+        "sensors-regulators"
+      ],
+      "foundations": {
+        "text": "Cells use binding proteins to detect chemicals. Sestrin2 links information about leucine to a larger regulatory network.",
+        "references": []
+      },
+      "mechanism": {
+        "text": "Without bound leucine, Sestrin2 can associate with and restrain GATOR2. Leucine binding relieves this interaction, influencing the GATOR1–Rag axis.",
+        "references": [
+          "wolfson2016"
+        ]
+      },
+      "advanced": {
+        "text": "This is regulation through protein interactions, not direct phosphorylation of mTOR by leucine. Sensor isoforms and cellular context matter when extrapolating the route to muscle.",
+        "references": [
+          "wolfson2016"
+        ]
+      },
+      "inputs": [
+        "Intracellular leucine",
+        "Stress context"
+      ],
+      "outputs": [
+        "GATOR2 regulation"
+      ],
+      "compartments": [
+        "Cytosol"
+      ],
+      "timescales": [
+        "Minutes: binding and signaling"
+      ],
+      "causalStatus": [
+        {
+          "relationship": "Contributory",
+          "scope": "A defined leucine-sensing route in experimental cells; not established as the sole human muscle sensor."
+        }
+      ],
+      "humanEvidence": [
+        {
+          "provenance": [
+            "Mechanistic inference"
+          ],
+          "model": "Human",
+          "directness": "Inferred",
+          "summary": "Human feeding responses do not identify Sestrin2 as their uniquely necessary mediator.",
+          "references": [
+            "churchward2012"
+          ]
+        }
+      ],
+      "modelEvidence": [
+        {
+          "provenance": [
+            "Cell culture",
+            "Biochemical reconstitution"
+          ],
+          "model": "Cellular",
+          "directness": "Direct",
+          "summary": "Leucine-binding mutations and cellular perturbations support the sensing mechanism.",
+          "references": [
+            "wolfson2016"
+          ]
+        }
+      ],
+      "uncertainty": "Isoform contributions and regulation during repeated human exercise need direct testing.",
+      "oversimplification": "Sestrin2 is the muscle-growth switch.",
+      "correction": "It regulates one nutrient input in a network with additional sensors and constraints.",
+      "practicalRelevance": "Use it to understand a mechanism, not to infer a supplement outcome.",
+      "related": [
+        "leucine",
+        "rag-gtpases",
+        "mtorc1"
+      ]
+    },
+    {
+      "slug": "rag-gtpases",
+      "title": "Rag GTPases",
+      "definition": "Heterodimeric nucleotide-binding proteins that help recruit mTORC1 to lysosomal membranes.",
+      "systemLevel": "Small GTPases",
+      "topics": [
+        "sensors-regulators",
+        "signaling-pathways"
+      ],
+      "foundations": {
+        "text": "Some signals work by bringing proteins into the same neighborhood. The Rags help position mTORC1 where activation can occur.",
+        "references": []
+      },
+      "mechanism": {
+        "text": "RagA or RagB pairs with RagC or RagD. Nutrient-responsive nucleotide states favor binding to RAPTOR, a component of mTORC1.",
+        "references": [
+          "sancak2008"
+        ]
+      },
+      "advanced": {
+        "text": "The recruitment-favoring configuration is RagA/B–GTP with RagC/D–GDP. Ragulator anchors the machinery; nucleotide-dependent interfaces control docking rather than directly activating the kinase.",
+        "references": [
+          "docking2019"
+        ]
+      },
+      "inputs": [
+        "GATOR regulation",
+        "Other amino-acid sensing routes",
+        "Nucleotide exchange and hydrolysis"
+      ],
+      "outputs": [
+        "mTORC1 localization"
+      ],
+      "compartments": [
+        "Lysosomal surface"
+      ],
+      "timescales": [
+        "Minutes"
+      ],
+      "causalStatus": [
+        {
+          "relationship": "Permissive",
+          "scope": "Recruitment in the canonical nutrient pathway; docking alone is not sufficient for kinase output."
+        }
+      ],
+      "humanEvidence": [
+        {
+          "provenance": [
+            "Mechanistic inference"
+          ],
+          "model": "Human",
+          "directness": "Inferred",
+          "summary": "The cellular recruitment model is not a direct measure of its contribution to human hypertrophy.",
+          "references": [
+            "sancak2008"
+          ]
+        }
+      ],
+      "modelEvidence": [
+        {
+          "provenance": [
+            "Cell culture",
+            "Biochemical reconstitution"
+          ],
+          "model": "Cellular",
+          "directness": "Direct",
+          "summary": "Perturbation and structural studies support nucleotide-dependent mTORC1 docking.",
+          "references": [
+            "sancak2008",
+            "docking2019"
+          ]
+        }
+      ],
+      "uncertainty": "Alternative localization routes and tissue-specific regulation complicate a universal pathway diagram.",
+      "oversimplification": "Rags activate mTORC1 by themselves.",
+      "correction": "Recruitment and catalytic activation are distinct regulatory steps.",
+      "practicalRelevance": "Ask whether a study measured location, activity, or an outcome.",
+      "related": [
+        "sestrin2",
+        "rheb",
+        "mtorc1"
+      ]
+    },
+    {
+      "slug": "rheb",
+      "title": "Rheb",
+      "definition": "A small GTPase that can directly stimulate the catalytic activity of mTORC1.",
+      "systemLevel": "Small GTPase",
+      "topics": [
+        "sensors-regulators"
+      ],
+      "foundations": {
+        "text": "Putting an enzyme in the right place does not guarantee that it is active. Rheb provides an activation input to mTORC1.",
+        "references": []
+      },
+      "mechanism": {
+        "text": "GTP-bound Rheb binds mTORC1 and promotes catalytic activation. TSC restrains Rheb through GTPase-activating activity.",
+        "references": [
+          "yang2017",
+          "inoki2002"
+        ]
+      },
+      "advanced": {
+        "text": "Structural work supports allosteric rearrangement of mTOR following Rheb binding. The reaction depends on nucleotide state and productive encounters, not simply total Rheb abundance.",
+        "references": [
+          "yang2017"
+        ]
+      },
+      "inputs": [
+        "TSC complex",
+        "GTP/GDP state",
+        "Membrane association"
+      ],
+      "outputs": [
+        "mTORC1 kinase activation"
+      ],
+      "compartments": [
+        "Endomembrane-associated pools"
+      ],
+      "timescales": [
+        "Seconds to minutes"
+      ],
+      "causalStatus": [
+        {
+          "relationship": "Permissive",
+          "scope": "For nutrient-responsive pathway operation."
+        },
+        {
+          "relationship": "Sufficient",
+          "scope": "To stimulate isolated mTORC1 in defined biochemical assays; not sufficient for organismal growth."
+        }
+      ],
+      "humanEvidence": [
+        {
+          "provenance": [
+            "Mechanistic inference"
+          ],
+          "model": "Human",
+          "directness": "Inferred",
+          "summary": "Biochemical activation does not establish the size of Rheb's contribution to training outcomes.",
+          "references": [
+            "yang2017"
+          ]
+        }
+      ],
+      "modelEvidence": [
+        {
+          "provenance": [
+            "Biochemical reconstitution"
+          ],
+          "model": "Biochemical",
+          "directness": "Direct",
+          "summary": "Structural and kinase assays connect Rheb binding to mTORC1 activation.",
+          "references": [
+            "yang2017"
+          ]
+        }
+      ],
+      "uncertainty": "Spatial dynamics during contraction in intact human muscle are less resolved than the purified mechanism.",
+      "oversimplification": "Leucine directly activates Rheb.",
+      "correction": "The canonical nutrient-recruitment arm and TSC–Rheb activation arm are distinct interacting inputs.",
+      "practicalRelevance": "Keep localization and activation separate when interpreting diagrams.",
+      "related": [
+        "tsc1-2",
+        "rag-gtpases",
+        "mtorc1"
+      ]
+    },
+    {
+      "slug": "tsc1-2",
+      "title": "TSC1/2",
+      "definition": "Core components of a regulatory complex that restrains Rheb-dependent mTORC1 activation.",
+      "systemLevel": "Regulatory complex",
+      "topics": [
+        "sensors-regulators"
+      ],
+      "foundations": {
+        "text": "A cell needs ways to limit costly construction. The TSC complex helps regulate whether a growth-associated signal is transmitted.",
+        "references": []
+      },
+      "mechanism": {
+        "text": "TSC2 supplies GTPase-activating function toward Rheb; TSC1 helps stabilize the complex. AKT-dependent regulation can relieve this restraint.",
+        "references": [
+          "garami2003",
+          "inoki2002"
+        ]
+      },
+      "advanced": {
+        "text": "TSC is not a binary object: phosphorylation, complex integrity, and localization affect regulation. A measurement at one phosphosite cannot report all of these states.",
+        "references": [
+          "inoki2002"
+        ]
+      },
+      "inputs": [
+        "Growth-factor signaling",
+        "Energy and stress context"
+      ],
+      "outputs": [
+        "Rheb nucleotide state"
+      ],
+      "compartments": [
+        "Cytosol",
+        "Lysosome-associated pools"
+      ],
+      "timescales": [
+        "Minutes"
+      ],
+      "causalStatus": [
+        {
+          "relationship": "Contributory",
+          "scope": "A negative regulatory input into Rheb; loss of restraint does not supply growth substrates."
+        }
+      ],
+      "humanEvidence": [
+        {
+          "provenance": [
+            "Mechanistic inference"
+          ],
+          "model": "Human",
+          "directness": "Inferred",
+          "summary": "Cellular TSC perturbations cannot quantify normal exercise adaptation in humans.",
+          "references": [
+            "inoki2002"
+          ]
+        }
+      ],
+      "modelEvidence": [
+        {
+          "provenance": [
+            "Cell culture"
+          ],
+          "model": "Cellular",
+          "directness": "Direct",
+          "summary": "Experiments link AKT phosphorylation of TSC2 to regulation of mTOR signaling.",
+          "references": [
+            "inoki2002"
+          ]
+        }
+      ],
+      "uncertainty": "The timing and contribution of TSC relocalization under distinct human training conditions remain open.",
+      "oversimplification": "Removing an inhibitory signal guarantees hypertrophy.",
+      "correction": "Removing restraint is different from supplying the conditions needed for sustained growth.",
+      "practicalRelevance": "Interpret relief of inhibition as one mechanistic step.",
+      "related": [
+        "akt",
+        "rheb",
+        "ampk"
+      ]
+    },
+    {
+      "slug": "akt",
+      "title": "AKT",
+      "definition": "A family of serine/threonine kinases linking growth-factor inputs to multiple metabolic and cellular responses.",
+      "systemLevel": "Kinase",
+      "topics": [
+        "signaling-pathways"
+      ],
+      "foundations": {
+        "text": "Hormones can change how a cell handles nutrients. AKT is one of the proteins carrying those instructions inside the cell.",
+        "references": []
+      },
+      "mechanism": {
+        "text": "Insulin-associated PI3K signaling recruits AKT to membranes. AKT can phosphorylate TSC2, connecting growth-factor information to mTOR regulation.",
+        "references": [
+          "inoki2002"
+        ]
+      },
+      "advanced": {
+        "text": "AKT isoforms, substrate availability, and location shape the response. An AKT phosphosite is a snapshot of regulatory state, not a complete measurement of substrate flux.",
+        "references": [
+          "inoki2002"
+        ]
+      },
+      "inputs": [
+        "Insulin and growth factors",
+        "PI3K-dependent membrane lipids"
+      ],
+      "outputs": [
+        "TSC2 regulation",
+        "Metabolic signaling"
+      ],
+      "compartments": [
+        "Plasma membrane",
+        "Cytosol",
+        "Nucleus"
+      ],
+      "timescales": [
+        "Minutes"
+      ],
+      "causalStatus": [
+        {
+          "relationship": "Contributory",
+          "scope": "A growth-factor route; do not assume all loading-induced mTORC1 regulation passes through AKT."
+        }
+      ],
+      "humanEvidence": [
+        {
+          "provenance": [
+            "Human biopsy"
+          ],
+          "model": "Human",
+          "directness": "Indirect",
+          "summary": "Exercise signaling measurements help describe responses but cannot establish a universal linear AKT-to-growth chain.",
+          "references": [
+            "drummond2009"
+          ]
+        }
+      ],
+      "modelEvidence": [
+        {
+          "provenance": [
+            "Cell culture"
+          ],
+          "model": "Cellular",
+          "directness": "Direct",
+          "summary": "AKT–TSC2 regulation has been tested by molecular perturbation.",
+          "references": [
+            "inoki2002"
+          ]
+        }
+      ],
+      "uncertainty": "The relative contribution of growth-factor and mechanical inputs is context dependent.",
+      "oversimplification": "Resistance exercise grows muscle only by increasing insulin signaling.",
+      "correction": "Loading and nutrient inputs converge through several routes.",
+      "practicalRelevance": "Do not equate a hormone excursion with an adaptation.",
+      "related": [
+        "tsc1-2",
+        "mtorc1",
+        "mechanical-tension"
+      ]
+    },
+    {
+      "slug": "ampk",
+      "title": "AMPK",
+      "definition": "An energy-sensitive kinase complex that coordinates responses to cellular energetic stress.",
+      "systemLevel": "Kinase complex",
+      "topics": [
+        "sensors-regulators",
+        "signaling-pathways"
+      ],
+      "foundations": {
+        "text": "Building and maintaining cells costs energy. AMPK helps adjust cellular activity when energy demand challenges supply.",
+        "references": []
+      },
+      "mechanism": {
+        "text": "Changes in adenine nucleotides and upstream phosphorylation regulate AMPK. AMPK can restrain mTORC1 signaling through phosphorylation of RAPTOR.",
+        "references": [
+          "gwinn2008"
+        ]
+      },
+      "advanced": {
+        "text": "AMP, ADP, and ATP interact with regulatory sites; nucleotide state and kinase/phosphatase activity jointly matter. Bulk ATP alone is an incomplete description of energetic state.",
+        "references": [
+          "gwinn2008"
+        ]
+      },
+      "inputs": [
+        "Adenine nucleotide balance",
+        "Upstream kinases",
+        "Cellular stress"
+      ],
+      "outputs": [
+        "Energy-conserving responses",
+        "RAPTOR regulation"
+      ],
+      "compartments": [
+        "Cytosol",
+        "Compartment-associated signaling pools"
+      ],
+      "timescales": [
+        "Seconds to minutes: sensing",
+        "Hours: downstream responses"
+      ],
+      "causalStatus": [
+        {
+          "relationship": "Contributory",
+          "scope": "Energy-sensitive regulation; AMPK activity is not sufficient to predict training interference."
+        }
+      ],
+      "humanEvidence": [
+        {
+          "provenance": [
+            "Mechanistic inference"
+          ],
+          "model": "Human",
+          "directness": "Inferred",
+          "summary": "A cellular inhibitory connection cannot by itself establish the outcome of concurrent training in people.",
+          "references": [
+            "gwinn2008"
+          ]
+        }
+      ],
+      "modelEvidence": [
+        {
+          "provenance": [
+            "Cell culture"
+          ],
+          "model": "Cellular",
+          "directness": "Direct",
+          "summary": "RAPTOR phosphorylation experiments support an AMPK-mediated restraint on mTORC1.",
+          "references": [
+            "gwinn2008"
+          ]
+        }
+      ],
+      "uncertainty": "Compartment, exercise dose, and recovery change how molecular responses relate to adaptation.",
+      "oversimplification": "AMPK cancels muscle growth.",
+      "correction": "Energy regulation is dynamic; one inhibitory interaction does not determine a whole training outcome.",
+      "practicalRelevance": "Interpret energetic stress within the complete training and recovery context.",
+      "related": [
+        "mtorc1",
+        "tsc1-2",
+        "muscle-protein-synthesis"
+      ]
+    },
+    {
+      "slug": "mtorc1",
+      "title": "mTORC1",
+      "definition": "A protein kinase complex integrating nutrient and regulatory inputs with cellular growth-related processes.",
+      "systemLevel": "Kinase complex",
+      "topics": [
+        "signaling-pathways"
+      ],
+      "foundations": {
+        "text": "Cells coordinate construction with available resources. mTORC1 helps regulate that coordination; it does not manufacture muscle by itself.",
+        "references": []
+      },
+      "mechanism": {
+        "text": "Rag-dependent recruitment and Rheb-dependent activation converge on mTORC1. Its substrates include S6K1 and 4E-BP proteins involved in translation regulation.",
+        "references": [
+          "sancak2008",
+          "yang2017",
+          "thoreen2012"
+        ]
+      },
+      "advanced": {
+        "text": "Localization changes encounter probabilities; allostery changes catalysis; substrate recognition changes which reactions occur. These are separable levels of control, not interchangeable meanings of activation.",
+        "references": [
+          "docking2019",
+          "yang2017"
+        ]
+      },
+      "inputs": [
+        "Amino-acid sensing",
+        "Rheb",
+        "Energetic state",
+        "Loading-associated signals"
+      ],
+      "outputs": [
+        "Translation regulation",
+        "Cellular growth and turnover programs"
+      ],
+      "compartments": [
+        "Lysosome-associated signaling",
+        "Cytosol"
+      ],
+      "timescales": [
+        "Minutes: signaling",
+        "Hours and longer: downstream processes"
+      ],
+      "causalStatus": [
+        {
+          "relationship": "Required",
+          "scope": "Rapamycin-sensitive signaling is required for the early synthesis increase in a specific human exercise experiment, not proven sufficient for hypertrophy."
+        }
+      ],
+      "humanEvidence": [
+        {
+          "provenance": [
+            "Human intervention",
+            "Human biopsy",
+            "Tracer study"
+          ],
+          "model": "Human",
+          "directness": "Direct",
+          "summary": "Rapamycin blocked the early exercise-induced synthesis increase in the tested protocol.",
+          "references": [
+            "drummond2009"
+          ]
+        }
+      ],
+      "modelEvidence": [
+        {
+          "provenance": [
+            "Biochemical reconstitution"
+          ],
+          "model": "Biochemical",
+          "directness": "Direct",
+          "summary": "Structural work resolves mechanisms for recruitment and catalytic regulation.",
+          "references": [
+            "yang2017",
+            "docking2019"
+          ]
+        }
+      ],
+      "uncertainty": "Acute pharmacological dependence does not quantify long-term mediation of training adaptation.",
+      "oversimplification": "More mTORC1 signaling means more muscle.",
+      "correction": "Signal duration, substrates, turnover, and repeated exposures separate a kinase response from tissue growth.",
+      "practicalRelevance": "Treat pathway biomarkers as mechanistic observations with bounded meaning.",
+      "related": [
+        "rag-gtpases",
+        "rheb",
+        "s6k1",
+        "4e-bp1",
+        "hypertrophy"
+      ]
+    },
+    {
+      "slug": "s6k1",
+      "title": "S6K1",
+      "definition": "A kinase downstream of mTORC1 that participates in regulation of protein synthesis and cellular signaling.",
+      "systemLevel": "Kinase",
+      "topics": [
+        "signaling-pathways"
+      ],
+      "foundations": {
+        "text": "One regulatory protein can change the activity of others. S6K1 is part of this relay and is often measured in muscle biopsies.",
+        "references": []
+      },
+      "mechanism": {
+        "text": "mTORC1-dependent phosphorylation contributes to S6K1 regulation. S6K1 acts on downstream substrates, including ribosomal protein S6, within a wider translation network.",
+        "references": [
+          "drummond2009"
+        ]
+      },
+      "advanced": {
+        "text": "A phosphosite signal depends on sampling time, protein abundance, and assay normalization. It is not a direct count of new peptide bonds or active ribosomes.",
+        "references": [
+          "drummond2009",
+          "thoreen2012"
+        ]
+      },
+      "inputs": [
+        "mTORC1-associated signaling",
+        "Other activating inputs"
+      ],
+      "outputs": [
+        "Substrate phosphorylation",
+        "Translation-associated regulation"
+      ],
+      "compartments": [
+        "Cytosol",
+        "Nucleus"
+      ],
+      "timescales": [
+        "Minutes to hours"
+      ],
+      "causalStatus": [
+        {
+          "relationship": "Correlated",
+          "scope": "Often measured alongside synthesis; a phosphorylation change alone is not sufficient evidence of synthesis or hypertrophy."
+        }
+      ],
+      "humanEvidence": [
+        {
+          "provenance": [
+            "Human biopsy"
+          ],
+          "model": "Human",
+          "directness": "Indirect",
+          "summary": "S6K1 phosphorylation is responsive in human exercise experiments; its measurement is not a tissue-growth endpoint.",
+          "references": [
+            "drummond2009"
+          ]
+        }
+      ],
+      "modelEvidence": [
+        {
+          "provenance": [
+            "Cell culture"
+          ],
+          "model": "Cellular",
+          "directness": "Indirect",
+          "summary": "Translation studies show mTORC1 output is distributed across effectors, including the 4E-BP arm.",
+          "references": [
+            "thoreen2012"
+          ]
+        }
+      ],
+      "uncertainty": "The predictive value of individual sites depends on timing and experimental context.",
+      "oversimplification": "A larger S6K1 signal proves a better workout.",
+      "correction": "A molecular assay cannot substitute for longitudinal functional and tissue measurements.",
+      "practicalRelevance": "Read the assay and endpoint before comparing study claims.",
+      "related": [
+        "mtorc1",
+        "4e-bp1",
+        "muscle-protein-synthesis"
+      ]
+    },
+    {
+      "slug": "4e-bp1",
+      "title": "4E-BP1",
+      "definition": "An eIF4E-binding protein that regulates assembly of the cap-dependent translation initiation machinery.",
+      "systemLevel": "Translation regulator",
+      "topics": [
+        "signaling-pathways",
+        "cellular-processes"
+      ],
+      "foundations": {
+        "text": "Before a protein can be built, the cell must begin reading its RNA instructions. 4E-BP1 helps regulate access to that starting machinery.",
+        "references": []
+      },
+      "mechanism": {
+        "text": "Binding of 4E-BP1 to eIF4E restrains eIF4F assembly. mTORC1-associated phosphorylation can reduce this restraint.",
+        "references": [
+          "thoreen2012"
+        ]
+      },
+      "advanced": {
+        "text": "Multiple phosphorylation sites and competing protein interactions influence eIF4E availability. Measuring one site is not equivalent to measuring initiation across all messenger RNAs.",
+        "references": [
+          "thoreen2012"
+        ]
+      },
+      "inputs": [
+        "mTORC1 signaling",
+        "Phosphatase activity"
+      ],
+      "outputs": [
+        "eIF4E availability",
+        "Cap-dependent initiation"
+      ],
+      "compartments": [
+        "Cytosol"
+      ],
+      "timescales": [
+        "Minutes"
+      ],
+      "causalStatus": [
+        {
+          "relationship": "Permissive",
+          "scope": "Relief of inhibition supports initiation but does not guarantee complete protein production."
+        }
+      ],
+      "humanEvidence": [
+        {
+          "provenance": [
+            "Human biopsy"
+          ],
+          "model": "Human",
+          "directness": "Indirect",
+          "summary": "Translation signaling can be sampled in muscle, but a single regulator cannot report total synthesis flux.",
+          "references": [
+            "drummond2009"
+          ]
+        }
+      ],
+      "modelEvidence": [
+        {
+          "provenance": [
+            "Cell culture"
+          ],
+          "model": "Cellular",
+          "directness": "Direct",
+          "summary": "Perturbation and translation profiling support an important 4E-BP-dependent branch of mTORC1 control.",
+          "references": [
+            "thoreen2012"
+          ]
+        }
+      ],
+      "uncertainty": "Responses vary across transcripts and conditions; cell-wide conclusions require more than a phosphoblot.",
+      "oversimplification": "Phosphorylated 4E-BP1 means every protein is being made faster.",
+      "correction": "Initiation is transcript-sensitive and remains subject to other constraints.",
+      "practicalRelevance": "Look for synthesis measurements alongside signaling measurements.",
+      "related": [
+        "mtorc1",
+        "translation-initiation",
+        "s6k1"
+      ]
+    },
+    {
+      "slug": "translation-initiation",
+      "title": "Translation initiation",
+      "definition": "The regulated assembly of ribosomal and initiation-factor machinery on messenger RNA before peptide elongation.",
+      "systemLevel": "Cellular process",
+      "topics": [
+        "cellular-processes"
+      ],
+      "foundations": {
+        "text": "A ribosome must locate a message and establish where to start reading it. Initiation organizes that beginning.",
+        "references": []
+      },
+      "mechanism": {
+        "text": "For cap-dependent initiation, eIF4F helps recruit machinery to messenger RNA. The 4E-BP–eIF4E interaction regulates access to this process.",
+        "references": [
+          "thoreen2012"
+        ]
+      },
+      "advanced": {
+        "text": "Initiation rate is only one constraint on protein production. Charged transfer RNAs, elongation, energy supply, and quality control are also needed to finish a polypeptide.",
+        "references": []
+      },
+      "inputs": [
+        "Messenger RNA",
+        "Initiation factors",
+        "Ribosomal subunits",
+        "Energy and amino-acid availability"
+      ],
+      "outputs": [
+        "Ribosomes committed to elongation"
+      ],
+      "compartments": [
+        "Cytosol",
+        "Endoplasmic-reticulum-associated ribosomes"
+      ],
+      "timescales": [
+        "Seconds to minutes"
+      ],
+      "causalStatus": [
+        {
+          "relationship": "Required",
+          "scope": "Starting translation is required to produce a new polypeptide; increased initiation is not sufficient for net tissue accretion."
+        }
+      ],
+      "humanEvidence": [
+        {
+          "provenance": [
+            "Tracer study"
+          ],
+          "model": "Human",
+          "directness": "Indirect",
+          "summary": "Tracer incorporation estimates synthesis downstream of initiation without isolating initiation rate.",
+          "references": [
+            "churchward2012"
+          ]
+        }
+      ],
+      "modelEvidence": [
+        {
+          "provenance": [
+            "Cell culture"
+          ],
+          "model": "Cellular",
+          "directness": "Direct",
+          "summary": "Translation profiling and perturbations link mTORC1 regulation to message translation.",
+          "references": [
+            "thoreen2012"
+          ]
+        }
+      ],
+      "uncertainty": "Rate-limiting steps can differ between messages and physiological states.",
+      "oversimplification": "Starting translation guarantees muscle growth.",
+      "correction": "Completion, protein fate, and degradation determine the resulting balance.",
+      "practicalRelevance": "Distinguish regulatory machinery from measured production.",
+      "related": [
+        "4e-bp1",
+        "muscle-protein-synthesis",
+        "ribosome-biogenesis"
+      ]
+    },
+    {
+      "slug": "muscle-protein-synthesis",
+      "title": "Muscle protein synthesis",
+      "definition": "Production of new muscle proteins from amino acids through translation.",
+      "systemLevel": "Cellular process",
+      "topics": [
+        "cellular-processes",
+        "evidence-methods"
+      ],
+      "foundations": {
+        "text": "Muscle continually replaces and remodels proteins. Making new protein can repair existing structures as well as support growth.",
+        "references": []
+      },
+      "mechanism": {
+        "text": "Ribosomes link amino acids into sequences specified by messenger RNA. Synthesis must be considered alongside protein breakdown to interpret net protein balance.",
+        "references": []
+      },
+      "advanced": {
+        "text": "Stable-isotope incorporation estimates fractional synthesis over a defined interval and protein pool. Precursor enrichment assumptions, biopsy timing, and pool selection affect interpretation; the estimate is not a direct measure of net accretion.",
+        "references": [
+          "churchward2012",
+          "damas2016"
+        ]
+      },
+      "inputs": [
+        "Amino acids",
+        "Energy",
+        "Translational capacity and regulation"
+      ],
+      "outputs": [
+        "New proteins"
+      ],
+      "compartments": [
+        "Muscle-cell ribosomes"
+      ],
+      "timescales": [
+        "Minutes: translation",
+        "Hours to days: tracer windows"
+      ],
+      "causalStatus": [
+        {
+          "relationship": "Required",
+          "scope": "New protein production is required for protein accretion."
+        },
+        {
+          "relationship": "Correlated",
+          "scope": "A synthesis measurement may relate to growth, but the relationship depends on when and how it is measured."
+        }
+      ],
+      "humanEvidence": [
+        {
+          "provenance": [
+            "Human intervention",
+            "Tracer study"
+          ],
+          "model": "Human",
+          "directness": "Direct",
+          "summary": "Integrated synthesis became related to hypertrophy after early damage attenuated in one training study.",
+          "references": [
+            "damas2016"
+          ]
+        }
+      ],
+      "modelEvidence": [
+        {
+          "provenance": [
+            "Mechanistic inference"
+          ],
+          "model": "Cellular",
+          "directness": "Inferred",
+          "summary": "Translation regulation provides a mechanism, but cellular regulation does not determine an individual's growth response.",
+          "references": [
+            "thoreen2012"
+          ]
+        }
+      ],
+      "uncertainty": "How short measurement windows represent weeks of synthesis and breakdown remains a central inference problem.",
+      "oversimplification": "A higher acute synthesis measurement proves more hypertrophy.",
+      "correction": "Repair, turnover, and timing can separate acute synthesis from later growth.",
+      "practicalRelevance": "Prefer outcome-matched evidence when evaluating a long-term claim.",
+      "related": [
+        "translation-initiation",
+        "hypertrophy",
+        "ribosome-biogenesis"
+      ]
+    },
+    {
+      "slug": "ribosome-biogenesis",
+      "title": "Ribosome biogenesis",
+      "definition": "Production and assembly of ribosomal RNA and proteins into new ribosomes.",
+      "systemLevel": "Cellular process",
+      "topics": [
+        "cellular-processes",
+        "tissue-adaptations"
+      ],
+      "foundations": {
+        "text": "Cells can change how many protein-making machines they have. This differs from changing how quickly existing machines work.",
+        "references": []
+      },
+      "mechanism": {
+        "text": "Ribosomal RNA production, processing, and assembly with ribosomal proteins build translational capacity.",
+        "references": [
+          "stec2016"
+        ]
+      },
+      "advanced": {
+        "text": "Pre-rRNA, total RNA, assembled ribosome content, and active translation measure different things. Total RNA is a proxy for capacity, not a direct count of productive ribosomes.",
+        "references": [
+          "stec2016"
+        ]
+      },
+      "inputs": [
+        "Transcriptional regulation",
+        "Nucleotides",
+        "Ribosomal proteins",
+        "Energy"
+      ],
+      "outputs": [
+        "Ribosomal subunits",
+        "Potential translational capacity"
+      ],
+      "compartments": [
+        "Nucleolus",
+        "Nucleus",
+        "Cytosol"
+      ],
+      "timescales": [
+        "Hours to days",
+        "Weeks: accumulated adaptation"
+      ],
+      "causalStatus": [
+        {
+          "relationship": "Correlated",
+          "scope": "Human training studies associate ribosomal measures with growth."
+        },
+        {
+          "relationship": "Required",
+          "scope": "Inhibition experiments support a requirement in tested myotube growth conditions; this is not a universal human threshold."
+        }
+      ],
+      "humanEvidence": [
+        {
+          "provenance": [
+            "Human intervention",
+            "Human biopsy"
+          ],
+          "model": "Human",
+          "directness": "Indirect",
+          "summary": "Human training responses associate ribosomal measures with hypertrophy heterogeneity.",
+          "references": [
+            "stec2016"
+          ]
+        }
+      ],
+      "modelEvidence": [
+        {
+          "provenance": [
+            "Cell culture"
+          ],
+          "model": "Cellular",
+          "directness": "Direct",
+          "summary": "In vitro inhibition experiments tested dependence of myotube growth on ribosome biogenesis.",
+          "references": [
+            "stec2016"
+          ]
+        }
+      ],
+      "uncertainty": "The extent to which ribosomal capacity limits different human training responses is unresolved.",
+      "oversimplification": "More RNA always means more muscle.",
+      "correction": "Capacity, active use, and net protein balance are different quantities.",
+      "practicalRelevance": "Separate translational capacity from acute signaling when reading adaptation studies.",
+      "related": [
+        "muscle-protein-synthesis",
+        "mtorc1",
+        "hypertrophy"
+      ]
+    },
+    {
+      "slug": "hypertrophy",
+      "title": "Hypertrophy",
+      "definition": "A sustained increase in tissue or cell size; here, growth of skeletal muscle fibers and muscle tissue.",
+      "systemLevel": "Tissue adaptation",
+      "topics": [
+        "tissue-adaptations",
+        "performance-physiology"
+      ],
+      "foundations": {
+        "text": "Muscle growth accumulates over time. A temporary pump or swelling after exercise is not the same observation as lasting tissue growth.",
+        "references": []
+      },
+      "mechanism": {
+        "text": "Sustained protein accretion reflects synthesis exceeding breakdown over time, alongside other remodeling. A single bout samples only a small portion of that history.",
+        "references": [
+          "damas2016"
+        ]
+      },
+      "advanced": {
+        "text": "Fiber cross-sectional area, whole-muscle volume, and lean mass differ in scale and specificity. Hydration and sampling affect measurements; strength also depends on neural and task-specific factors.",
+        "references": [
+          "mitchell2014",
+          "damas2016"
+        ]
+      },
+      "inputs": [
+        "Repeated loading",
+        "Protein balance",
+        "Recovery and tissue remodeling"
+      ],
+      "outputs": [
+        "Larger muscle fibers and tissue",
+        "Potential contribution to force capacity"
+      ],
+      "compartments": [
+        "Muscle fibers",
+        "Whole tissue"
+      ],
+      "timescales": [
+        "Weeks to months"
+      ],
+      "causalStatus": [
+        {
+          "relationship": "Contributory",
+          "scope": "Muscle size contributes to force capacity but is not sufficient to specify task performance."
+        }
+      ],
+      "humanEvidence": [
+        {
+          "provenance": [
+            "Human intervention"
+          ],
+          "model": "Human",
+          "directness": "Direct",
+          "summary": "Longitudinal training studies measure growth; one acute synthesis response did not predict it in the cited cohort.",
+          "references": [
+            "mitchell2014"
+          ]
+        }
+      ],
+      "modelEvidence": [
+        {
+          "provenance": [
+            "Cell culture"
+          ],
+          "model": "Cellular",
+          "directness": "Indirect",
+          "summary": "Myotube growth permits mechanistic perturbation but differs from mature human tissue adaptation.",
+          "references": [
+            "stec2016"
+          ]
+        }
+      ],
+      "uncertainty": "Individual adaptation integrates exposures and biology that are poorly captured by any single biomarker.",
+      "oversimplification": "Phosphorylation is muscle growth.",
+      "correction": "A regulatory event and a lasting tissue phenotype require different measurements.",
+      "practicalRelevance": "Judge long-term claims with longitudinal tissue and functional outcomes.",
+      "related": [
+        "mechanical-tension",
+        "muscle-protein-synthesis",
+        "ribosome-biogenesis"
+      ]
+    }
+  ],
+  "articles": [
+    {
+      "slug": "from-leucine-to-muscle-protein-synthesis",
+      "title": "From Leucine to Muscle Protein Synthesis",
+      "description": "Follow a dietary amino acid through sensing, localization, translation, and the limits of inference about muscle growth.",
+      "date": "2026-09-26",
+      "type": "Mechanism Explainer",
+      "topics": [
+        "nutrition-substrate-biology",
+        "signaling-pathways",
+        "essays-research-updates"
+      ],
+      "question": "How does leucine availability become a cellular response, and where does the evidence stop short of hypertrophy?",
+      "whatChanged": "Foundational synthesis for the atlas launch; this article is not reporting a newly published study.",
+      "elementary": "Muscle cells need raw materials, energy, and instructions to make proteins. Leucine participates as both a building block and a signal. Neither role replaces the need for other amino acids, and new protein can support repair rather than growth.",
+      "advancedMechanism": {
+        "text": "The core distinction is recruitment versus catalytic activation versus biosynthetic flux. Rag-dependent positioning, Rheb-dependent allostery, and downstream translation regulation connect these levels without making them equivalent.",
+        "references": [
+          "sancak2008",
+          "yang2017",
+          "thoreen2012"
+        ]
+      },
+      "whyItMatters": "It prevents a plausible molecular explanation from being mistaken for proof that an intervention produces lasting human muscle growth.",
+      "demonstrated": "The cited studies establish defined cellular sensing mechanisms and acute human feeding or exercise responses. They measure different links in the proposed chain.",
+      "notDemonstrated": "No single experiment here traces dietary leucine through every molecular node to long-term hypertrophy in humans.",
+      "studyType": "Narrative synthesis of selected primary experiments; not a systematic review.",
+      "population": "Human feeding and training cohorts, cultured cells, isolated animal muscle, and purified protein systems; population-specific limits apply.",
+      "methods": "Tracer incorporation, biopsies, molecular perturbation, protein binding, structural biology, and longitudinal tissue measurements.",
+      "limitations": "Selected foundational literature; no exhaustive search or quantitative synthesis. Much of the sensing mechanism comes from systems other than intact exercising human muscle.",
+      "confidence": "Well supported for the existence of the cellular mechanisms and acute human responses; limited for the quantitative contribution of each sensor to long-term human adaptation.",
+      "related": [
+        "leucine",
+        "sestrin2",
+        "rag-gtpases",
+        "rheb",
+        "mtorc1",
+        "muscle-protein-synthesis",
+        "hypertrophy"
+      ],
+      "evidence": [
+        {
+          "provenance": [
+            "Human intervention",
+            "Tracer study"
+          ],
+          "model": "Human",
+          "directness": "Direct",
+          "summary": "Feeding and exercise studies measure acute synthesis responses, not the full molecular chain.",
+          "references": [
+            "churchward2012",
+            "drummond2009"
+          ]
+        },
+        {
+          "provenance": [
+            "Cell culture",
+            "Biochemical reconstitution"
+          ],
+          "model": "Mixed",
+          "directness": "Direct",
+          "summary": "Binding, docking, and catalytic mechanisms are tested in experimental model systems.",
+          "references": [
+            "wolfson2016",
+            "docking2019",
+            "yang2017"
+          ]
+        }
+      ],
+      "pathway": "leucine-loading",
+      "sections": [
+        {
+          "slug": "what-leucine-is",
+          "title": "What leucine is",
+          "foundations": {
+            "text": "Leucine is an essential amino acid: a chemical building block that the human body cannot make in adequate amounts. Dietary proteins deliver leucine together with other amino acids.",
+            "references": []
+          },
+          "mechanism": {
+            "text": "Digestion and transport determine availability to tissues. Inside cells, leucine can enter protein synthesis or participate in metabolism and sensing.",
+            "references": []
+          },
+          "advanced": {
+            "text": "An amino acid's concentration is a state variable, not a flux. Plasma concentration, intracellular free pools, transport, oxidation, and incorporation need not change in parallel.",
+            "references": []
+          }
+        },
+        {
+          "slug": "why-sensing-exists",
+          "title": "Why amino-acid sensing exists",
+          "foundations": {
+            "text": "Making a protein requires a complete set of ingredients. Cells benefit from coordinating construction with what is available.",
+            "references": []
+          },
+          "mechanism": {
+            "text": "The nutrient arm of mTORC1 regulation connects amino-acid availability to the location of a regulatory complex.",
+            "references": [
+              "sancak2008"
+            ]
+          },
+          "advanced": {
+            "text": "A sensing pathway conveys information; a substrate pool supplies matter. A sensor responding to one amino acid cannot establish that all substrates and energy are sufficient.",
+            "references": []
+          }
+        },
+        {
+          "slug": "sestrin2",
+          "title": "Sestrin2",
+          "foundations": {
+            "text": "A molecule can carry information by binding to a protein. Sestrin2 is one example of a leucine-responsive binding protein.",
+            "references": [
+              "wolfson2016"
+            ]
+          },
+          "mechanism": {
+            "text": "Leucine occupancy changes Sestrin2's interaction with GATOR2, linking nutrient availability to regulation upstream of the Rags.",
+            "references": [
+              "wolfson2016"
+            ]
+          },
+          "advanced": {
+            "text": "For an ideal single-site equilibrium, fractional occupancy is θ = [free ligand] / (Kd + [free ligand]). This illustrative binding model is not a fitted description of exercising muscle: competing interactions, compartmental concentrations, kinetics, and sensor abundance can alter the cellular response. A plasma leucine concentration cannot be substituted for the free concentration at a sensor. Nor does occupancy establish that Sestrin2 is the sole relevant human muscle sensor.",
+            "references": [
+              "wolfson2016"
+            ]
+          }
+        },
+        {
+          "slug": "rag-gtpases",
+          "title": "Rag GTPases",
+          "foundations": {
+            "text": "Proteins often need to meet before they can influence one another. The Rags help organize such encounters.",
+            "references": []
+          },
+          "mechanism": {
+            "text": "Rag heterodimers interact with RAPTOR to recruit mTORC1 in response to nutrient information.",
+            "references": [
+              "sancak2008"
+            ]
+          },
+          "advanced": {
+            "text": "RagA/B–GTP paired with RagC/D–GDP favors recruitment. The states of both partners matter; calling all GTPases simply 'on when GTP-bound' obscures this asymmetry.",
+            "references": [
+              "docking2019"
+            ]
+          }
+        },
+        {
+          "slug": "lysosomal-localization",
+          "title": "Lysosomal localization of mTORC1",
+          "foundations": {
+            "text": "A lysosome is a membrane-bound recycling compartment that also serves as a signaling location.",
+            "references": []
+          },
+          "mechanism": {
+            "text": "Lysosome-associated Rag machinery positions mTORC1 for productive regulatory encounters. The membrane surface is part of the mechanism.",
+            "references": [
+              "docking2019"
+            ]
+          },
+          "advanced": {
+            "text": "Recruitment alters effective local concentration and encounter geometry. A membrane constrains movement and orientation, so bulk concentration does not completely specify productive molecular encounters. Colocalization in an image supports proximity at the assay's resolution, not necessarily binding or enzyme activity. Distinguishing recruitment from activation requires orthogonal measurements of interaction and catalysis.",
+            "references": [
+              "docking2019"
+            ]
+          }
+        },
+        {
+          "slug": "rheb",
+          "title": "Rheb and permissive activation",
+          "foundations": {
+            "text": "Being in the right location is only part of the story. An enzyme can still need a separate activating interaction.",
+            "references": []
+          },
+          "mechanism": {
+            "text": "Rheb in its GTP-bound state promotes mTORC1 catalysis. TSC provides restraint on this input and connects it to other regulatory conditions.",
+            "references": [
+              "yang2017",
+              "inoki2002"
+            ]
+          },
+          "advanced": {
+            "text": "Rheb acts through allosteric structural change. 'Permissive' describes the cellular context; biochemically Rheb is a direct activator, not merely a passive docking factor.",
+            "references": [
+              "yang2017"
+            ]
+          }
+        },
+        {
+          "slug": "s6k1-4ebp1",
+          "title": "S6K1 / 4E-BP1",
+          "foundations": {
+            "text": "mTORC1 influences other proteins that help control the protein-making machinery.",
+            "references": []
+          },
+          "mechanism": {
+            "text": "S6K1 is a downstream kinase. 4E-BP1 regulates eIF4E availability and initiation-factor assembly; these are distinct branches, not consecutive steps.",
+            "references": [
+              "drummond2009",
+              "thoreen2012"
+            ]
+          },
+          "advanced": {
+            "text": "Phosphorylation is site-specific and reversible. Protein abundance, subcellular location, substrate access, and phosphatases influence the meaning of a measured phosphosite.",
+            "references": []
+          }
+        },
+        {
+          "slug": "translation-initiation",
+          "title": "Translation initiation",
+          "foundations": {
+            "text": "The cell assembles machinery to start reading a messenger RNA before it can build a protein.",
+            "references": []
+          },
+          "mechanism": {
+            "text": "Changes in eIF4E binding help regulate cap-dependent initiation. Regulation differs across messages.",
+            "references": [
+              "thoreen2012"
+            ]
+          },
+          "advanced": {
+            "text": "Initiation does not bypass elongation constraints. Charging a transfer RNA couples amino-acid attachment to ATP conversion to AMP and pyrophosphate; elongation also uses GTP-dependent steps. Thus an initiation signal cannot remove energetic or substrate constraints. Ribosome occupancy alone can also be ambiguous: more ribosomes on an RNA might reflect faster initiation or slower movement along that RNA.",
+            "references": []
+          }
+        },
+        {
+          "slug": "signaling-is-not-growth",
+          "title": "Why signaling is not the same as hypertrophy",
+          "foundations": {
+            "text": "A message to build is different from a completed structure, and a completed protein may replace an old one.",
+            "references": []
+          },
+          "mechanism": {
+            "text": "Net accretion depends on synthesis and breakdown integrated over time. A short post-exercise response may include remodeling rather than lasting enlargement.",
+            "references": [
+              "damas2016"
+            ]
+          },
+          "advanced": {
+            "text": "One study found that an initial acute myofibrillar synthesis response did not correlate with subsequent hypertrophy. This tests a proposed predictor, not whether synthesis is biologically required.",
+            "references": [
+              "mitchell2014"
+            ]
+          }
+        },
+        {
+          "slug": "all-essential-amino-acids",
+          "title": "Why total essential amino acids still matter",
+          "foundations": {
+            "text": "A protein sequence needs many amino acids. Adding more of one ingredient does not manufacture the missing ones.",
+            "references": []
+          },
+          "mechanism": {
+            "text": "Leucine can influence a feeding response, but the full amino-acid mixture and time window matter for sustained synthesis.",
+            "references": [
+              "churchward2012"
+            ]
+          },
+          "advanced": {
+            "text": "Existing intracellular pools and protein recycling can temporarily supply amino acids. Their presence explains why an acute response does not establish long-term nutritional sufficiency.",
+            "references": []
+          }
+        },
+        {
+          "slug": "energetic-state",
+          "title": "Interaction with energetic state",
+          "foundations": {
+            "text": "Protein construction consumes energy. Cells coordinate it with other demands rather than following nutrient signals in isolation.",
+            "references": []
+          },
+          "mechanism": {
+            "text": "AMPK supplies an energy-sensitive regulatory input and can restrain mTORC1 through RAPTOR phosphorylation.",
+            "references": [
+              "gwinn2008"
+            ]
+          },
+          "advanced": {
+            "text": "This inhibitory connection is experimentally supported in cellular systems. It does not make AMPK an explanation by itself for concurrent-training outcomes or a binary antagonist of all growth.",
+            "references": [
+              "gwinn2008"
+            ]
+          }
+        },
+        {
+          "slug": "resistance-training",
+          "title": "Interaction with resistance training",
+          "foundations": {
+            "text": "Training loads the tissue that must adapt. Feeding supplies resources and regulatory inputs in the context of that exposure.",
+            "references": []
+          },
+          "mechanism": {
+            "text": "Mechanical input has its own routes to signaling; a loading diagram should not force every response through the leucine sensor.",
+            "references": [
+              "hornberger2006"
+            ]
+          },
+          "advanced": {
+            "text": "Ex vivo mechanical experiments can isolate candidate mechanisms. Human exercise combines recruitment, force transmission, metabolism, and systemic responses, making direct translation less simple.",
+            "references": [
+              "hornberger2006"
+            ]
+          }
+        },
+        {
+          "slug": "human-evidence",
+          "title": "What is strongly supported in humans",
+          "foundations": {
+            "text": "Researchers can measure newly synthesized muscle proteins after feeding or exercise using labeled tracers and biopsies.",
+            "references": [
+              "churchward2012"
+            ]
+          },
+          "mechanism": {
+            "text": "Pharmacological inhibition with rapamycin blocked an early post-exercise synthesis increase, supporting a role for rapamycin-sensitive regulation in that protocol.",
+            "references": [
+              "drummond2009"
+            ]
+          },
+          "advanced": {
+            "text": "These are bounded findings: the intervention, participants, protein pool, and recovery interval define the claim. They do not identify every intervening sensor or prove a chronic supplement effect.",
+            "references": [
+              "drummond2009"
+            ]
+          }
+        },
+        {
+          "slug": "open-questions",
+          "title": "What remains mechanistically uncertain",
+          "foundations": {
+            "text": "We know many parts of the system, but not exactly how much each part explains a person's adaptation.",
+            "references": []
+          },
+          "mechanism": {
+            "text": "Sensor contributions, spatial organization, translational capacity, and turnover must be connected across timescales. Human ribosomal associations and cell-culture necessity tests answer different questions.",
+            "references": [
+              "stec2016"
+            ]
+          },
+          "advanced": {
+            "text": "A stronger translational chain would connect a specific perturbation to molecular state, measured synthesis and breakdown, repeated exposure, tissue change, and function in the same relevant population. The map is a guide to those tests, not a substitute for them.",
+            "references": []
+          }
+        }
+      ]
+    },
+    {
+      "slug": "phosphorylation-is-not-hypertrophy",
+      "title": "Phosphorylation is not hypertrophy",
+      "description": "Why an acute molecular response cannot stand in for a long-term training outcome.",
+      "date": "2026-09-26",
+      "type": "Concept Correction",
+      "topics": [
+        "evidence-methods",
+        "essays-research-updates"
+      ],
+      "question": "Can a short-lived synthesis or signaling response predict muscle growth?",
+      "whatChanged": "An editorial correction of a common inference, revisiting 2014 and 2016 studies; no new experiment is announced.",
+      "elementary": "A signal, a production rate, and a lasting change in muscle size are different observations. Each requires its own measurement.",
+      "advancedMechanism": {
+        "text": "Phosphorylation is a regulatory state; tracer incorporation estimates synthesis flux. Neither directly measures the synthesis-minus-breakdown balance accumulated over a training program.",
+        "references": [
+          "mitchell2014",
+          "damas2016"
+        ]
+      },
+      "whyItMatters": "A study can demonstrate a real biological response while leaving a performance or growth claim unanswered.",
+      "demonstrated": "Mitchell and colleagues found no correlation between the initial acute synthesis response and subsequent hypertrophy in their cohort. Damas and colleagues found a relationship for integrated synthesis after early damage attenuated.",
+      "notDemonstrated": "These studies do not show that synthesis is irrelevant, that all biomarkers are useless, or that phosphorylation can never inform mechanism.",
+      "studyType": "Concept correction drawing on longitudinal human resistance-training studies.",
+      "population": "Young men in the cited training cohorts; findings are not automatically generalizable to women, older adults, or clinical populations.",
+      "methods": "Stable-isotope synthesis estimates, muscle sampling, and longitudinal hypertrophy measures, with differing integration windows.",
+      "limitations": "Small, specific cohorts; different time windows; associations do not identify every causal mediator. This is a selected comparison, not a meta-analysis.",
+      "confidence": "High confidence that these endpoints are distinct. Limited confidence in predicting individual growth from any one acute measurement.",
+      "related": [
+        "s6k1",
+        "muscle-protein-synthesis",
+        "hypertrophy"
+      ],
+      "evidence": [
+        {
+          "provenance": [
+            "Human intervention",
+            "Human biopsy",
+            "Tracer study"
+          ],
+          "model": "Human",
+          "directness": "Direct",
+          "summary": "Human studies assess synthesis and growth over different timescales; the relation depends on study context.",
+          "references": [
+            "mitchell2014",
+            "damas2016"
+          ]
+        }
+      ],
+      "sections": [
+        {
+          "slug": "read-the-endpoint",
+          "title": "Read the endpoint before the conclusion",
+          "foundations": {
+            "text": "First ask what was measured: a molecular mark, new protein, muscle size, or strength.",
+            "references": []
+          },
+          "mechanism": {
+            "text": "A causal hypothesis can connect these endpoints, but measuring one does not establish changes in all the others.",
+            "references": []
+          },
+          "advanced": {
+            "text": "Prediction and mediation are separate problems. A necessary process can be a poor predictor if it is measured over the wrong interval or if other processes account for outcome variation.",
+            "references": [
+              "mitchell2014"
+            ]
+          }
+        }
+      ]
+    }
+  ],
+  "topics": [
+    {
+      "slug": "training-stimuli",
+      "title": "Training Stimuli",
+      "description": "Begin with the physical perturbation: force, duration, recruitment, and energetic demand.",
+      "planned": [
+        "Endurance exercise",
+        "Concurrent training",
+        "Hypoxia",
+        "Thermoregulation"
+      ]
+    },
+    {
+      "slug": "molecules-metabolites",
+      "title": "Molecules & Metabolites",
+      "description": "Distinguish chemical substrates from signals and from measures of cellular state.",
+      "planned": [
+        "ATP / ADP / AMP",
+        "Glucose",
+        "Glycogen",
+        "Phosphocreatine",
+        "Creatine kinase",
+        "Fatty acids",
+        "Ketones"
+      ]
+    },
+    {
+      "slug": "sensors-regulators",
+      "title": "Sensors & Regulators",
+      "description": "How ligand binding, nucleotide state, and physical forces become regulatory information.",
+      "planned": [
+        "Integrins",
+        "Focal adhesion kinase",
+        "Calcium / CaMK",
+        "YAP / TAZ",
+        "Myostatin / activin"
+      ]
+    },
+    {
+      "slug": "signaling-pathways",
+      "title": "Signaling Pathways",
+      "description": "Follow interacting networks, their subcellular locations, and their experimental limits.",
+      "planned": [
+        "Insulin / GLUT4",
+        "p38 MAPK",
+        "SMAD2/3",
+        "FOXO",
+        "PGC-1α / NRF1 / nuclear respiratory factor 2 / TFAM"
+      ]
+    },
+    {
+      "slug": "cellular-processes",
+      "title": "Cellular Processes",
+      "description": "Connect regulation to material transformations, turnover, and cellular capacity.",
+      "planned": [
+        "Autophagy",
+        "Mitophagy",
+        "Mitochondrial biogenesis",
+        "Ubiquitin-proteasome system",
+        "MuRF1 / atrogin-1",
+        "Lysosomal degradation"
+      ]
+    },
+    {
+      "slug": "tissue-adaptations",
+      "title": "Tissue Adaptations",
+      "description": "Track changes that accumulate across repeated exposures, recovery, and remodeling.",
+      "planned": [
+        "Satellite cells / myonuclei",
+        "Extracellular matrix",
+        "Tendon adaptation",
+        "Connective tissue",
+        "Aging muscle"
+      ]
+    },
+    {
+      "slug": "performance-physiology",
+      "title": "Performance Physiology",
+      "description": "Ask whether cellular and tissue changes transfer to strength, endurance, or task performance.",
+      "planned": [
+        "Strength and neural adaptation",
+        "Oxidative metabolism",
+        "Fatigue",
+        "Sex differences",
+        "Training status"
+      ]
+    },
+    {
+      "slug": "nutrition-substrate-biology",
+      "title": "Nutrition & Substrate Biology",
+      "description": "Keep amino-acid signaling, substrate supply, and whole-body availability distinct.",
+      "planned": [
+        "Essential amino acids",
+        "Creatine / phosphocreatine",
+        "Glycogen availability",
+        "Micronutrient constraints",
+        "Obesity / insulin resistance"
+      ]
+    },
+    {
+      "slug": "evidence-methods",
+      "title": "Evidence & Methods",
+      "description": "Read tracer estimates, biopsies, perturbation experiments, and longitudinal outcomes at the scale they measure.",
+      "planned": [
+        "Tracer assumptions",
+        "Biopsy sampling",
+        "Causal inference",
+        "Signal versus flux"
+      ]
+    },
+    {
+      "slug": "essays-research-updates",
+      "title": "Essays / Research Updates",
+      "description": "A publication record for explainers, evidence reviews, corrections, and study appraisals.",
+      "planned": [
+        "Sleep and recovery",
+        "Inflammation",
+        "Oxidative stress",
+        "Literature notes"
+      ]
+    }
+  ],
+  "references": [
+    {
+      "id": "wolfson2016",
+      "authors": "Wolfson RL et al.",
+      "year": 2016,
+      "title": "Sestrin2 is a leucine sensor for the mTORC1 pathway",
+      "journal": "Science",
+      "url": "https://pmc.ncbi.nlm.nih.gov/articles/PMC4698017/"
+    },
+    {
+      "id": "sancak2008",
+      "authors": "Sancak Y et al.",
+      "year": 2008,
+      "title": "The Rag GTPases bind raptor and mediate amino acid signaling to mTORC1",
+      "journal": "Science",
+      "url": "https://doi.org/10.1126/science.1157535"
+    },
+    {
+      "id": "yang2017",
+      "authors": "Yang H et al.",
+      "year": 2017,
+      "title": "Mechanisms of mTORC1 activation by RHEB and inhibition by PRAS40",
+      "journal": "Nature",
+      "url": "https://doi.org/10.1038/nature25023"
+    },
+    {
+      "id": "inoki2002",
+      "authors": "Inoki K et al.",
+      "year": 2002,
+      "title": "TSC2 is phosphorylated and inhibited by Akt and suppresses mTOR signalling",
+      "journal": "Nature Cell Biology",
+      "url": "https://doi.org/10.1038/ncb839"
+    },
+    {
+      "id": "gwinn2008",
+      "authors": "Gwinn DM et al.",
+      "year": 2008,
+      "title": "AMPK phosphorylation of raptor mediates a metabolic checkpoint",
+      "journal": "Molecular Cell",
+      "url": "https://doi.org/10.1016/j.molcel.2008.03.003"
+    },
+    {
+      "id": "drummond2009",
+      "authors": "Drummond MJ et al.",
+      "year": 2009,
+      "title": "Rapamycin administration in humans blocks the contraction-induced increase in skeletal muscle protein synthesis",
+      "journal": "The Journal of Physiology",
+      "url": "https://doi.org/10.1113/jphysiol.2008.163816"
+    },
+    {
+      "id": "churchward2012",
+      "authors": "Churchward-Venne TA et al.",
+      "year": 2012,
+      "title": "Supplementation of a suboptimal protein dose with leucine or essential amino acids: effects on myofibrillar protein synthesis at rest and following resistance exercise in men",
+      "journal": "The Journal of Physiology",
+      "url": "https://doi.org/10.1113/jphysiol.2012.228833"
+    },
+    {
+      "id": "damas2016",
+      "authors": "Damas F et al.",
+      "year": 2016,
+      "title": "Resistance training-induced changes in integrated myofibrillar protein synthesis are related to hypertrophy only after attenuation of muscle damage",
+      "journal": "The Journal of Physiology",
+      "url": "https://doi.org/10.1113/JP272472"
+    },
+    {
+      "id": "mitchell2014",
+      "authors": "Mitchell CJ et al.",
+      "year": 2014,
+      "title": "Acute post-exercise myofibrillar protein synthesis is not correlated with resistance training-induced muscle hypertrophy in young men",
+      "journal": "PLOS ONE",
+      "url": "https://pubmed.ncbi.nlm.nih.gov/24586775/"
+    },
+    {
+      "id": "hornberger2006",
+      "authors": "Hornberger TA et al.",
+      "year": 2006,
+      "title": "The role of phospholipase D and phosphatidic acid in the mechanical activation of mTOR signaling in skeletal muscle",
+      "journal": "PNAS",
+      "url": "https://pmc.ncbi.nlm.nih.gov/articles/PMC1450240/"
+    },
+    {
+      "id": "stec2016",
+      "authors": "Stec MJ et al.",
+      "year": 2016,
+      "title": "Ribosome biogenesis may augment resistance training-induced myofiber hypertrophy and is required for myotube growth in vitro",
+      "journal": "American Journal of Physiology-Endocrinology and Metabolism",
+      "url": "https://pmc.ncbi.nlm.nih.gov/articles/PMC4835943/"
+    },
+    {
+      "id": "docking2019",
+      "authors": "Rogala KB et al.",
+      "year": 2019,
+      "title": "Structural basis for the docking of mTORC1 on the lysosomal surface",
+      "journal": "Science",
+      "url": "https://pubmed.ncbi.nlm.nih.gov/31601708/"
+    },
+    {
+      "id": "thoreen2012",
+      "authors": "Thoreen CC et al.",
+      "year": 2012,
+      "title": "A unifying model for mTORC1-mediated regulation of mRNA translation",
+      "journal": "Nature",
+      "url": "https://doi.org/10.1038/nature11083"
+    },
+    {
+      "id": "garami2003",
+      "authors": "Garami A et al.",
+      "year": 2003,
+      "title": "Insulin activation of Rheb, a mediator of mTOR/S6K/4E-BP signaling, is inhibited by TSC1 and 2",
+      "journal": "Molecular Cell",
+      "url": "https://doi.org/10.1016/S1097-2765(03)00220-X"
+    }
+  ],
+  "pathways": [
+    {
+      "slug": "leucine-loading",
+      "title": "Two inputs, a shared regulatory network",
+      "description": "A selected mechanism map, not a complete pathway. Arrows describe the labeled relationship in its evidence context; they do not imply a deterministic human outcome.",
+      "nodes": [
+        {
+          "id": "leucine",
+          "label": "Leucine availability",
+          "concept": "leucine",
+          "column": 0,
+          "row": 0
+        },
+        {
+          "id": "sensor",
+          "label": "Sestrin2 / GATOR",
+          "concept": "sestrin2",
+          "column": 1,
+          "row": 0
+        },
+        {
+          "id": "rags",
+          "label": "Rag recruitment",
+          "concept": "rag-gtpases",
+          "column": 2,
+          "row": 0
+        },
+        {
+          "id": "tension",
+          "label": "Training / tension",
+          "concept": "mechanical-tension",
+          "column": 0,
+          "row": 1
+        },
+        {
+          "id": "mech",
+          "label": "Mechanotransduction",
+          "concept": "mechanical-tension",
+          "column": 1,
+          "row": 1
+        },
+        {
+          "id": "mtor",
+          "label": "mTORC1",
+          "concept": "mtorc1",
+          "column": 3,
+          "row": 1
+        },
+        {
+          "id": "s6",
+          "label": "S6K1",
+          "concept": "s6k1",
+          "column": 4,
+          "row": 0
+        },
+        {
+          "id": "bp",
+          "label": "4E-BP1 regulation",
+          "concept": "4e-bp1",
+          "column": 4,
+          "row": 2
+        },
+        {
+          "id": "translation",
+          "label": "Translation initiation",
+          "concept": "translation-initiation",
+          "column": 5,
+          "row": 1
+        },
+        {
+          "id": "akt",
+          "label": "AKT",
+          "concept": "akt",
+          "column": 0,
+          "row": 2
+        },
+        {
+          "id": "tsc",
+          "label": "TSC1/2",
+          "concept": "tsc1-2",
+          "column": 1,
+          "row": 2
+        },
+        {
+          "id": "rheb",
+          "label": "Rheb–GTP",
+          "concept": "rheb",
+          "column": 2,
+          "row": 2
+        },
+        {
+          "id": "ampk",
+          "label": "AMPK",
+          "concept": "ampk",
+          "column": 3,
+          "row": 3
+        },
+        {
+          "id": "mps",
+          "label": "Protein synthesis",
+          "concept": "muscle-protein-synthesis",
+          "column": 5,
+          "row": 3
+        },
+        {
+          "id": "growth",
+          "label": "Net accretion → growth",
+          "concept": "hypertrophy",
+          "column": 4,
+          "row": 3
+        }
+      ],
+      "edges": [
+        {
+          "from": "leucine",
+          "to": "sensor",
+          "kind": "contributes",
+          "label": "Ligand sensing",
+          "support": "Binding and perturbation support",
+          "evidence": {
+            "provenance": [
+              "Cell culture"
+            ],
+            "model": "Cellular",
+            "directness": "Direct",
+            "summary": "A nutrient-sensing interaction, not a human growth endpoint.",
+            "references": [
+              "wolfson2016"
+            ]
+          }
+        },
+        {
+          "from": "sensor",
+          "to": "rags",
+          "kind": "contributes",
+          "label": "Via GATOR network",
+          "support": "Cellular pathway support",
+          "evidence": {
+            "provenance": [
+              "Cell culture"
+            ],
+            "model": "Cellular",
+            "directness": "Direct",
+            "summary": "Intervening complexes are condensed in this diagram.",
+            "references": [
+              "wolfson2016"
+            ]
+          }
+        },
+        {
+          "from": "rags",
+          "to": "mtor",
+          "kind": "permits",
+          "label": "Lysosomal recruitment",
+          "support": "Structural and cellular support",
+          "evidence": {
+            "provenance": [
+              "Biochemical reconstitution",
+              "Cell culture"
+            ],
+            "model": "Mixed",
+            "directness": "Direct",
+            "summary": "Recruitment differs from catalytic activation.",
+            "references": [
+              "docking2019"
+            ]
+          }
+        },
+        {
+          "from": "tension",
+          "to": "mech",
+          "kind": "contributes",
+          "label": "Force transduction",
+          "support": "Candidate routes in isolated muscle",
+          "evidence": {
+            "provenance": [
+              "Ex vivo"
+            ],
+            "model": "Animal",
+            "directness": "Direct",
+            "summary": "Isolated-muscle experiments support mechanical regulation.",
+            "references": [
+              "hornberger2006"
+            ]
+          }
+        },
+        {
+          "from": "mech",
+          "to": "mtor",
+          "kind": "uncertain",
+          "label": "Multiple candidate routes",
+          "support": "Incomplete human mediation evidence",
+          "evidence": {
+            "provenance": [
+              "Mechanistic inference"
+            ],
+            "model": "Human",
+            "directness": "Inferred",
+            "summary": "A single dominant route is not established for human training.",
+            "references": [
+              "hornberger2006"
+            ]
+          }
+        },
+        {
+          "from": "akt",
+          "to": "tsc",
+          "kind": "inhibits",
+          "label": "Regulates TSC restraint",
+          "support": "Cellular perturbation support",
+          "evidence": {
+            "provenance": [
+              "Cell culture"
+            ],
+            "model": "Cellular",
+            "directness": "Direct",
+            "summary": "AKT-associated phosphorylation can relieve TSC-mediated restraint.",
+            "references": [
+              "inoki2002"
+            ]
+          }
+        },
+        {
+          "from": "tsc",
+          "to": "rheb",
+          "kind": "inhibits",
+          "label": "Promotes GTP hydrolysis",
+          "support": "Cellular and biochemical support",
+          "evidence": {
+            "provenance": [
+              "Cell culture",
+              "Biochemical reconstitution"
+            ],
+            "model": "Mixed",
+            "directness": "Direct",
+            "summary": "TSC regulates the Rheb nucleotide state.",
+            "references": [
+              "garami2003"
+            ]
+          }
+        },
+        {
+          "from": "rheb",
+          "to": "mtor",
+          "kind": "contributes",
+          "label": "Allosteric activation",
+          "support": "Direct structural and kinase evidence",
+          "evidence": {
+            "provenance": [
+              "Biochemical reconstitution"
+            ],
+            "model": "Biochemical",
+            "directness": "Direct",
+            "summary": "Rheb can stimulate mTORC1 catalysis in defined assays.",
+            "references": [
+              "yang2017"
+            ]
+          }
+        },
+        {
+          "from": "ampk",
+          "to": "mtor",
+          "kind": "inhibits",
+          "label": "Via RAPTOR; context matters",
+          "support": "Cellular perturbation support",
+          "evidence": {
+            "provenance": [
+              "Cell culture"
+            ],
+            "model": "Cellular",
+            "directness": "Direct",
+            "summary": "This edge does not predict concurrent-training outcomes.",
+            "references": [
+              "gwinn2008"
+            ]
+          }
+        },
+        {
+          "from": "mtor",
+          "to": "s6",
+          "kind": "contributes",
+          "label": "Kinase regulation",
+          "support": "Pathway and biopsy support",
+          "evidence": {
+            "provenance": [
+              "Human biopsy"
+            ],
+            "model": "Human",
+            "directness": "Indirect",
+            "summary": "A phosphosite readout is not a synthesis measurement.",
+            "references": [
+              "drummond2009"
+            ]
+          }
+        },
+        {
+          "from": "mtor",
+          "to": "bp",
+          "kind": "contributes",
+          "label": "Phosphorylation regulation",
+          "support": "Cellular translation evidence",
+          "evidence": {
+            "provenance": [
+              "Cell culture"
+            ],
+            "model": "Cellular",
+            "directness": "Direct",
+            "summary": "Regulates relief of eIF4E restraint.",
+            "references": [
+              "thoreen2012"
+            ]
+          }
+        },
+        {
+          "from": "s6",
+          "to": "translation",
+          "kind": "contributes",
+          "label": "Translation-associated control",
+          "support": "Network-level interpretation",
+          "evidence": {
+            "provenance": [
+              "Mechanistic inference"
+            ],
+            "model": "Cellular",
+            "directness": "Indirect",
+            "summary": "A condensed branch; S6K1 is not the only translation regulator.",
+            "references": [
+              "thoreen2012"
+            ]
+          }
+        },
+        {
+          "from": "bp",
+          "to": "translation",
+          "kind": "permits",
+          "label": "eIF4E availability",
+          "support": "Cellular perturbation support",
+          "evidence": {
+            "provenance": [
+              "Cell culture"
+            ],
+            "model": "Cellular",
+            "directness": "Direct",
+            "summary": "Reduced restraint permits initiation-factor assembly.",
+            "references": [
+              "thoreen2012"
+            ]
+          }
+        },
+        {
+          "from": "translation",
+          "to": "mps",
+          "kind": "permits",
+          "label": "Needs substrates + elongation",
+          "support": "Process relationship",
+          "evidence": {
+            "provenance": [
+              "Mechanistic inference"
+            ],
+            "model": "Cellular",
+            "directness": "Inferred",
+            "summary": "Initiation is required, but completion has additional constraints.",
+            "references": [
+              "thoreen2012"
+            ]
+          }
+        },
+        {
+          "from": "mps",
+          "to": "growth",
+          "kind": "uncertain",
+          "label": "Balance over repeated exposures",
+          "support": "Conditional human association",
+          "evidence": {
+            "provenance": [
+              "Human intervention",
+              "Tracer study"
+            ],
+            "model": "Human",
+            "directness": "Indirect",
+            "summary": "Growth depends on sustained net balance, including breakdown; acute synthesis alone does not predict it.",
+            "references": [
+              "damas2016",
+              "mitchell2014"
+            ]
+          }
+        }
+      ]
+    }
+  ],
+  "editorial": {
+    "title": "Molecular Physiology of Training",
+    "subtitle": "A mechanistic atlas of how training, nutrition, and energetic state become biological adaptation.",
+    "introduction": "Start with an everyday physiological question. Follow the molecules, locations, and processes involved. Then ask what has actually been demonstrated in people.",
+    "hierarchy": [
+      "Stimulus",
+      "Molecular sensor",
+      "Signaling network",
+      "Cellular process",
+      "Tissue adaptation",
+      "Performance",
+      "Human evidence"
+    ],
+    "scope": "The first edition follows resistance training, leucine sensing, and mTORC1. Other systems are a roadmap for future coverage. The atlas is an educational synthesis of selected literature, not a systematic review or an individualized training prescription.",
+    "distinctions": [
+      [
+        "Acute signaling ≠ chronic adaptation",
+        "A response measured over minutes does not establish a change accumulated over weeks."
+      ],
+      [
+        "Phosphorylation ≠ phenotype",
+        "A regulatory modification and a tissue or performance outcome are different measurements."
+      ],
+      [
+        "Mechanistic plausibility ≠ demonstrated human effect",
+        "A plausible route needs outcome evidence in the relevant population."
+      ],
+      [
+        "Necessary ≠ sufficient",
+        "A required component may still need many other conditions to produce an outcome."
+      ],
+      [
+        "Correlation ≠ causation",
+        "Co-varying responses do not identify a causal relationship by themselves."
+      ],
+      [
+        "Substrate availability ≠ signaling",
+        "Having material available does not specify how the cell will use it."
+      ],
+      [
+        "Signaling ≠ material availability",
+        "Regulatory instructions do not supply missing amino acids or energy."
+      ],
+      [
+        "Molecular response ≠ whole-body outcome",
+        "Tissues interact, and outcomes depend on exposures across time."
+      ],
+      [
+        "Animal evidence ≠ human evidence",
+        "Model experiments test mechanisms under conditions that may not reproduce human physiology."
+      ],
+      [
+        "Biomarker ≠ functional endpoint",
+        "A proxy needs validation against the function it is intended to represent."
+      ]
+    ],
+    "evidenceGuide": [
+      [
+        "Provenance",
+        "Labels state the experimental source: intervention, biopsy, tracer, animal, cellular, ex vivo, reconstitution, or inference. Several labels can describe one study."
+      ],
+      [
+        "Directness",
+        "Direct means the cited study measures or perturbs the stated relationship in its own system. Indirect means a proxy or neighboring outcome. Inferred marks an extrapolation. Direct cellular evidence is not direct human evidence."
+      ],
+      [
+        "Confidence",
+        "Confidence is expressed in words with a claim and scope. There is no ranking of studies by stars and no assumption that one method answers every question."
+      ],
+      [
+        "Human evidence",
+        "Check population, intervention, endpoint, comparison, and observation window. An absence of direct human evidence in an entry means this selected source set does not establish it, not that the entire literature has been exhaustively searched."
+      ]
+    ]
+  }
+}
