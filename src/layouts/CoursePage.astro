@@ -26,32 +26,3 @@ const maturity = 'maturity' in entry.data ? entry.data.maturity : undefined;
     <slot />
   </article>
 </BaseLayout>
-<style>
-  .course-source {
-    color: var(--muted);
-    font-size: 0.9rem;
-  }
-
-  @media print {
-    :global(body)::before,
-    :global(.site-header),
-    :global(.site-footer),
-    .course-source,
-    .status-line .badge {
-      display: none;
-    }
-
-    :global(main) {
-      max-width: none;
-      padding: 0;
-    }
-
-    .course-page {
-      color: #000;
-    }
-
-    .course-page table {
-      break-inside: avoid;
-    }
-  }
-</style>
