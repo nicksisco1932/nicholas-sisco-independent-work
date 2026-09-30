@@ -1,0 +1,109 @@
+---
+/* Atlas home: /molecular-physiology.html
+ * Data-driven from the atlas-concepts collection and atlas-topics.json.
+ */
+import { getCollection } from 'astro:content';
+import AtlasPage from '../layouts/AtlasPage.astro';
+import topics from '../data/atlas-topics.json';
+
+const concepts = await getCollection('atlas-concepts');
+// Order concepts to match the production listing; fall back to title sort.
+const conceptOrder = [
+  'mechanical-tension', 'leucine', 'sestrin2', 'rag-gtpases', 'rheb',
+  'tsc1-2', 'akt', 'ampk', 'mtorc1', 's6k1', '4e-bp1',
+  'translation-initiation', 'ribosome-biogenesis',
+  'muscle-protein-synthesis', 'hypertrophy',
+];
+const bySlug = new Map(concepts.map((c) => [c.id.replace(/\.mdx$/, ''), c]));
+const ordered = conceptOrder.map((s) => bySlug.get(s)).filter(Boolean);
+
+const base = import.meta.env.BASE_URL.endsWith('/')
+  ? import.meta.env.BASE_URL
+  : import.meta.env.BASE_URL + '/';
+const conceptUrl = (slug: string) => `${base}molecular-physiology/concepts/${slug}.html`;
+const topicUrl = (slug: string) => `${base}molecular-physiology/topics/${slug}.html`;
+const updateUrl = (slug: string) => `${base}molecular-physiology/updates/${slug}.html`;
+
+const hierarchy = [
+  'Stimulus', 'Molecular sensor', 'Signaling network', 'Cellular process',
+  'Tissue adaptation', 'Performance', 'Human evidence',
+];
+---
+<AtlasPage
+  title="Molecular Physiology of Training"
+  description="A mechanistic atlas of how training, nutrition, and energetic state become biological adaptation."
+  eyebrow="A scientific atlas · Edition 01"
+  lead="A mechanistic atlas of how training, nutrition, and energetic state become biological adaptation."
+  breadcrumb={[]}
+>
+  <div class="atlas-hero">
+    <div>
+      <p class="hero-intro">Start with an everyday physiological question. Follow the molecules, locations, and processes involved. Then ask what has actually been demonstrated in people.</p>
+      <p><a href={updateUrl('from-leucine-to-muscle-protein-synthesis')}>Begin with the leucine explainer →</a></p>
+    </div>
+    <aside class="hero-aside">
+      <span class="kicker">An explanation at every depth</span>
+      <ol class="depth-key">
+        <li><strong>01 · Foundations</strong><br />Understand the physiology.</li>
+        <li><strong>02 · Mechanism</strong><br />Follow the molecular players.</li>
+        <li><strong>03 · Advanced</strong><br />Inspect interactions and constraints.</li>
+      </ol>
+      <p class="small">Read as far as you need. Advanced sections open on demand.</p>
+    </aside>
+  </div>
+
+  <section aria-label="Causal hierarchy">
+    <ol class="hierarchy">
+      {hierarchy.map((step, i) => (
+        <li><span>{String(i + 1).padStart(2, '0')}</span>{step}</li>
+      ))}
+    </ol>
+    <p class="small">An organizing hierarchy, not a universal linear pathway. Human evidence tests links throughout the chain.</p>
+  </section>
+
+  <section class="feature">
+    <div>
+      <p class="kicker">Start here · The first pathway cluster</p>
+      <h2><a href={updateUrl('from-leucine-to-muscle-protein-synthesis')}>From Leucine to Muscle Protein Synthesis</a></h2>
+      <p>Follow a dietary amino acid through sensing, localization, translation, and the limits of inference about muscle growth.</p>
+      <p>
+        <a href={updateUrl('from-leucine-to-muscle-protein-synthesis')}>Read the integrated explainer →</a>
+        {' · '}
+        <a href={updateUrl('from-leucine-to-muscle-protein-synthesis') + '#pathway'}>Explore the mechanism map</a>
+      </p>
+    </div>
+    <div class="feature-note">
+      <strong>Resistance training + leucine + mTORC1</strong>
+      <p>15 connected concepts. Three explanation depths. Evidence attached to each mechanistic claim.</p>
+      <p class="small">The first edition follows resistance training, leucine sensing, and mTORC1. Other systems are a roadmap for future coverage. The atlas is an educational synthesis of selected literature, not a systematic review or an individualized training prescription.</p>
+    </div>
+  </section>
+
+  <section id="topics">
+    <p class="kicker">Browse by scale and system</p>
+    <h2>Ten ways into the atlas</h2>
+    <div class="grid topics">
+      {topics.map((t: any, i: number) => (
+        <article class="card">
+          <p class="kicker">{String(i + 1).padStart(2, '0')} · {t.concepts.length} concepts · {(t.reading || []).length} articles</p>
+          <h3><a href={topicUrl(t.slug)}>{t.title}</a></h3>
+          <p>{t.lead}</p>
+        </article>
+      ))}
+    </div>
+  </section>
+
+  <section id="concepts">
+    <p class="kicker">Connected reference entries</p>
+    <h2>The first concept library</h2>
+    <div class="grid three">
+      {ordered.map((c) => (
+        <article class="card">
+          <p class="kicker">{c!.data.kicker}</p>
+          <h3><a href={conceptUrl(c!.id.replace(/\.mdx$/, ''))}>{c!.data.title}</a></h3>
+          <p>{c!.data.description}</p>
+        </article>
+      ))}
+    </div>
+  </section>
+</AtlasPage>

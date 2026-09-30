@@ -105,6 +105,36 @@ const coursePaths = defineCollection({
   schema: coursePathSchema,
 });
 
+const atlasConceptSchema = z.object({
+  title: z.string(),
+  description: z.string(),
+  kicker: z.string().optional(),
+  lead: z.string().optional(),
+  topics: z.array(z.string()).default([]),
+  facts: z.record(z.string()).default({}),
+  source_site_url: z.string().url(),
+});
+
+const atlasUpdateSchema = z.object({
+  title: z.string(),
+  description: z.string(),
+  kicker: z.string().optional(),
+  lead: z.string().optional(),
+  date: z.coerce.string().optional(),
+  topics: z.array(z.string()).default([]),
+  source_site_url: z.string().url(),
+});
+
+const atlasConcepts = defineCollection({
+  type: 'content',
+  schema: atlasConceptSchema,
+});
+
+const atlasUpdates = defineCollection({
+  type: 'content',
+  schema: atlasUpdateSchema,
+});
+
 export const collections = {
   projects,
   notes,
@@ -113,4 +143,6 @@ export const collections = {
   'course-resources': courseResources,
   'course-guides': courseGuides,
   'course-paths': coursePaths,
+  'atlas-concepts': atlasConcepts,
+  'atlas-updates': atlasUpdates,
 };

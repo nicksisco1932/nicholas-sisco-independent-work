@@ -1,0 +1,59 @@
+---
+/* Dynamic concept pages: /molecular-physiology/concepts/<slug>.html
+ * Renders the concept heading via AtlasPage and the converted MDX body.
+ */
+import { getCollection, type CollectionEntry } from 'astro:content';
+import AtlasPage from '../../../layouts/AtlasPage.astro';
+import topics from '../../../data/atlas-topics.json';
+
+export async function getStaticPaths() {
+  const concepts = await getCollection('atlas-concepts');
+  return concepts.map((entry) => ({
+    params: { slug: entry.id.replace(/\.mdx$/, '') },
+    props: { entry },
+  }));
+}
+
+interface Props {
+  entry: CollectionEntry<'atlas-concepts'>;
+}
+
+const { entry } = Astro.props;
+const { Content } = await entry.render();
+const base = import.meta.env.BASE_URL.endsWith('/')
+  ? import.meta.env.BASE_URL
+  : import.meta.env.BASE_URL + '/';
+const topicMap = new Map((topics as any[]).map((t) => [t.slug, t.title]));
+const topicUrl = (slug: string) => `${base}molecular-physiology/topics/${slug}.html`;
+const topicHref = (slug: string) => `../topics/${slug}.html`;
+const factEntries = Object.entries(entry.data.facts || {});
+---
+<AtlasPage
+  title={entry.data.title}
+  description={entry.data.description}
+  eyebrow={entry.data.kicker}
+  lead={entry.data.lead}
+  breadcrumb={entry.data.topics.map((t) => ({
+    href: topicUrl(t),
+    label: (topicMap.get(t) as string) || t,
+  }))}
+>
+  {entry.data.topics.length > 0 && (
+    <div class="topic-links">
+      {entry.data.topics.map((t, i) => (
+        <>
+          {i > 0 && ' · '}
+          <a href={topicHref(t)}>{(topicMap.get(t) as string) || t}</a>
+        </>
+      ))}
+    </div>
+  )}
+  {factEntries.length > 0 && (
+    <dl class="facts">
+      {factEntries.map(([k, v]) => (
+        <div><dt>{k}</dt><dd>{v}</dd></div>
+      ))}
+    </dl>
+  )}
+  <Content />
+</AtlasPage>

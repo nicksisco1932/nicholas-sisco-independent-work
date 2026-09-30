@@ -1,0 +1,52 @@
+---
+/* Dynamic update pages: /molecular-physiology/updates/<slug>.html
+ * Renders the article heading via AtlasPage and the converted MDX body.
+ */
+import { getCollection, type CollectionEntry } from 'astro:content';
+import AtlasPage from '../../../layouts/AtlasPage.astro';
+import topics from '../../../data/atlas-topics.json';
+
+export async function getStaticPaths() {
+  const updates = await getCollection('atlas-updates');
+  return updates.map((entry) => ({
+    params: { slug: entry.id.replace(/\.mdx$/, '') },
+    props: { entry },
+  }));
+}
+
+interface Props {
+  entry: CollectionEntry<'atlas-updates'>;
+}
+
+const { entry } = Astro.props;
+const { Content } = await entry.render();
+const base = import.meta.env.BASE_URL.endsWith('/')
+  ? import.meta.env.BASE_URL
+  : import.meta.env.BASE_URL + '/';
+const topicMap = new Map((topics as any[]).map((t) => [t.slug, t.title]));
+const topicHref = (slug: string) => `../topics/${slug}.html`;
+---
+<AtlasPage
+  title={entry.data.title}
+  description={entry.data.description}
+  eyebrow={entry.data.kicker}
+  lead={entry.data.lead}
+  breadcrumb={[{ href: `${base}molecular-physiology/updates.html`, label: 'Updates' }]}
+>
+  {entry.data.date && (
+    <p class="small">
+      Published <time datetime={entry.data.date}>{entry.data.date}</time> · Molecular Physiology of Training
+    </p>
+  )}
+  {entry.data.topics.length > 0 && (
+    <div class="topic-links">
+      {entry.data.topics.map((t, i) => (
+        <>
+          {i > 0 && ' · '}
+          <a href={topicHref(t)}>{(topicMap.get(t) as string) || t}</a>
+        </>
+      ))}
+    </div>
+  )}
+  <Content />
+</AtlasPage>

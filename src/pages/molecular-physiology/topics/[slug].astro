@@ -1,0 +1,65 @@
+---
+/* Dynamic topic pages: /molecular-physiology/topics/<slug>.html
+ * Topics are data (src/data/atlas-topics.json); concept cards link to
+ * the concept routes. Order of concepts follows the production listing.
+ */
+import AtlasPage from '../../../layouts/AtlasPage.astro';
+import topics from '../../../data/atlas-topics.json';
+
+export async function getStaticPaths() {
+  return topics.map((topic: any) => ({
+    params: { slug: topic.slug },
+    props: { topic },
+  }));
+}
+
+const { topic } = Astro.props;
+const base = import.meta.env.BASE_URL.endsWith('/')
+  ? import.meta.env.BASE_URL
+  : import.meta.env.BASE_URL + '/';
+const conceptUrl = (slug: string) => `${base}molecular-physiology/concepts/${slug}.html`;
+const updateUrl = (slug: string) => `${base}molecular-physiology/updates/${slug}.html`;
+---
+<AtlasPage
+  title={topic.title}
+  description={topic.lead}
+  eyebrow="Atlas topic"
+  lead={topic.lead}
+  breadcrumb={[]}
+>
+  <section>
+    <h2>Available concepts</h2>
+    <div class="grid">
+      {topic.concepts.map((c: any) => (
+        <article class="card">
+          <p class="kicker">{c.kicker}</p>
+          <h3><a href={conceptUrl(c.slug)}>{c.title}</a></h3>
+          <p>{c.description}</p>
+        </article>
+      ))}
+    </div>
+  </section>
+  {topic.reading && topic.reading.length > 0 && (
+    <section>
+      <h2>Available reading</h2>
+      <div class="grid">
+        {topic.reading.map((r: any) => (
+          <article class="card">
+            <p class="kicker">{r.kicker}</p>
+            <h3><a href={updateUrl(r.slug)}>{r.title}</a></h3>
+            <p>{r.description}</p>
+          </article>
+        ))}
+      </div>
+    </section>
+  )}
+  {topic.planned && topic.planned.length > 0 && (
+    <section>
+      <h2>Planned coverage</h2>
+      <p>These subjects are extension points for later editions. They are not yet complete entries.</p>
+      <ul>
+        {topic.planned.map((p: string) => <li>{p}</li>)}
+      </ul>
+    </section>
+  )}
+</AtlasPage>

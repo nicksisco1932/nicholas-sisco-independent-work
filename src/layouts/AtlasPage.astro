@@ -1,0 +1,42 @@
+---
+/* AtlasPage — shared layout for all Molecular Physiology atlas pages.
+ * Provides the production atlas styling (scoped under .atlas), the page
+ * heading block, and base-aware breadcrumbs. Kind-specific structure
+ * (concept sections, topic cards, update chapters) lives in the MDX
+ * content and the dynamic route pages, which compose this layout.
+ */
+import BaseLayout from './BaseLayout.astro';
+import '../styles/atlas.css';
+
+interface Props {
+  title: string;
+  description: string;
+  eyebrow?: string;
+  lead?: string;
+  breadcrumb: { href: string; label: string }[];
+}
+
+const { title, description, eyebrow, lead, breadcrumb } = Astro.props;
+const base = import.meta.env.BASE_URL.endsWith('/')
+  ? import.meta.env.BASE_URL
+  : import.meta.env.BASE_URL + '/';
+---
+<BaseLayout title={title + ' — Molecular Physiology'} description={description}>
+  <div class="atlas">
+    <nav class="breadcrumb" aria-label="Breadcrumb">
+      <a href={`${base}molecular-physiology.html`}>Molecular Physiology</a>
+      {breadcrumb.map((crumb) => (
+        <>
+          {' / '}
+          <a href={crumb.href}>{crumb.label}</a>
+        </>
+      ))}
+    </nav>
+    <div class="page-heading">
+      {eyebrow && <p class="eyebrow">{eyebrow}</p>}
+      <h1>{title}</h1>
+      {lead && <p class="lead">{lead}</p>}
+    </div>
+    <slot />
+  </div>
+</BaseLayout>
