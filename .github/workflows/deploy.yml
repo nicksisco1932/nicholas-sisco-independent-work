@@ -1,0 +1,58 @@
+# Deploy to GitHub Pages — official actions/deploy-pages pattern.
+# Builds the Astro site on every push to main and publishes ./dist.
+#
+# One-time repo setup (Settings → Pages): Source = "GitHub Actions".
+# No gh-pages branch, no tokens, no manual steps.
+name: Deploy to GitHub Pages
+
+on:
+  push:
+    branches: [main]
+  workflow_dispatch:
+
+permissions:
+  contents: read
+  pages: write
+  id-token: write
+
+concurrency:
+  group: pages
+  cancel-in-progress: false
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+      - name: Setup Node
+        uses: actions/setup-node@v4
+        with:
+          node-version: 20
+          cache: npm
+      - name: Install dependencies
+        # NOTE: `npm install` (not `npm ci`) because package-lock.json is not
+        # committed in the initial push — the GitHub file API used for the
+        # first upload caps single arguments below the lock file's size.
+        # Committing package-lock.json from any local clone is safe and
+        # recommended; at that point this can switch back to `npm ci`.
+        run: npm install
+      - name: Build
+        run: npm run build
+      - name: Configure Pages
+        uses: actions/configure-pages@v5
+      - name: Upload artifact
+        uses: actions/upload-pages-artifact@v3
+        with:
+          path: ./dist
+
+  deploy:
+    needs: build
+    runs-on: ubuntu-latest
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    steps:
+      - name: Deploy to GitHub Pages
+        id: deployment
+        uses: actions/deploy-pages@v5
