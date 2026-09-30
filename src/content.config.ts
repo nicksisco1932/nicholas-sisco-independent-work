@@ -58,4 +58,9 @@ const courseResources = defineCollection({
   schema: resourceSchema,
 });
 
-export const collections = { projects, notes, courseWeeks, courseResources };
+export const collections = {
+  projects,
+  notes,
+  'course-weeks': courseWeeks,
+  'course-resources': courseResources,
+};
