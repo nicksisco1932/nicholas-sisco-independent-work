@@ -1,6 +1,4 @@
 User-agent: *
 Allow: /
 
-# TODO(site-url): update the sitemap host once the final GitHub Pages URL is set
-# in astro.config.mjs.
-Sitemap: https://nicksisco1932.github.io/independent-work/sitemap-index.xml
+Sitemap: https://nicksisco1932.github.io/nicholas-sisco-independent-work/sitemap-index.xml
