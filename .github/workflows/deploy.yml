@@ -29,7 +29,6 @@ jobs:
         uses: actions/setup-node@v4
         with:
           node-version: 20
-          cache: npm
       - name: Install dependencies
         # NOTE: `npm install` (not `npm ci`) because package-lock.json is not
         # committed in the initial push — the GitHub file API used for the
