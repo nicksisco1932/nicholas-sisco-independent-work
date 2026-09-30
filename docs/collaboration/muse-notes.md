@@ -3,7 +3,7 @@
 ## 2026-09-29 — Muse
 
 - Commit or branch reviewed: `codex/astro-migration-spike` @ `4bbafd9` ("Add Astro migration spike for Forged Fitness Week 1")
-- Build result: **FAILED as pushed** — two bugs, both diagnosed and verified fixed locally (fixes not pushed; see below).
+- Build result: **FAILED as pushed** — two bugs, both fixed (see follow-up below). Branch now builds clean.
 - Content fidelity: Week 01 reads as a faithful, restrained port. Three lesson sections (Understand / Apply / Review), worked examples, practice prompts, and the evidence-boundary section are all present with production source links. No invented content detected.
 - URL and navigation result: `/forged-fitness/weeks/week-01.html` and `/forged-fitness/resources/baseline.html` build correctly once the bugs are fixed. Homepage card, header nav link, week-01 → baseline internal link, and sitemap entries all verified in rendered output.
 - Print/worksheet result: worksheet table renders correctly on screen (5 columns, reflection prompts intact). No `@media print` stylesheet exists anywhere in the site, so printing includes full site chrome (header/footer nav). Flagged as a fidelity gap for full migration, not a spike blocker.
@@ -65,10 +65,43 @@ const entry = await getEntry('course-resources', 'baseline');
 
 ### Open questions for the owner
 
-1. Who applies the two fixes — Muse pushes them to this branch, or Codex
-   applies them in its next local pass?
-2. Is a print stylesheet in scope for the worksheet migration, or is
-   screen-only acceptable for v1?
+1. ~~Who applies the two fixes?~~ Resolved: both agents fixed them independently;
+   final state is Muse's branch to maintain (owner direction, 2026-09-29).
+2. ~~Print stylesheet scope?~~ Resolved: Codex added a print treatment in
+   `474b999`; it is in the branch and verified in rendered output.
+
+## 2026-09-29 — Muse (follow-up: review of 474b999 + race incident)
+
+### Review of Codex commit 474b999 ("Fix Astro course spike build paths and print output")
+
+Correct and complete. It applies both build fixes (baseline import path,
+kebab-case collection keys with quoted export keys, updated type and `getEntry`
+call sites — identical to the fixes I had verified locally) and adds a focused
+print treatment to `CoursePage.astro`: hides site header/footer, the provenance
+source link, and maturity badges in print; full-width main; black body text;
+worksheet tables kept together with `break-inside: avoid`. `codex-notes.md`
+documents the change accurately. No issues found.
+
+### Race incident (my error)
+
+My fix commit `1bc9c5c` was built from the pre-`474b999` tree. Codex pushed
+`474b999` first; my push landed on top and overwrote `src/layouts/CoursePage.astro`
+and `src/content.config.ts` with my older versions, deleting Codex's print
+stylesheet. Failure mode: I pushed without re-reading the branch tip — a
+lost-update race against a concurrent pusher, on a branch I knew Codex was
+actively working.
+
+Fixed in `f5e2834`: restored Codex's `<style>` block verbatim from `474b999`,
+verified with a fresh `npm install` + `astro build` before pushing (6 pages,
+no errors, `@media print` present in rendered worksheet HTML).
+Lesson for this collaboration: on a shared branch, read the tip immediately
+before every push; the file API is not atomic against concurrent pushes.
+
+### Current branch state
+
+Tip `f5e2834` contains: the spike, both build fixes, the print stylesheet, and
+these review notes. `main` and production are untouched. Per owner direction,
+Muse owns `codex/astro-migration-spike` from here; Codex has stood down from it.
 
 ## Review template
 
