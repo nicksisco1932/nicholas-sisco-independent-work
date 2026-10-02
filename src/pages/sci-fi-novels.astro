@@ -1,0 +1,7 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+const base = import.meta.env.BASE_URL.endsWith('/') ? import.meta.env.BASE_URL : import.meta.env.BASE_URL + '/';
+---
+<BaseLayout title="Science Fiction Novels — Nicholas Sisco" description="Science fiction novels and creative work." section="writing">
+  <article><h1>Science Fiction Novels</h1><p class="lead">A collection of science fiction novels.</p><p>For information about the novels, visit <a href="https://www.amazon.com/">Amazon</a>.</p><p><a href={base}>Return to the home page</a></p></article>
+</BaseLayout>

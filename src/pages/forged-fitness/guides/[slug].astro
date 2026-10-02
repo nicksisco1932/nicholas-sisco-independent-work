@@ -1,11 +1,12 @@
 ---
 /* Dynamic guide pages: /forged-fitness/guides/<slug>.html
  * (orientation, starter program) */
-import { getCollection, type CollectionEntry } from 'astro:content';
+import { getCollection, render, type CollectionEntry } from 'astro:content';
 import CoursePage from '../../../layouts/CoursePage.astro';
+import { isPublished } from '../../../lib/publication.mjs';
 
 export async function getStaticPaths() {
-  const guides = await getCollection('course-guides');
+  const guides = await getCollection('course-guides', isPublished);
   return guides.map((entry) => ({
     params: { slug: entry.id.replace(/\.mdx$/, '') },
     props: { entry },
@@ -17,7 +18,7 @@ interface Props {
 }
 
 const { entry } = Astro.props;
-const { Content } = await entry.render();
+const { Content } = await render(entry);
 const eyebrow = entry.data.guide_type === 'orientation' ? 'Start here' : 'Course guide';
 ---
 <CoursePage entry={entry} eyebrow={eyebrow}>

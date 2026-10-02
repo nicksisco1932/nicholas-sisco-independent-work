@@ -1,0 +1,39 @@
+---
+published: true
+title: "Who disappears from a historical panel?"
+description: "Source-cited methods note on historical population membership, exits, terminal outcomes, censoring, and source missingness. Not an ODGS analysis or empirical finding."
+status: "Published methods note"
+maturity: "Concept / protocol proposal"
+date: "2026-09"
+last_updated: "2026-09"
+source_notion_pages:
+  - https://app.notion.com/p/3e4c6b28dc0181eda63bdc03430143ae
+evidence_reviewed_through: null
+unresolved_questions: []
+tags: ["methods-note","historical-panel"]
+---
+
+Methods note · Protocol proposal
+A historical panel can look complete after its least visible members have disappeared. A defensible analysis needs to say who was eligible at each date, who exited, and what each exit means for the outcome.
+<strong>Status: source-cited protocol proposal, not an empirical finding.</strong><p class="muted">This note does not analyze ODGS companies, select its issuer universe, or claim a project data source is available.</p>
+Selection and exit are part of the data
+A panel assembled only from entities still present today can exclude entities whose disappearance is related to the outcome. The mechanism and direction depend on the unit, endpoint, and exit process. “Survivorship bias” is a reason to examine selection; it is not a universal correction factor.
+For stock-return data, Shumway documented missing delisting returns for many stocks delisted for negative reasons and found the omitted returns were large in the setting studied. Dropping terminal returns in that setting can make measured return histories too favorable. That result does not imply a fixed adjustment for other samples or outcomes. <sup><a href="https://doi.org/10.1111/j.1540-6261.1997.tb03818.x">[1]</a></sup>
+For mutual funds, Elton, Gruber, and Blake followed funds that existed at the end of 1976 and accounted for merger terms when funds merged. Their design shows why disappeared entities and exit treatment belong in the research record. <sup><a href="https://doi.org/10.1093/rfs/9.4.1097">[2]</a></sup>
+CRSP’s current product description lists active and inactive securities, permanent identifiers, corporate actions, and delisting information. These fields may support historical-universe research, but a product description does not establish project access, complete coverage for a particular question, or a valid reconstruction. <sup><a href="https://www.crsp.org/research__trashed/crsp-us-stock-databases/">[3]</a></sup>
+Proposed audit
+
+<li>Define the target population and observation unit at each historical date. Record eligibility and entry using information available then.</li>
+<li>Preserve stable entity and security identifiers through name changes, reorganizations, mergers, and share-class changes. A ticker or current company name is not a permanent identity.</li>
+<li>Retain entities that exit the observable universe. Record exit date, exit type, source, and whether the entity was delisted, bankrupt, merged, acquired, liquidated, renamed, or became unobserved.</li>
+<li>Predefine what the estimand means after each exit. For returns, account for terminal returns, distributions, and merger consideration when available. For other outcomes, distinguish a true zero, competing event, censoring, and missing follow-up.</li>
+<li>Report panel coverage and exit counts by date and exit type. Compare included and excluded entities using information known before the endpoint.</li>
+<li>Run sensitivity analyses for unresolved exit values or coverage gaps. State which conclusions depend on those choices.</li>
+
+Limits
+The cited studies concern particular financial datasets and questions. This note does not estimate a bias for ODGS or set its population, outcome, or source. The project remains at specification and source-feasibility stage; access to CRSP or another historical return source has not been confirmed. The checklist is a proposed research-control protocol, not a tested result.
+Takeaway
+A historical panel needs an explicit account of who enters, who exits, and how exits affect observation and outcome measurement. Keep population selection, terminal outcomes, censoring, and source missingness distinct so readers can see which assumptions affect each result.
+Sources
+<li>Shumway T. “The Delisting Bias in CRSP Data.” <em>The Journal of Finance</em>. 1997;52(1):327–340. <a href="https://doi.org/10.1111/j.1540-6261.1997.tb03818.x">doi:10.1111/j.1540-6261.1997.tb03818.x</a>.</li><li>Elton EJ, Gruber MJ, Blake CR. “Survivorship Bias and Mutual Fund Performance.” <em>The Review of Financial Studies</em>. 1996;9(4):1097–1120. <a href="https://doi.org/10.1093/rfs/9.4.1097">doi:10.1093/rfs.9.4.1097</a>.</li><li>Center for Research in Security Prices. <a href="https://www.crsp.org/research__trashed/crsp-us-stock-databases/">CRSP US Stock Databases</a>. Product description; access and project-specific coverage remain unverified.</li>
+Prepared for the independent scientific notes collection · September 2026

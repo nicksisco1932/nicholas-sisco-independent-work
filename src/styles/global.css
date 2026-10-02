@@ -5,6 +5,8 @@
 
 *, *::before, *::after { box-sizing: border-box; }
 
+:focus-visible { outline: 3px solid var(--accent); outline-offset: 3px; }
+
 html {
   -webkit-text-size-adjust: 100%;
 }
@@ -27,6 +29,8 @@ body::before {
     var(--pastel-rose), var(--pastel-sand), var(--pastel-sage),
     var(--pastel-sky), var(--pastel-lilac));
 }
+
+main.wide { max-width: 76rem; }
 
 main {
   max-width: var(--maxw);
@@ -123,5 +127,7 @@ th { background: var(--surface-tint); font-family: var(--font-head); }
 @media (max-width: 560px) {
   body { font-size: 1rem; }
   h1 { font-size: 1.65rem; }
-  main { padding: 1.25rem 1rem 3rem; }
+  main.wide { max-width: 76rem; }
+
+main { padding: 1.25rem 1rem 3rem; }
 }

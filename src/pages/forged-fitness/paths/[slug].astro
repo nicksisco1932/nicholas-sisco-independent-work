@@ -3,12 +3,13 @@
  * Week cards are generated from the collections so the path always
  * reflects the current curriculum.
  */
-import { getCollection, type CollectionEntry } from 'astro:content';
+import { getCollection, render, type CollectionEntry } from 'astro:content';
 import CoursePage from '../../../layouts/CoursePage.astro';
+import { isPublished } from '../../../lib/publication.mjs';
 
 export async function getStaticPaths() {
-  const paths = await getCollection('course-paths');
-  const weeks = await getCollection('course-weeks');
+  const paths = await getCollection('course-paths', isPublished);
+  const weeks = (await getCollection('course-weeks', isPublished)).filter(isPublished);
   return paths.map((entry) => ({
     params: { slug: entry.id.replace(/\.mdx$/, '') },
     props: {
@@ -26,7 +27,7 @@ interface Props {
 }
 
 const { entry, weeks } = Astro.props;
-const { Content } = await entry.render();
+const { Content } = await render(entry);
 ---
 <CoursePage entry={entry} eyebrow="Course path">
   <p data-path-progress={entry.id.replace(/\.mdx$/, '')} role="status"></p>

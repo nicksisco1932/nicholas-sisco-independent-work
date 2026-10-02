@@ -2,12 +2,13 @@
 /* Dynamic update pages: /molecular-physiology/updates/<slug>.html
  * Renders the article heading via AtlasPage and the converted MDX body.
  */
-import { getCollection, type CollectionEntry } from 'astro:content';
+import { getCollection, render, type CollectionEntry } from 'astro:content';
 import AtlasPage from '../../../layouts/AtlasPage.astro';
 import topics from '../../../data/atlas-topics.json';
+import { isPublished } from '../../../lib/publication.mjs';
 
 export async function getStaticPaths() {
-  const updates = await getCollection('atlas-updates');
+  const updates = await getCollection('atlas-updates', isPublished);
   return updates.map((entry) => ({
     params: { slug: entry.id.replace(/\.mdx$/, '') },
     props: { entry },
@@ -19,7 +20,7 @@ interface Props {
 }
 
 const { entry } = Astro.props;
-const { Content } = await entry.render();
+const { Content } = await render(entry);
 const base = import.meta.env.BASE_URL.endsWith('/')
   ? import.meta.env.BASE_URL
   : import.meta.env.BASE_URL + '/';

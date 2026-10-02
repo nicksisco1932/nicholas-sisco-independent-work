@@ -1,0 +1,8 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import { problem } from '../data/legacy-content';
+const content = problem;
+---
+<BaseLayout title="The Problem of Evil — Nicholas Sisco" description="A philosophical essay distinguishing logical and evidential arguments from evil, explanations of suffering, and moral proximity." section="writing">
+  <article><h1>The Problem of Evil</h1><div set:html={content} /></article>
+</BaseLayout>

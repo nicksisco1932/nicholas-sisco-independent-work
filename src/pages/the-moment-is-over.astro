@@ -1,0 +1,8 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import { story } from '../data/legacy-content';
+const content = story;
+---
+<BaseLayout title="The Moment Is Over — Nicholas Sisco" description="A short piece about espresso, memory, color, existential thought, and the uncomplicated love of an old dog." section="writing">
+  <article><h1>The Moment Is Over</h1><div set:html={content} /></article>
+</BaseLayout>

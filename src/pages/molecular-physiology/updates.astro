@@ -4,8 +4,9 @@
  */
 import { getCollection } from 'astro:content';
 import AtlasPage from '../../layouts/AtlasPage.astro';
+import { isPublished } from '../../lib/publication.mjs';
 
-const updates = await getCollection('atlas-updates');
+const updates = await getCollection('atlas-updates', isPublished);
 const sorted = [...updates].sort((a, b) =>
   (b.data.date || '').localeCompare(a.data.date || '')
 );
