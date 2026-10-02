@@ -5,9 +5,10 @@
 import { getCollection, type CollectionEntry } from 'astro:content';
 import AtlasPage from '../../../layouts/AtlasPage.astro';
 import topics from '../../../data/atlas-topics.json';
+import { isPublished } from '../../../lib/publication.mjs';
 
 export async function getStaticPaths() {
-  const updates = await getCollection('atlas-updates');
+  const updates = await getCollection('atlas-updates', isPublished);
   return updates.map((entry) => ({
     params: { slug: entry.id.replace(/\.mdx$/, '') },
     props: { entry },

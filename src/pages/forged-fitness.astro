@@ -6,11 +6,12 @@
  */
 import { getCollection } from 'astro:content';
 import CoursePage from '../layouts/CoursePage.astro';
+import { isPublished } from '../lib/publication.mjs';
 
-const weeks = (await getCollection('course-weeks')).sort((a, b) => a.data.week - b.data.week);
-const paths = await getCollection('course-paths');
-const resources = await getCollection('course-resources');
-const guides = await getCollection('course-guides');
+const weeks = (await getCollection('course-weeks', isPublished)).sort((a, b) => a.data.week - b.data.week);
+const paths = (await getCollection('course-paths', isPublished)).sort((a, b) => a.data.weeks - b.data.weeks);
+const resources = await getCollection('course-resources', isPublished);
+const guides = await getCollection('course-guides', isPublished);
 const starter = guides.find((g) => g.id.startsWith('starter-program'));
 
 const entry = {

@@ -3,9 +3,10 @@
  * (orientation, starter program) */
 import { getCollection, type CollectionEntry } from 'astro:content';
 import CoursePage from '../../../layouts/CoursePage.astro';
+import { isPublished } from '../../../lib/publication.mjs';
 
 export async function getStaticPaths() {
-  const guides = await getCollection('course-guides');
+  const guides = await getCollection('course-guides', isPublished);
   return guides.map((entry) => ({
     params: { slug: entry.id.replace(/\.mdx$/, '') },
     props: { entry },

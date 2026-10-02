@@ -15,8 +15,8 @@
 
   /* Text */
   --ink: #35322c;         /* primary text */
-  --muted: #7d7468;       /* secondary text, bylines */
-  --faint: #a89e8f;       /* tertiary text */
+  --muted: #665f55;       /* secondary text, accessible on ivory */
+  --faint: #665f55;       /* tertiary labels remain readable */
 
   /* Lines & borders */
   --line: #e8dfd1;

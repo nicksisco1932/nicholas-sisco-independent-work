@@ -9,7 +9,7 @@ interface Props { entry: CollectionEntry<'projects'>; }
 const { entry } = Astro.props;
 const { title, description, status, maturity } = entry.data;
 ---
-<BaseLayout title={`${title} — Nicholas Sisco`} description={description}>
+<BaseLayout title={`${title} — Nicholas Sisco`} description={description} section="projects">
   <article>
     <h1>{title}</h1>
     <p class="status-line">

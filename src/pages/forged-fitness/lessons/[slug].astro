@@ -5,9 +5,10 @@
  */
 import { getCollection, type CollectionEntry } from 'astro:content';
 import CoursePage from '../../../layouts/CoursePage.astro';
+import { isPublished } from '../../../lib/publication.mjs';
 
 export async function getStaticPaths() {
-  const lessons = await getCollection('course-lessons');
+  const lessons = await getCollection('course-lessons', isPublished);
   const stageOrder = { understand: 0, apply: 1, review: 2 };
   const sorted = [...lessons].sort(
     (a, b) => a.data.week - b.data.week || stageOrder[a.data.stage] - stageOrder[b.data.stage]

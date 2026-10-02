@@ -5,10 +5,11 @@
  */
 import { getCollection, type CollectionEntry } from 'astro:content';
 import CoursePage from '../../../layouts/CoursePage.astro';
+import { isPublished } from '../../../lib/publication.mjs';
 
 export async function getStaticPaths() {
-  const paths = await getCollection('course-paths');
-  const weeks = await getCollection('course-weeks');
+  const paths = await getCollection('course-paths', isPublished);
+  const weeks = (await getCollection('course-weeks', isPublished)).filter(isPublished);
   return paths.map((entry) => ({
     params: { slug: entry.id.replace(/\.mdx$/, '') },
     props: {

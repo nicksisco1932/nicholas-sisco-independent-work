@@ -2,9 +2,10 @@
 /* Dynamic worksheet pages: /forged-fitness/resources/<slug>.html */
 import { getCollection, type CollectionEntry } from 'astro:content';
 import CoursePage from '../../../layouts/CoursePage.astro';
+import { isPublished } from '../../../lib/publication.mjs';
 
 export async function getStaticPaths() {
-  const resources = await getCollection('course-resources');
+  const resources = await getCollection('course-resources', isPublished);
   return resources.map((entry) => ({
     params: { slug: entry.id.replace(/\.mdx$/, '') },
     props: { entry },

@@ -5,15 +5,35 @@
  */
 import AtlasPage from '../../../layouts/AtlasPage.astro';
 import topics from '../../../data/atlas-topics.json';
+import { getCollection, type CollectionEntry } from 'astro:content';
+import { isPublished } from '../../../lib/publication.mjs';
+
+type Topic = { slug: string; title: string; lead: string; concepts: string[]; reading?: string[]; planned?: string[] };
+type AtlasEntry = CollectionEntry<'atlas-concepts'> | CollectionEntry<'atlas-updates'>;
 
 export async function getStaticPaths() {
-  return topics.map((topic: any) => ({
+  const [concepts, updates] = await Promise.all([
+    getCollection('atlas-concepts', isPublished),
+    getCollection('atlas-updates', isPublished),
+  ]);
+  const conceptMap = new Map(concepts.map((entry) => [entry.id.replace(/\.mdx$/, ''), entry]));
+  const updateMap = new Map(updates.map((entry) => [entry.id.replace(/\.mdx$/, ''), entry]));
+  return (topics as Topic[]).map((topic) => {
+    const resolvedConcepts = topic.concepts.map((slug) => conceptMap.get(slug));
+    const resolvedReading = (topic.reading ?? []).map((slug) => updateMap.get(slug));
+    const missing = [
+      ...topic.concepts.filter((_, index) => !resolvedConcepts[index]),
+      ...(topic.reading ?? []).filter((_, index) => !resolvedReading[index]),
+    ];
+    if (missing.length) throw new Error(`Unknown or unpublished atlas references in ${topic.slug}: ${missing.join(', ')}`);
+    return {
     params: { slug: topic.slug },
-    props: { topic },
-  }));
+      props: { topic, concepts: resolvedConcepts as AtlasEntry[], reading: resolvedReading as AtlasEntry[] },
+    };
+  });
 }
 
-const { topic } = Astro.props;
+const { topic, concepts, reading } = Astro.props as { topic: Topic; concepts: AtlasEntry[]; reading: AtlasEntry[] };
 const base = import.meta.env.BASE_URL.endsWith('/')
   ? import.meta.env.BASE_URL
   : import.meta.env.BASE_URL + '/';
@@ -30,24 +50,24 @@ const updateUrl = (slug: string) => `${base}molecular-physiology/updates/${slug}
   <section>
     <h2>Available concepts</h2>
     <div class="grid">
-      {topic.concepts.map((c: any) => (
+      {concepts.map((c) => (
         <article class="card">
-          <p class="kicker">{c.kicker}</p>
-          <h3><a href={conceptUrl(c.slug)}>{c.title}</a></h3>
-          <p>{c.description}</p>
+          <p class="kicker">{c.data.kicker}</p>
+          <h3><a href={conceptUrl(c.id.replace(/\.mdx$/, ''))}>{c.data.title}</a></h3>
+          <p>{c.data.description}</p>
         </article>
       ))}
     </div>
   </section>
-  {topic.reading && topic.reading.length > 0 && (
+  {reading.length > 0 && (
     <section>
       <h2>Available reading</h2>
       <div class="grid">
-        {topic.reading.map((r: any) => (
+        {reading.map((r) => (
           <article class="card">
-            <p class="kicker">{r.kicker}</p>
-            <h3><a href={updateUrl(r.slug)}>{r.title}</a></h3>
-            <p>{r.description}</p>
+            <p class="kicker">{r.data.kicker}</p>
+            <h3><a href={updateUrl(r.id.replace(/\.mdx$/, ''))}>{r.data.title}</a></h3>
+            <p>{r.data.description}</p>
           </article>
         ))}
       </div>

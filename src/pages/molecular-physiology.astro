@@ -5,8 +5,9 @@
 import { getCollection } from 'astro:content';
 import AtlasPage from '../layouts/AtlasPage.astro';
 import topics from '../data/atlas-topics.json';
+import { isPublished } from '../lib/publication.mjs';
 
-const concepts = await getCollection('atlas-concepts');
+const concepts = await getCollection('atlas-concepts', isPublished);
 // Order concepts to match the production listing; fall back to title sort.
 const conceptOrder = [
   'mechanical-tension', 'leucine', 'sestrin2', 'rag-gtpases', 'rheb',

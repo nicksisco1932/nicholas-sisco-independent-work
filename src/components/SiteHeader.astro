@@ -1,89 +1,28 @@
 ---
-/* SiteHeader — header + primary navigation.
- * NOTE: nav labels and order were not recovered from the previous site
- * (inventory §8). This is a minimal reconstruction: Home + the three
- * confirmed top-level pages. Adjust when verified against the live site.
- * Links are base-aware (import.meta.env.BASE_URL) so the site works under
- * the GitHub Pages project subpath. */
-const _base = import.meta.env.BASE_URL; // e.g. /repo (no trailing slash)
+interface Props { section?: string }
+const { section } = Astro.props;
+const _base = import.meta.env.BASE_URL;
 const base = _base.endsWith('/') ? _base : _base + '/';
-const nav = [
-  { href: base, label: 'Home' },
-  { href: base + 'literature.html', label: 'Literature Agent' },
-  { href: base + 'odgs.html', label: 'ODGS' },
-  { href: base + 'publication-maturity.html', label: 'Research Notes' },
-  { href: base + 'forged-fitness.html', label: 'Forged Fitness' },
-  { href: base + 'molecular-physiology.html', label: 'Molecular Physiology' },
+const nav: [string, string][] = [
+  ['#projects', 'Projects'], ['#physiology', 'Physiology'], ['#notes', 'Notes'],
+  ['#methods', 'Methods'], ['#writing', 'Writing'], ['#about', 'About'],
 ];
-const current = Astro.url.pathname;
 ---
 <header class="site-header">
   <div class="inner">
-    <a class="brand" href={base}>Nicholas Sisco <span>Independent Research &amp; Engineering</span></a>
-    <nav aria-label="Primary">
-      <ul>
-        {nav.map((item) => (
-          <li>
-            <a
-              href={item.href}
-              aria-current={current === item.href ? 'page' : undefined}
-              class={current === item.href ? 'active' : undefined}
-            >{item.label}</a>
-          </li>
-        ))}
-      </ul>
-    </nav>
+    <a class="brand" href={base} aria-current={!section ? 'page' : undefined}>Nicholas Sisco <span>Independent Research &amp; Engineering</span></a>
+    <nav aria-label="Primary"><ul>{nav.map(([href, label]) => (
+      <li><a href={`${base}${href}`} aria-current={section === label.toLowerCase() ? 'location' : undefined}>{label}</a></li>
+    ))}</ul></nav>
   </div>
 </header>
 <style>
-  .site-header {
-    background: var(--surface);
-    border-bottom: 1px solid var(--line);
-  }
-  .inner {
-    max-width: var(--maxw);
-    margin: 0 auto;
-    padding: 1rem 1.25rem;
-    display: flex;
-    flex-wrap: wrap;
-    gap: 0.5rem 1.5rem;
-    align-items: baseline;
-    justify-content: space-between;
-  }
-  .brand {
-    font-family: var(--font-head);
-    font-weight: 700;
-    font-size: 1.1rem;
-    color: var(--ink);
-    text-decoration: none;
-  }
-  .brand span {
-    display: block;
-    font-family: var(--font-body);
-    font-weight: 400;
-    font-size: 0.8rem;
-    color: var(--muted);
-  }
-  nav ul {
-    list-style: none;
-    margin: 0;
-    padding: 0;
-    display: flex;
-    flex-wrap: wrap;
-    gap: 0.25rem 1.1rem;
-  }
-  nav a {
-    color: var(--muted);
-    text-decoration: none;
-    font-size: 0.95rem;
-  }
-  nav a:hover { color: var(--accent-ink); }
-  nav a.active {
-    color: var(--accent-ink);
-    font-weight: 600;
-    border-bottom: 2px solid var(--accent);
-  }
-  @media (max-width: 560px) {
-    .inner { padding: 0.85rem 1rem; }
-  }
+  .site-header { background: var(--surface); border-bottom: 1px solid var(--line); }
+  .inner { max-width: var(--maxw); margin: 0 auto; padding: 1rem 1.25rem; display: flex; flex-wrap: wrap; gap: .5rem 1.5rem; align-items: baseline; justify-content: space-between; }
+  .brand { font-family: var(--font-head); font-weight: 700; font-size: 1.1rem; color: var(--ink); text-decoration: none; }
+  .brand span { display: block; font-family: var(--font-body); font-weight: 400; font-size: .8rem; color: var(--muted); }
+  nav ul { list-style: none; margin: 0; padding: 0; display: flex; flex-wrap: wrap; gap: .25rem 1.1rem; }
+  nav a { color: var(--muted); text-decoration: none; font-size: .95rem; }
+  nav a:hover, nav a[aria-current="location"] { color: var(--accent-ink); }
+  @media (max-width: 560px) { .inner { padding: .85rem 1rem; } }
 </style>

@@ -5,6 +5,7 @@ import { defineCollection, z } from 'astro:content';
 // how mature it is, which Notion sources it synthesizes, what evidence it
 // rests on, and what remains unresolved.
 const synthesisSchema = z.object({
+  published: z.boolean().default(false),
   title: z.string(),
   description: z.string(),
   status: z.string(),
@@ -28,6 +29,7 @@ const notes = defineCollection({
 });
 
 const courseWeekSchema = z.object({
+  published: z.boolean().default(false),
   title: z.string(),
   description: z.string(),
   status: z.string(),
@@ -40,6 +42,7 @@ const courseWeekSchema = z.object({
 });
 
 const resourceSchema = z.object({
+  published: z.boolean().default(false),
   title: z.string(),
   description: z.string(),
   status: z.string(),
@@ -50,6 +53,7 @@ const resourceSchema = z.object({
 });
 
 const courseLessonSchema = z.object({
+  published: z.boolean().default(false),
   title: z.string(),
   description: z.string(),
   status: z.string(),
@@ -62,6 +66,7 @@ const courseLessonSchema = z.object({
 });
 
 const courseGuideSchema = z.object({
+  published: z.boolean().default(false),
   title: z.string(),
   description: z.string(),
   status: z.string(),
@@ -72,6 +77,7 @@ const courseGuideSchema = z.object({
 });
 
 const coursePathSchema = z.object({
+  published: z.boolean().default(false),
   title: z.string(),
   description: z.string(),
   status: z.string(),
@@ -106,6 +112,7 @@ const coursePaths = defineCollection({
 });
 
 const atlasConceptSchema = z.object({
+  published: z.boolean().default(false),
   title: z.string(),
   description: z.string(),
   kicker: z.string().optional(),
@@ -116,6 +123,7 @@ const atlasConceptSchema = z.object({
 });
 
 const atlasUpdateSchema = z.object({
+  published: z.boolean().default(false),
   title: z.string(),
   description: z.string(),
   kicker: z.string().optional(),

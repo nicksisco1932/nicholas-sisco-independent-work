@@ -3,18 +3,18 @@
  * With `build.format: 'file'`, /literature → literature.html, preserving the
  * legacy .html URL style. Draft entries (status: draft) are excluded from the
  * build and from all listings — they exist in the collection as stubs only. */
-import { getCollection, render } from 'astro:content';
+import { getCollection, render, type CollectionEntry } from 'astro:content';
 import ProjectPage from '../layouts/ProjectPage.astro';
 import NoteArticle from '../layouts/NoteArticle.astro';
+import { isPublished } from '../lib/publication.mjs';
 
 export async function getStaticPaths() {
-  const published = ({ data }: { data: { status: string } }) => data.status !== 'draft';
   const paths = [];
-  for (const entry of await getCollection('projects', published)) {
+  for (const entry of await getCollection('projects', isPublished)) {
     // Strip the .mdx extension: entry.id is "literature.mdx", URL is /literature.html
     paths.push({ params: { slug: entry.id.replace(/\.mdx$/, '') }, props: { kind: 'project' as const, entry } });
   }
-  for (const entry of await getCollection('notes', published)) {
+  for (const entry of await getCollection('notes', isPublished)) {
     paths.push({ params: { slug: entry.id.replace(/\.mdx$/, '') }, props: { kind: 'note' as const, entry } });
   }
   return paths;
@@ -22,8 +22,6 @@ export async function getStaticPaths() {
 
 const { kind, entry } = Astro.props;
 const { Content } = await render(entry);
-const Layout = kind === 'project' ? ProjectPage : NoteArticle;
+
 ---
-<Layout entry={entry}>
-  <Content />
-</Layout>
+{kind === 'project' ? <ProjectPage entry={entry as CollectionEntry<'projects'>}><Content /></ProjectPage> : <NoteArticle entry={entry as CollectionEntry<'notes'>}><Content /></NoteArticle>}
