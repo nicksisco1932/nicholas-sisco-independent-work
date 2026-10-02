@@ -3,7 +3,7 @@
  * Lesson cards and the companion-resource link are generated from the
  * content collections so they can never drift out of sync.
  */
-import { getCollection, type CollectionEntry } from 'astro:content';
+import { getCollection, render, type CollectionEntry } from 'astro:content';
 import CoursePage from '../../../layouts/CoursePage.astro';
 import { isPublished } from '../../../lib/publication.mjs';
 
@@ -28,7 +28,7 @@ interface Props {
 }
 
 const { entry, lessons } = Astro.props;
-const { Content } = await entry.render();
+const { Content } = await render(entry);
 const eyebrow = `Week ${entry.data.week}`;
 const lessonHref = (id: string) => `../lessons/${id.replace(/\.mdx$/, '')}.html`;
 ---

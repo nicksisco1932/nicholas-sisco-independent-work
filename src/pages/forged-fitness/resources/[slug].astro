@@ -1,6 +1,6 @@
 ---
 /* Dynamic worksheet pages: /forged-fitness/resources/<slug>.html */
-import { getCollection, type CollectionEntry } from 'astro:content';
+import { getCollection, render, type CollectionEntry } from 'astro:content';
 import CoursePage from '../../../layouts/CoursePage.astro';
 import { isPublished } from '../../../lib/publication.mjs';
 
@@ -17,7 +17,7 @@ interface Props {
 }
 
 const { entry } = Astro.props;
-const { Content } = await entry.render();
+const { Content } = await render(entry);
 ---
 <CoursePage entry={entry} eyebrow="Printable worksheet">
   <div class="prose">

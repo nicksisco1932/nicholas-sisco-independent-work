@@ -25,7 +25,7 @@ export async function GET() {
       week: l.data.week,
       stage: l.data.stage,
       url: `${base}/forged-fitness/lessons/${l.id.replace(/\.mdx$/, '')}.html`,
-      version: createHash('sha1').update(l.body).digest('hex').slice(0, 16),
+      version: createHash('sha1').update(l.body ?? '').digest('hex').slice(0, 16),
     })),
     paths: paths.map((p) => ({
       id: p.id.replace(/\.mdx$/, ''),

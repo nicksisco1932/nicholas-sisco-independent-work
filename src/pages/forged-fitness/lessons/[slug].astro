@@ -3,7 +3,7 @@
  * Renders the lesson heading via CoursePage, the lesson body, the sticky
  * week nav aside, the mark-complete control, and prev/next navigation.
  */
-import { getCollection, type CollectionEntry } from 'astro:content';
+import { getCollection, render, type CollectionEntry } from 'astro:content';
 import CoursePage from '../../../layouts/CoursePage.astro';
 import { isPublished } from '../../../lib/publication.mjs';
 
@@ -36,7 +36,7 @@ interface Props {
 }
 
 const { entry, weekLessons, prev, next } = Astro.props;
-const { Content } = await entry.render();
+const { Content } = await render(entry);
 const stageLabel = entry.data.stage.charAt(0).toUpperCase() + entry.data.stage.slice(1);
 const eyebrow = `Week ${entry.data.week} · ${stageLabel}`;
 const lessonUrl = (id: string) => `${id.replace(/\.mdx$/, '')}.html`;
