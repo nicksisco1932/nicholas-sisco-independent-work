@@ -1,0 +1,11 @@
+{
+  "$schema": "node_modules/wrangler/config-schema.json",
+  "name": "nicholas-sisco-independent-work",
+  "compatibility_date": "2026-10-02",
+  "workers_dev": false,
+  "assets": {
+    "directory": "./dist",
+    "not_found_handling": "404-page",
+    "html_handling": "none"
+  }
+}

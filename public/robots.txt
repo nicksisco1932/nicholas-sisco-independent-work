@@ -1,4 +1,0 @@
-User-agent: *
-Allow: /
-
-Sitemap: https://nicksisco1932.github.io/nicholas-sisco-independent-work/sitemap-index.xml

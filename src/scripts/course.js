@@ -1,9 +1,8 @@
 // Course interactivity for Forged Fitness pages: quiz self-checks,
 // print buttons, and per-lesson progress tracking (localStorage).
 // Ported from the production site's course.js; the only behavioral change
-// is that the course-index.json fetch is base-aware so it works under the
-// GitHub Pages project subpath.
-import { loadProgress, saveProgress, clearProgress } from './progress.mjs';
+// is that the course-index.json fetch is base-aware for either host base.
+import { loadProgress, saveProgress, clearProgress, exportProgress, importProgress } from './progress.mjs';
 
 for (const form of document.querySelectorAll('.quiz')) {
   const button = form.querySelector('button');
@@ -35,6 +34,45 @@ try {
   let { done, available } = loadProgress(storage, lessons);
   const lessonById = new Map(lessons.map(x => [x.id, x]));
   const current = document.querySelector('[data-complete]');
+
+  const transferStatus = document.querySelector('[data-transfer-status]');
+  for (const button of document.querySelectorAll('[data-export-progress]')) {
+    button.addEventListener('click', () => {
+      if (!available) {
+        transferStatus.textContent = 'Browser storage is unavailable, so progress could not be exported.';
+        return;
+      }
+      const blob = new Blob([JSON.stringify(exportProgress(storage, lessons), null, 2)], { type: 'application/json' });
+      const link = document.createElement('a');
+      const downloadUrl = URL.createObjectURL(blob);
+      link.href = downloadUrl;
+      link.download = 'forged-course-progress.json';
+      link.click();
+      window.setTimeout(() => URL.revokeObjectURL(downloadUrl), 1000);
+      transferStatus.textContent = 'Progress file downloaded. Keep it on your device and import it on the new site.';
+    });
+  }
+  for (const input of document.querySelectorAll('[data-import-progress]')) {
+    input.addEventListener('change', async () => {
+      const file = input.files?.[0];
+      if (!file) return;
+      if (file.size > 262_144) {
+        transferStatus.textContent = 'The progress file is invalid or too large.';
+        input.value = '';
+        return;
+      }
+      const result = importProgress(storage, lessons, await file.text());
+      transferStatus.textContent = result.ok
+        ? `Imported ${result.imported} matching lesson completions. Existing progress was kept.`
+        : result.reason;
+      if (result.ok) {
+        done = loadProgress(storage, lessons).done;
+        available = true;
+        render();
+      }
+      input.value = '';
+    });
+  }
 
   function render() {
     for (const element of document.querySelectorAll('[data-total-progress]'))

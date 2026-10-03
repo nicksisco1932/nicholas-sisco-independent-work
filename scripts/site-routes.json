@@ -1,0 +1,1016 @@
+{
+  "forged-fitness/guides/orientation.html": [
+    "a-small-glossary",
+    "choose-your-level-of-participation",
+    "main",
+    "who-this-is-for",
+    "your-first-ten-minutes"
+  ],
+  "forged-fitness/guides/starter-program.html": [
+    "activity-beyond-lifting",
+    "comfort-and-stopping",
+    "comfortable-overhead-press",
+    "dead-bug-heel-slide",
+    "effort",
+    "evidence--reading",
+    "exercise-bridge",
+    "exercise-calf",
+    "exercise-carry",
+    "exercise-deadbug",
+    "exercise-hinge",
+    "exercise-instructions",
+    "exercise-press",
+    "exercise-pull",
+    "exercise-push",
+    "exercise-row",
+    "exercise-split",
+    "exercise-squat",
+    "glute-bridge",
+    "hip-hinge",
+    "incline-push-up",
+    "light-carry",
+    "main",
+    "progression",
+    "pulldown-or-row",
+    "regression-and-time-constraints",
+    "schedule",
+    "session-a",
+    "session-b",
+    "squat-to-a-chair",
+    "starting-dose",
+    "supported-calf-raise",
+    "supported-row",
+    "supported-split-squat",
+    "warm-up"
+  ],
+  "forged-fitness/lessons/w01-apply.html": [
+    "check-your-reasoning",
+    "choose-a-workable-next-step",
+    "evidence--reading",
+    "keep-the-record-small",
+    "main",
+    "ref-R21",
+    "ref-R22",
+    "try-it",
+    "use-the-same-language",
+    "your-next-step"
+  ],
+  "forged-fitness/lessons/w01-review.html": [
+    "check-your-reasoning",
+    "evidence--reading",
+    "main",
+    "make-the-action-concrete",
+    "ref-R21",
+    "ref-R22",
+    "review-rather-than-escalate-automatically",
+    "separate-behavior-from-outcome",
+    "try-it",
+    "your-next-step"
+  ],
+  "forged-fitness/lessons/w01-understand.html": [
+    "check-your-reasoning",
+    "evidence--reading",
+    "keep-the-explanation-provisional",
+    "main",
+    "measure-what-your-question-needs",
+    "ref-R21",
+    "ref-R22",
+    "try-it",
+    "your-next-step",
+    "your-starting-point-is-information"
+  ],
+  "forged-fitness/lessons/w02-apply.html": [
+    "build-a-meal-not-a-ranking",
+    "check-your-reasoning",
+    "evidence--reading",
+    "main",
+    "ref-R01",
+    "ref-R19",
+    "ref-R24",
+    "start-with-the-serving",
+    "try-it",
+    "use-more-than-one-column",
+    "your-next-step"
+  ],
+  "forged-fitness/lessons/w02-review.html": [
+    "check-the-arithmetic",
+    "check-your-reasoning",
+    "evidence--reading",
+    "leave-room-for-flexibility",
+    "main",
+    "name-the-actual-constraint",
+    "ref-R01",
+    "ref-R19",
+    "ref-R24",
+    "try-it",
+    "your-next-step"
+  ],
+  "forged-fitness/lessons/w02-understand.html": [
+    "check-your-reasoning",
+    "energy-is-an-accounting-concept",
+    "evidence--reading",
+    "food-also-supplies-materials",
+    "main",
+    "ref-R01",
+    "ref-R19",
+    "ref-R24",
+    "try-it",
+    "use-numbers-with-a-population-attached",
+    "your-next-step"
+  ],
+  "forged-fitness/lessons/w03-apply.html": [
+    "check-your-reasoning",
+    "evidence--reading",
+    "include-the-rest-of-the-week",
+    "main",
+    "ref-R20",
+    "ref-R24",
+    "ref-R25",
+    "start-from-the-pattern",
+    "try-it",
+    "use-a-modest-entry",
+    "your-next-step"
+  ],
+  "forged-fitness/lessons/w03-review.html": [
+    "check-your-reasoning",
+    "choose-your-next-route",
+    "evidence--reading",
+    "look-for-a-workable-combination",
+    "main",
+    "ref-R20",
+    "ref-R24",
+    "ref-R25",
+    "review-the-plan-at-the-level-you-control",
+    "try-it",
+    "your-next-step"
+  ],
+  "forged-fitness/lessons/w03-understand.html": [
+    "check-your-reasoning",
+    "evidence--reading",
+    "follow-the-levels",
+    "keep-materials-in-the-explanation",
+    "look-at-the-endpoint",
+    "main",
+    "ref-R20",
+    "ref-R24",
+    "ref-R25",
+    "try-it",
+    "your-next-step"
+  ],
+  "forged-fitness/lessons/w04-apply.html": [
+    "check-your-reasoning",
+    "establish-a-comfortable-starting-point",
+    "evidence--reading",
+    "main",
+    "progress-one-variable",
+    "record-enough-to-learn",
+    "ref-R20",
+    "ref-R23",
+    "ref-R25",
+    "try-it",
+    "your-next-step"
+  ],
+  "forged-fitness/lessons/w04-review.html": [
+    "check-your-reasoning",
+    "decide-rather-than-judge",
+    "evidence--reading",
+    "main",
+    "read-the-whole-entry",
+    "ref-R20",
+    "ref-R23",
+    "ref-R25",
+    "try-it",
+    "update-the-question",
+    "your-next-step"
+  ],
+  "forged-fitness/lessons/w04-understand.html": [
+    "check-your-reasoning",
+    "evidence--reading",
+    "main",
+    "make-the-comparison-useful",
+    "ref-R20",
+    "ref-R23",
+    "ref-R25",
+    "try-it",
+    "what-changes-with-practice",
+    "what-produces-movement",
+    "your-next-step"
+  ],
+  "forged-fitness/lessons/w05-apply.html": [
+    "change-one-controllable-feature",
+    "check-your-reasoning",
+    "evidence--reading",
+    "main",
+    "protect-the-opportunity",
+    "reduce-demand-deliberately",
+    "ref-R08",
+    "ref-R22",
+    "try-it",
+    "your-next-step"
+  ],
+  "forged-fitness/lessons/w05-review.html": [
+    "check-your-reasoning",
+    "evaluate-the-adjustment",
+    "evidence--reading",
+    "know-the-limit-of-the-worksheet",
+    "main",
+    "ref-R08",
+    "ref-R22",
+    "separate-what-happened-from-why",
+    "try-it",
+    "your-next-step"
+  ],
+  "forged-fitness/lessons/w05-understand.html": [
+    "check-your-reasoning",
+    "evidence--reading",
+    "look-for-a-pattern",
+    "main",
+    "ref-R08",
+    "ref-R22",
+    "several-processes-share-the-word",
+    "sleep-has-a-role-without-being-a-score",
+    "try-it",
+    "your-next-step"
+  ],
+  "forged-fitness/lessons/w06-apply.html": [
+    "check-your-reasoning",
+    "evidence--reading",
+    "main",
+    "make-the-backup-usable",
+    "place-food-around-the-actual-schedule",
+    "ref-R02",
+    "ref-R24",
+    "start-from-familiar-foods",
+    "try-it",
+    "your-next-step"
+  ],
+  "forged-fitness/lessons/w06-review.html": [
+    "check-your-reasoning",
+    "choose-one-next-experiment",
+    "decide-whether-to-continue",
+    "evidence--reading",
+    "main",
+    "ref-R02",
+    "ref-R24",
+    "try-it",
+    "use-the-evidence-you-have",
+    "your-next-step"
+  ],
+  "forged-fitness/lessons/w06-understand.html": [
+    "ask-about-duration-and-turnaround",
+    "check-your-reasoning",
+    "evidence--reading",
+    "keep-tolerance-in-the-plan",
+    "main",
+    "ref-R02",
+    "ref-R24",
+    "start-with-the-whole-day",
+    "try-it",
+    "your-next-step"
+  ],
+  "forged-fitness/lessons/w07-apply.html": [
+    "check-your-reasoning",
+    "choose-what-to-reduce",
+    "evidence--reading",
+    "keep-the-choice-interpretable",
+    "main",
+    "ref-R08",
+    "ref-R20",
+    "review-before-rebuilding",
+    "try-it",
+    "your-next-step"
+  ],
+  "forged-fitness/lessons/w07-review.html": [
+    "check-your-reasoning",
+    "evidence--reading",
+    "keep-the-referral-informative",
+    "main",
+    "ref-R08",
+    "ref-R20",
+    "start-with-the-facts",
+    "try-it",
+    "use-three-possible-actions",
+    "your-next-step"
+  ],
+  "forged-fitness/lessons/w07-understand.html": [
+    "a-useful-signal-with-many-causes",
+    "act-at-the-right-scale",
+    "check-your-reasoning",
+    "evidence--reading",
+    "look-beyond-the-workout",
+    "main",
+    "ref-R08",
+    "ref-R20",
+    "try-it",
+    "your-next-step"
+  ],
+  "forged-fitness/lessons/w08-apply.html": [
+    "check-relevance-and-limitations",
+    "check-your-reasoning",
+    "evidence--reading",
+    "extract-before-evaluating",
+    "include-the-opportunity-cost",
+    "main",
+    "ref-R09",
+    "ref-R24",
+    "try-it",
+    "your-next-step"
+  ],
+  "forged-fitness/lessons/w08-review.html": [
+    "check-your-reasoning",
+    "do-not-turn-a-trial-into-a-diagnosis",
+    "evidence--reading",
+    "leave-clinical-questions-to-appropriate-care",
+    "main",
+    "ref-R09",
+    "ref-R24",
+    "try-it",
+    "use-bounded-language",
+    "your-next-step"
+  ],
+  "forged-fitness/lessons/w08-understand.html": [
+    "ask-whether-the-result-matters-here",
+    "check-your-reasoning",
+    "evidence--reading",
+    "main",
+    "read-the-complete-claim",
+    "ref-R09",
+    "ref-R24",
+    "separate-ingredient-and-product-evidence",
+    "try-it",
+    "your-next-step"
+  ],
+  "forged-fitness/lessons/w09-apply.html": [
+    "check-your-reasoning",
+    "choose-a-practical-movement-option",
+    "evidence--reading",
+    "keep-clinical-management-separate",
+    "main",
+    "ref-R02",
+    "ref-R26",
+    "ref-R27",
+    "try-it",
+    "use-the-schedule-you-already-have",
+    "your-next-step"
+  ],
+  "forged-fitness/lessons/w09-review.html": [
+    "check-your-reasoning",
+    "evidence--reading",
+    "keep-a-useful-conclusion",
+    "locate-the-leap",
+    "main",
+    "ref-R02",
+    "ref-R26",
+    "ref-R27",
+    "state-what-would-be-needed",
+    "try-it",
+    "your-next-step"
+  ],
+  "forged-fitness/lessons/w09-understand.html": [
+    "a-tissue-is-part-of-a-system",
+    "check-your-reasoning",
+    "evidence--reading",
+    "keep-the-measurement-in-view",
+    "main",
+    "ref-R02",
+    "ref-R26",
+    "ref-R27",
+    "transport-is-regulated",
+    "try-it",
+    "your-next-step"
+  ],
+  "forged-fitness/lessons/w10-apply.html": [
+    "check-your-reasoning",
+    "define-the-fallback",
+    "evidence--reading",
+    "main",
+    "plan-the-return",
+    "ref-R20",
+    "ref-R21",
+    "set-the-primary-plan",
+    "try-it",
+    "your-next-step"
+  ],
+  "forged-fitness/lessons/w10-review.html": [
+    "ask-what-the-friction-reveals",
+    "check-your-reasoning",
+    "count-opportunities-as-well-as-actions",
+    "evidence--reading",
+    "keep-evidence-and-values-visible",
+    "main",
+    "ref-R20",
+    "ref-R21",
+    "try-it",
+    "your-next-step"
+  ],
+  "forged-fitness/lessons/w10-understand.html": [
+    "check-your-reasoning",
+    "evidence--reading",
+    "keep-the-purpose-change-the-route",
+    "main",
+    "name-the-actual-constraint",
+    "ref-R20",
+    "ref-R21",
+    "treat-the-plan-as-a-design-choice",
+    "try-it",
+    "your-next-step"
+  ],
+  "forged-fitness/lessons/w11-apply.html": [
+    "check-your-reasoning",
+    "evidence--reading",
+    "main",
+    "prepare-as-usual",
+    "ref-R20",
+    "ref-R23",
+    "stop-at-the-plan",
+    "try-it",
+    "write-the-full-result",
+    "your-next-step"
+  ],
+  "forged-fitness/lessons/w11-review.html": [
+    "check-your-reasoning",
+    "evidence--reading",
+    "main",
+    "make-room-for-mixed-results",
+    "ref-R20",
+    "ref-R23",
+    "return-to-the-progression-rule",
+    "try-it",
+    "use-the-result-to-plan",
+    "your-next-step"
+  ],
+  "forged-fitness/lessons/w11-understand.html": [
+    "check-your-reasoning",
+    "define-the-ability-first",
+    "evidence--reading",
+    "interpret-the-result-at-its-scale",
+    "main",
+    "ref-R20",
+    "ref-R23",
+    "standardize-what-you-can",
+    "try-it",
+    "your-next-step"
+  ],
+  "forged-fitness/lessons/w12-apply.html": [
+    "check-your-reasoning",
+    "choose-a-small-number-of-priorities",
+    "choose-evidence-of-progress",
+    "evidence--reading",
+    "main",
+    "ref-R20",
+    "ref-R21",
+    "ref-R23",
+    "specify-the-routine-and-fallback",
+    "try-it",
+    "your-next-step"
+  ],
+  "forged-fitness/lessons/w12-review.html": [
+    "audit-your-own-wording",
+    "check-your-reasoning",
+    "continue-at-the-appropriate-depth",
+    "evidence--reading",
+    "explain-a-complete-decision",
+    "main",
+    "ref-R20",
+    "ref-R21",
+    "ref-R23",
+    "try-it",
+    "your-next-step"
+  ],
+  "forged-fitness/lessons/w12-understand.html": [
+    "check-the-arithmetic",
+    "check-your-reasoning",
+    "evidence--reading",
+    "give-each-period-a-purpose",
+    "main",
+    "organize-the-next-question",
+    "ref-R20",
+    "ref-R21",
+    "ref-R23",
+    "try-it",
+    "your-next-step"
+  ],
+  "forged-fitness/paths/performance-autonomy.html": [
+    "main"
+  ],
+  "forged-fitness/paths/recomp-resilience.html": [
+    "main"
+  ],
+  "forged-fitness/paths/reset-prime.html": [
+    "main"
+  ],
+  "forged-fitness/progress.html": [
+    "import-progress-file",
+    "main",
+    "progress-transfer-title"
+  ],
+  "forged-fitness/resources/baseline.html": [
+    "evidence--reading",
+    "how-to-use-it",
+    "main",
+    "your-worksheet"
+  ],
+  "forged-fitness/resources/grocery-planner.html": [
+    "evidence--reading",
+    "how-to-use-it",
+    "main",
+    "your-worksheet"
+  ],
+  "forged-fitness/resources/meal-builder.html": [
+    "evidence--reading",
+    "how-to-use-it",
+    "main",
+    "your-worksheet"
+  ],
+  "forged-fitness/resources/next-cycle.html": [
+    "evidence--reading",
+    "how-to-use-it",
+    "main",
+    "your-worksheet"
+  ],
+  "forged-fitness/resources/recovery-decisions.html": [
+    "evidence--reading",
+    "how-to-use-it",
+    "main",
+    "your-worksheet"
+  ],
+  "forged-fitness/resources/training-log.html": [
+    "evidence--reading",
+    "how-to-use-it",
+    "main",
+    "your-worksheet"
+  ],
+  "forged-fitness/weeks/week-01.html": [
+    "main",
+    "your-companion-resource"
+  ],
+  "forged-fitness/weeks/week-02.html": [
+    "main",
+    "your-companion-resource"
+  ],
+  "forged-fitness/weeks/week-03.html": [
+    "main",
+    "your-companion-resource"
+  ],
+  "forged-fitness/weeks/week-04.html": [
+    "main",
+    "your-companion-resource"
+  ],
+  "forged-fitness/weeks/week-05.html": [
+    "main",
+    "your-companion-resource"
+  ],
+  "forged-fitness/weeks/week-06.html": [
+    "main",
+    "your-companion-resource"
+  ],
+  "forged-fitness/weeks/week-07.html": [
+    "main",
+    "your-companion-resource"
+  ],
+  "forged-fitness/weeks/week-08.html": [
+    "main",
+    "your-companion-resource"
+  ],
+  "forged-fitness/weeks/week-09.html": [
+    "main",
+    "your-companion-resource"
+  ],
+  "forged-fitness/weeks/week-10.html": [
+    "main",
+    "your-companion-resource"
+  ],
+  "forged-fitness/weeks/week-11.html": [
+    "main",
+    "your-companion-resource"
+  ],
+  "forged-fitness/weeks/week-12.html": [
+    "main",
+    "your-companion-resource"
+  ],
+  "forged-fitness.html": [
+    "curriculum",
+    "main"
+  ],
+  "historical-universe.html": [
+    "main"
+  ],
+  "index.html": [
+    "about",
+    "main",
+    "methods",
+    "notes",
+    "physiology",
+    "projects",
+    "writing"
+  ],
+  "literature.html": [
+    "appraisal-foundation",
+    "evidence",
+    "limits-and-next",
+    "main",
+    "problem-and-approach",
+    "public-case-study",
+    "schemaversion-note"
+  ],
+  "molecular-physiology/concepts/4e-bp1.html": [
+    "human-evidence",
+    "inputs",
+    "level-1--foundations",
+    "level-2--mechanism",
+    "main",
+    "model-system-evidence",
+    "necessary-versus-sufficient",
+    "neighboring-concepts",
+    "outputs",
+    "practical-relevance",
+    "ref-drummond2009",
+    "ref-thoreen2012",
+    "references",
+    "what-remains-unresolved"
+  ],
+  "molecular-physiology/concepts/akt.html": [
+    "human-evidence",
+    "inputs",
+    "level-1--foundations",
+    "level-2--mechanism",
+    "main",
+    "model-system-evidence",
+    "necessary-versus-sufficient",
+    "neighboring-concepts",
+    "outputs",
+    "practical-relevance",
+    "ref-drummond2009",
+    "ref-inoki2002",
+    "references",
+    "what-remains-unresolved"
+  ],
+  "molecular-physiology/concepts/ampk.html": [
+    "human-evidence",
+    "inputs",
+    "level-1--foundations",
+    "level-2--mechanism",
+    "main",
+    "model-system-evidence",
+    "necessary-versus-sufficient",
+    "neighboring-concepts",
+    "outputs",
+    "practical-relevance",
+    "ref-gwinn2008",
+    "references",
+    "what-remains-unresolved"
+  ],
+  "molecular-physiology/concepts/hypertrophy.html": [
+    "human-evidence",
+    "inputs",
+    "level-1--foundations",
+    "level-2--mechanism",
+    "main",
+    "model-system-evidence",
+    "necessary-versus-sufficient",
+    "neighboring-concepts",
+    "outputs",
+    "practical-relevance",
+    "ref-damas2016",
+    "ref-mitchell2014",
+    "ref-stec2016",
+    "references",
+    "what-remains-unresolved"
+  ],
+  "molecular-physiology/concepts/leucine.html": [
+    "human-evidence",
+    "inputs",
+    "level-1--foundations",
+    "level-2--mechanism",
+    "main",
+    "model-system-evidence",
+    "necessary-versus-sufficient",
+    "neighboring-concepts",
+    "outputs",
+    "practical-relevance",
+    "ref-churchward2012",
+    "ref-wolfson2016",
+    "references",
+    "what-remains-unresolved"
+  ],
+  "molecular-physiology/concepts/mechanical-tension.html": [
+    "human-evidence",
+    "inputs",
+    "level-1--foundations",
+    "level-2--mechanism",
+    "main",
+    "model-system-evidence",
+    "necessary-versus-sufficient",
+    "neighboring-concepts",
+    "outputs",
+    "practical-relevance",
+    "ref-drummond2009",
+    "ref-hornberger2006",
+    "references",
+    "what-remains-unresolved"
+  ],
+  "molecular-physiology/concepts/mtorc1.html": [
+    "human-evidence",
+    "inputs",
+    "level-1--foundations",
+    "level-2--mechanism",
+    "main",
+    "model-system-evidence",
+    "necessary-versus-sufficient",
+    "neighboring-concepts",
+    "outputs",
+    "practical-relevance",
+    "ref-docking2019",
+    "ref-drummond2009",
+    "ref-sancak2008",
+    "ref-thoreen2012",
+    "ref-yang2017",
+    "references",
+    "what-remains-unresolved"
+  ],
+  "molecular-physiology/concepts/muscle-protein-synthesis.html": [
+    "human-evidence",
+    "inputs",
+    "level-1--foundations",
+    "level-2--mechanism",
+    "main",
+    "model-system-evidence",
+    "necessary-versus-sufficient",
+    "neighboring-concepts",
+    "outputs",
+    "practical-relevance",
+    "ref-churchward2012",
+    "ref-damas2016",
+    "ref-thoreen2012",
+    "references",
+    "what-remains-unresolved"
+  ],
+  "molecular-physiology/concepts/rag-gtpases.html": [
+    "human-evidence",
+    "inputs",
+    "level-1--foundations",
+    "level-2--mechanism",
+    "main",
+    "model-system-evidence",
+    "necessary-versus-sufficient",
+    "neighboring-concepts",
+    "outputs",
+    "practical-relevance",
+    "ref-docking2019",
+    "ref-sancak2008",
+    "references",
+    "what-remains-unresolved"
+  ],
+  "molecular-physiology/concepts/rheb.html": [
+    "human-evidence",
+    "inputs",
+    "level-1--foundations",
+    "level-2--mechanism",
+    "main",
+    "model-system-evidence",
+    "necessary-versus-sufficient",
+    "neighboring-concepts",
+    "outputs",
+    "practical-relevance",
+    "ref-inoki2002",
+    "ref-yang2017",
+    "references",
+    "what-remains-unresolved"
+  ],
+  "molecular-physiology/concepts/ribosome-biogenesis.html": [
+    "human-evidence",
+    "inputs",
+    "level-1--foundations",
+    "level-2--mechanism",
+    "main",
+    "model-system-evidence",
+    "necessary-versus-sufficient",
+    "neighboring-concepts",
+    "outputs",
+    "practical-relevance",
+    "ref-stec2016",
+    "references",
+    "what-remains-unresolved"
+  ],
+  "molecular-physiology/concepts/s6k1.html": [
+    "human-evidence",
+    "inputs",
+    "level-1--foundations",
+    "level-2--mechanism",
+    "main",
+    "model-system-evidence",
+    "necessary-versus-sufficient",
+    "neighboring-concepts",
+    "outputs",
+    "practical-relevance",
+    "ref-drummond2009",
+    "ref-thoreen2012",
+    "references",
+    "what-remains-unresolved"
+  ],
+  "molecular-physiology/concepts/sestrin2.html": [
+    "human-evidence",
+    "inputs",
+    "level-1--foundations",
+    "level-2--mechanism",
+    "main",
+    "model-system-evidence",
+    "necessary-versus-sufficient",
+    "neighboring-concepts",
+    "outputs",
+    "practical-relevance",
+    "ref-churchward2012",
+    "ref-wolfson2016",
+    "references",
+    "what-remains-unresolved"
+  ],
+  "molecular-physiology/concepts/translation-initiation.html": [
+    "human-evidence",
+    "inputs",
+    "level-1--foundations",
+    "level-2--mechanism",
+    "main",
+    "model-system-evidence",
+    "necessary-versus-sufficient",
+    "neighboring-concepts",
+    "outputs",
+    "practical-relevance",
+    "ref-churchward2012",
+    "ref-thoreen2012",
+    "references",
+    "what-remains-unresolved"
+  ],
+  "molecular-physiology/concepts/tsc1-2.html": [
+    "human-evidence",
+    "inputs",
+    "level-1--foundations",
+    "level-2--mechanism",
+    "main",
+    "model-system-evidence",
+    "necessary-versus-sufficient",
+    "neighboring-concepts",
+    "outputs",
+    "practical-relevance",
+    "ref-garami2003",
+    "ref-inoki2002",
+    "references",
+    "what-remains-unresolved"
+  ],
+  "molecular-physiology/topics/cellular-processes.html": [
+    "main"
+  ],
+  "molecular-physiology/topics/essays-research-updates.html": [
+    "main"
+  ],
+  "molecular-physiology/topics/evidence-methods.html": [
+    "main"
+  ],
+  "molecular-physiology/topics/molecules-metabolites.html": [
+    "main"
+  ],
+  "molecular-physiology/topics/nutrition-substrate-biology.html": [
+    "main"
+  ],
+  "molecular-physiology/topics/performance-physiology.html": [
+    "main"
+  ],
+  "molecular-physiology/topics/sensors-regulators.html": [
+    "main"
+  ],
+  "molecular-physiology/topics/signaling-pathways.html": [
+    "main"
+  ],
+  "molecular-physiology/topics/tissue-adaptations.html": [
+    "main"
+  ],
+  "molecular-physiology/topics/training-stimuli.html": [
+    "main"
+  ],
+  "molecular-physiology/updates/from-leucine-to-muscle-protein-synthesis.html": [
+    "advanced-mechanism-in-context",
+    "all-essential-amino-acids",
+    "appraisal",
+    "energetic-state",
+    "human-evidence",
+    "leucine-loading-arrow",
+    "leucine-loading-bar",
+    "leucine-loading-desc",
+    "leucine-loading-title",
+    "level-1--foundations",
+    "level-1--foundations-1",
+    "level-1--foundations-10",
+    "level-1--foundations-11",
+    "level-1--foundations-12",
+    "level-1--foundations-13",
+    "level-1--foundations-2",
+    "level-1--foundations-3",
+    "level-1--foundations-4",
+    "level-1--foundations-5",
+    "level-1--foundations-6",
+    "level-1--foundations-7",
+    "level-1--foundations-8",
+    "level-1--foundations-9",
+    "level-2--mechanism",
+    "level-2--mechanism-1",
+    "level-2--mechanism-10",
+    "level-2--mechanism-11",
+    "level-2--mechanism-12",
+    "level-2--mechanism-13",
+    "level-2--mechanism-2",
+    "level-2--mechanism-3",
+    "level-2--mechanism-4",
+    "level-2--mechanism-5",
+    "level-2--mechanism-6",
+    "level-2--mechanism-7",
+    "level-2--mechanism-8",
+    "level-2--mechanism-9",
+    "lysosomal-localization",
+    "main",
+    "neighboring-concepts",
+    "open-questions",
+    "pathway",
+    "rag-gtpases",
+    "ref-churchward2012",
+    "ref-damas2016",
+    "ref-docking2019",
+    "ref-drummond2009",
+    "ref-garami2003",
+    "ref-gwinn2008",
+    "ref-hornberger2006",
+    "ref-inoki2002",
+    "ref-mitchell2014",
+    "ref-sancak2008",
+    "ref-stec2016",
+    "ref-thoreen2012",
+    "ref-wolfson2016",
+    "ref-yang2017",
+    "references",
+    "resistance-training",
+    "rheb",
+    "s6k1-4ebp1",
+    "sestrin2",
+    "signaling-is-not-growth",
+    "the-scientific-question",
+    "translation-initiation",
+    "what-changed",
+    "what-leucine-is",
+    "why-it-matters",
+    "why-sensing-exists"
+  ],
+  "molecular-physiology/updates/phosphorylation-is-not-hypertrophy.html": [
+    "advanced-mechanism-in-context",
+    "appraisal",
+    "level-1--foundations",
+    "level-2--mechanism",
+    "main",
+    "neighboring-concepts",
+    "read-the-endpoint",
+    "ref-damas2016",
+    "ref-mitchell2014",
+    "references",
+    "the-scientific-question",
+    "what-changed",
+    "why-it-matters"
+  ],
+  "molecular-physiology/updates.html": [
+    "main"
+  ],
+  "molecular-physiology.html": [
+    "concepts",
+    "main",
+    "topics"
+  ],
+  "nmr-thermodynamic-inference.html": [
+    "main"
+  ],
+  "odgs.html": [
+    "current-specification",
+    "evidence-and-limits",
+    "main",
+    "next-research-gate",
+    "public-case-study",
+    "research-question",
+    "validation-design"
+  ],
+  "problem-of-evil.html": [
+    "main"
+  ],
+  "publication-maturity.html": [
+    "limits",
+    "main",
+    "proposed-audit-checklist",
+    "references",
+    "three-timelines",
+    "why-the-checks-matter"
+  ],
+  "sci-fi-novels.html": [
+    "main"
+  ],
+  "the-moment-is-over.html": [
+    "main"
+  ],
+  "when-execution-stops-being-scarce.html": [
+    "intentional-constraint",
+    "main"
+  ]
+}

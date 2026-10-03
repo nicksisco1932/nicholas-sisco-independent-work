@@ -12,8 +12,11 @@ interface Props {
 }
 const { title, description, section, wide = false, ogType = 'article' } = Astro.props;
 const path = Astro.url.pathname;
-const canonicalPath = path === '/nicholas-sisco-independent-work' ? `${path}/` : path;
+const canonicalPath = path.endsWith('/index.html') ? path.slice(0, -'index.html'.length) : path;
 const canonical = new URL(canonicalPath, Astro.site ?? Astro.url.origin).toString();
+const basePath = import.meta.env.BASE_URL.endsWith('/')
+  ? import.meta.env.BASE_URL
+  : `${import.meta.env.BASE_URL}/`;
 ---
 <!doctype html>
 <html lang="en">
@@ -23,7 +26,7 @@ const canonical = new URL(canonicalPath, Astro.site ?? Astro.url.origin).toStrin
     <title>{title}</title>
     <meta name="description" content={description} />
     <link rel="canonical" href={canonical} />
-    <link rel="sitemap" href={`${import.meta.env.BASE_URL}sitemap-index.xml`} />
+    <link rel="sitemap" href={`${basePath}sitemap-index.xml`} />
     <meta property="og:type" content={ogType} />
     <meta property="og:title" content={title} />
     <meta property="og:description" content={description} />
