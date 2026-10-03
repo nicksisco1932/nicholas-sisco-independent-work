@@ -1,0 +1,59 @@
+name: Deploy Cloudflare production
+
+on:
+  workflow_dispatch:
+    inputs:
+      commit_sha:
+        description: Full commit SHA to deploy (must already be on main)
+        required: true
+        type: string
+      confirmation:
+        description: Select DEPLOY only after reviewing this release and authorizing production deployment
+        required: true
+        type: choice
+        options: [DO_NOT_DEPLOY, DEPLOY]
+        default: DO_NOT_DEPLOY
+
+permissions:
+  contents: read
+
+concurrency:
+  group: cloudflare-production
+  cancel-in-progress: false
+
+jobs:
+  deploy:
+    if: github.ref == 'refs/heads/main' && inputs.confirmation == 'DEPLOY'
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: ${{ inputs.commit_sha }}
+          fetch-depth: 0
+      - name: Verify selected commit is on main
+        env:
+          COMMIT_SHA: ${{ inputs.commit_sha }}
+        run: |
+          [[ "$COMMIT_SHA" =~ ^[0-9a-f]{40}$ ]]
+          git fetch --no-tags origin main
+          git merge-base --is-ancestor "$COMMIT_SHA" origin/main
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 24
+          cache: npm
+      - run: npm ci
+      - name: Require permanent production domain
+        env:
+          PUBLIC_SITE_URL: ${{ vars.PUBLIC_SITE_URL }}
+        run: node scripts/check-production-origin.mjs
+      - name: Validate the exact release artifact
+        env:
+          PUBLIC_SITE_BASE: /
+          PUBLIC_SITE_URL: ${{ vars.PUBLIC_SITE_URL }}
+        run: npm run validate
+      - name: Deploy reviewed revision
+        uses: cloudflare/wrangler-action@v3
+        with:
+          apiToken: ${{ secrets.CLOUDFLARE_API_TOKEN }}
+          accountId: ${{ secrets.CLOUDFLARE_ACCOUNT_ID }}
+          command: deploy

@@ -1,13 +1,18 @@
 import { defineConfig } from 'astro/config';
 import mdx from '@astrojs/mdx';
 import sitemap from '@astrojs/sitemap';
+import process from 'node:process';
 
-// `site` is the final GitHub Pages URL (used for sitemap, robots.txt,
-// canonical/OG meta). `base` is the project subpath — all internal links are
-// written base-aware so the site works both locally and on Pages.
+// Local builds default to the legacy GitHub Pages URL. Production settings
+// are supplied explicitly so canonical metadata and internal links agree.
+const site = process.env.PUBLIC_SITE_URL?.trim()
+  || 'https://nicksisco1932.github.io/nicholas-sisco-independent-work/';
+const base = process.env.PUBLIC_SITE_BASE?.trim()
+  || '/nicholas-sisco-independent-work';
+
 export default defineConfig({
-  site: 'https://nicksisco1932.github.io/nicholas-sisco-independent-work/',
-  base: '/nicholas-sisco-independent-work',
+  site,
+  base,
   // `format: 'file'` emits /literature.html, /odgs.html, etc. — preserving the
   // legacy URL style of the previous site (see README "URL preservation").
   build: { format: 'file' },
