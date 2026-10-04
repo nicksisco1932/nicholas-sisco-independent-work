@@ -1,0 +1,8 @@
+# Serve the Astro file-format homepage without changing its canonical URL.
+/ /index.html 200
+/index.html / 301
+
+# Map the former GitHub Pages project prefix to the new domain root.
+/nicholas-sisco-independent-work / 301
+/nicholas-sisco-independent-work/ / 301
+/nicholas-sisco-independent-work/* /:splat 301

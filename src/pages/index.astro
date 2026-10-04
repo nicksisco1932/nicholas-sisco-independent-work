@@ -13,6 +13,7 @@ const featuredProjects = ['literature', 'odgs'].flatMap((slug) =>
 );
 const writing = notes.filter((note) => note.data.tags.includes('philosophy'));
 const researchNotes = notes.filter((note) => !note.data.tags.includes('philosophy'));
+// All links below derive from Astro's configured base for local, Pages, and production builds.
 const _base = import.meta.env.BASE_URL;
 const base = _base.endsWith('/') ? _base : _base + '/';
 const entryUrl = (id: string) => `${base}${id.replace(/\.mdx$/, '')}.html`;

@@ -72,4 +72,16 @@ const entry = {
       </div>
     </div>
   </section>
+
+  <section class="section progress-transfer" aria-labelledby="progress-transfer-title">
+    <h2 id="progress-transfer-title">Move progress to another site or device</h2>
+    <p class="small">Progress is stored only in this browser. Export a copy before moving to a new site, then import it there. The file stays on your device.</p>
+    <div class="actions">
+      <button type="button" data-export-progress>Export saved progress</button>
+      <label for="import-progress-file">Import progress file
+        <input id="import-progress-file" data-import-progress type="file" accept="application/json,.json" />
+      </label>
+    </div>
+    <p class="small" data-transfer-status role="status" aria-live="polite"></p>
+  </section>
 </CoursePage>

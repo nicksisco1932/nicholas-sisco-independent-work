@@ -17,7 +17,7 @@ underlying research justifies it.
    `src/content/notes/` following the README's "Adding a new article" steps,
    with the publication gate (ownership, independence, defensibility, evidence,
    clarity, maturity, professional test, privacy/IP) satisfied.
-4. Merge to `main`; the site deploys automatically.
+4. Merge the reviewed publication change to main; GitHub Actions validates it. Production publication is a separate, explicitly authorized workflow run for a reviewed commit SHA.
 
 ## Candidates
 

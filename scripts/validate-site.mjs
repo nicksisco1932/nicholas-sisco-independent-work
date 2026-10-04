@@ -7,17 +7,29 @@ import { readEntries, expectedRoute } from './lib/content-inventory.mjs';
 
 const root = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '..');
 const dist = path.join(root, 'dist');
-const base = '/nicholas-sisco-independent-work/';
-const origin = 'https://nicksisco1932.github.io';
+const configuredBase = process.env.PUBLIC_SITE_BASE?.trim() || '/nicholas-sisco-independent-work';
+const base = configuredBase === '/' ? '/' : `/${configuredBase.replace(/^\/+|\/+$/g, '')}/`;
+const configuredSite = process.env.PUBLIC_SITE_URL?.trim()
+  || 'https://nicksisco1932.github.io/nicholas-sisco-independent-work/';
+const origin = new URL(configuredSite).origin;
 const htmlFiles = [];
+const assetFiles = [];
 function walk(dir) {
   for (const item of fs.readdirSync(dir, { withFileTypes: true })) {
     const full = path.join(dir, item.name);
     if (item.isDirectory()) walk(full);
-    else if (item.name.endsWith('.html')) htmlFiles.push(full);
+    else {
+      assetFiles.push(full);
+      if (item.name.endsWith('.html')) htmlFiles.push(full);
+    }
   }
 }
 walk(dist);
+assert.ok(assetFiles.length <= 20_000, 'Cloudflare Workers Static Assets allows at most 20,000 files per version; found ' + assetFiles.length);
+for (const file of assetFiles) {
+  assert.ok(fs.statSync(file).size <= 25 * 1024 * 1024, 'Cloudflare Workers Static Assets allows files up to 25 MiB: ' + path.relative(dist, file));
+}
+const inventory = JSON.parse(fs.readFileSync(path.join(root, 'scripts/site-routes.json'), 'utf8'));
 // Every published content entry must have produced its route. This is derived
 // from the content tree, so publishing a new entry never requires a test change —
 // unlike the old hardcoded route count. Stronger than a count: a silently
@@ -30,6 +42,7 @@ for (const entry of readEntries().filter((e) => e.published)) {
 assert.deepEqual(unbuilt, [], `published entries with no built route:\n${unbuilt.join('\n')}`);
 const problems = [];
 const built = new Map();
+const actualInventory = {};
 function attrs(node) { return Object.fromEntries((node.attrs ?? []).map(({ name, value }) => [name, value])); }
 function children(node, out = []) { if (!node) return out; out.push(node); for (const child of node.childNodes ?? []) children(child, out); if (node.content) children(node.content, out); return out; }
 for (const file of htmlFiles) {
@@ -44,13 +57,20 @@ for (const file of htmlFiles) {
       ids.add(a.id);
     }
   }
+  actualInventory[relative] = [...ids].sort();
   const title = nodes.find((node) => node.tagName === 'title');
   const description = nodes.find((node) => node.tagName === 'meta' && attrs(node).name === 'description');
   const canonical = nodes.find((node) => node.tagName === 'link' && attrs(node).rel === 'canonical');
+  const canonicalHref = attrs(canonical).href;
   const h1s = nodes.filter((node) => node.tagName === 'h1');
-  if (!title || !description || !attrs(canonical).href || h1s.length !== 1) problems.push(`${relative}: missing title, description, canonical, or exactly one h1`);
+  const expectedCanonicalPath = relative === 'index.html' ? base : base + relative;
+  if (!title || !description || !canonicalHref || h1s.length !== 1) problems.push(relative + ': missing title, description, canonical, or exactly one h1');
+  else if (canonicalHref !== new URL(expectedCanonicalPath, origin + '/').href) problems.push(relative + ': incorrect canonical URL ' + canonicalHref);
   built.set(relative, ids);
 }
+assert.deepEqual(actualInventory, inventory, 'built route and fragment inventory changed; update scripts/site-routes.json only for reviewed content changes');
+const robots = fs.readFileSync(path.join(dist, 'robots.txt'), 'utf8');
+assert.ok(robots.includes(new URL('sitemap-index.xml', configuredSite).href), 'robots.txt must reference this deployment sitemap');
 const toRoute = (pathname) => {
   if (!pathname.startsWith(base)) return null;
   let pathPart = decodeURIComponent(pathname.slice(base.length));
