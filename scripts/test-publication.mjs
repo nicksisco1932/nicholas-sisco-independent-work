@@ -17,9 +17,9 @@ for (const collection of fs.readdirSync(content, { withFileTypes: true }).filter
     entries.push({ collection: collection.name, file, published });
   }
 }
-assert.equal(entries.length, 82, `expected 82 markdown entries, saw ${entries.length}`);
+assert.equal(entries.length, 83, `expected 83 markdown entries, saw ${entries.length}`);
 const notes = entries.filter((entry) => entry.collection === 'notes');
-assert.equal(notes.filter((entry) => entry.published).length, 4, 'four reviewed notes should be public');
+assert.equal(notes.filter((entry) => entry.published).length, 5, 'five reviewed notes should be public');
 assert.ok(fs.existsSync(path.join(content, 'notes/historical-universe.mdx')));
 assert.ok(fs.existsSync(path.join(content, 'notes/nmr-thermodynamic-inference.mdx')));
 console.log(`Publication metadata checked for ${entries.length} content entries.`);
