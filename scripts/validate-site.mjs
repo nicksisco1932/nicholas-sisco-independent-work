@@ -17,8 +17,8 @@ function walk(dir) {
   }
 }
 walk(dist);
-assert.equal(htmlFiles.length, 100, `expected 100 HTML routes, found ${htmlFiles.length}`);
-const expected = ['historical-universe.html', 'nmr-thermodynamic-inference.html', 'problem-of-evil.html', 'the-moment-is-over.html', 'sci-fi-novels.html'];
+assert.equal(htmlFiles.length, 101, `expected 101 HTML routes, found ${htmlFiles.length}`);
+const expected = ['historical-universe.html', 'nmr-thermodynamic-inference.html', 'problem-of-evil.html', 'the-moment-is-over.html', 'sci-fi-novels.html', 'the-wisdom-we-give-away.html'];
 for (const route of expected) assert.ok(fs.existsSync(path.join(dist, route)), `missing ${route}`);
 const problems = [];
 const built = new Map();
