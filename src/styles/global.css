@@ -1,7 +1,6 @@
 @import "./tokens.css";
 
-/* Base reset + typography. No images anywhere on the site (confirmed
- * text-only); the pastel theme carries the visual identity. */
+/* Shared type and accessible controls for the read-only archive. */
 
 *, *::before, *::after { box-sizing: border-box; }
 
@@ -9,6 +8,7 @@
 
 html {
   -webkit-text-size-adjust: 100%;
+  scroll-padding-top: 1.5rem;
 }
 
 body {
@@ -20,17 +20,7 @@ body {
   line-height: 1.7;
 }
 
-/* Soft pastel wash at the top of the page */
-body::before {
-  content: "";
-  display: block;
-  height: 6px;
-  background: linear-gradient(90deg,
-    var(--pastel-rose), var(--pastel-sand), var(--pastel-sage),
-    var(--pastel-sky), var(--pastel-lilac));
-}
-
-main.wide { max-width: 76rem; }
+main.wide { max-width: var(--shell-maxw); }
 
 main {
   max-width: var(--maxw);
@@ -50,6 +40,8 @@ h2 { font-size: 1.45rem; margin: 2.25rem 0 0.75rem; }
 h3 { font-size: 1.15rem; margin: 1.75rem 0 0.5rem; }
 
 p { margin: 0 0 1rem; }
+
+h1, h2, h3, p, a { overflow-wrap: break-word; }
 
 a { color: var(--accent); text-decoration-thickness: 1px; text-underline-offset: 2px; }
 a:hover { color: var(--accent-ink); }
@@ -122,12 +114,10 @@ th { background: var(--surface-tint); font-family: var(--font-head); }
   padding: 0.5rem 1rem;
   z-index: 100;
 }
-.skip-link:focus { left: 0; }
+.skip-link:focus { left: 0; color: #fff; }
 
 @media (max-width: 560px) {
   body { font-size: 1rem; }
   h1 { font-size: 1.65rem; }
-  main.wide { max-width: 76rem; }
-
-main { padding: 1.25rem 1rem 3rem; }
+  main { padding: 1.25rem 1rem 3rem; }
 }

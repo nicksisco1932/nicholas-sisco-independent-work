@@ -597,12 +597,18 @@
   ],
   "index.html": [
     "about",
+    "about-title",
+    "archive-title",
+    "collections-title",
     "main",
     "methods",
     "notes",
+    "notes-title",
     "physiology",
     "projects",
-    "writing"
+    "work-title",
+    "writing",
+    "writing-title"
   ],
   "literature.html": [
     "appraisal-foundation",
