@@ -1,25 +1,27 @@
 import assert from 'node:assert/strict';
 import fs from 'node:fs';
 import path from 'node:path';
-import { fileURLToPath } from 'node:url';
-import { isPublished } from '../src/lib/publication.mjs';
+import { readEntries, contentDir } from './lib/content-inventory.mjs';
 
-const root = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '..');
-const content = path.join(root, 'src/content');
-const entries = [];
-for (const collection of fs.readdirSync(content, { withFileTypes: true }).filter((x) => x.isDirectory())) {
-  for (const file of fs.readdirSync(path.join(content, collection.name)).filter((x) => x.endsWith('.mdx'))) {
-    const text = fs.readFileSync(path.join(content, collection.name, file), 'utf8');
-    const frontmatter = text.split(/^---\s*$/m)[1] ?? '';
-    const published = /^published:\s*true\s*$/m.test(frontmatter);
-    const status = /^status:\s*["']?([^\r\n"']+)/m.exec(frontmatter)?.[1]?.trim() ?? '';
-    assert.doesNotThrow(() => isPublished({ id: `${collection.name}/${file}`, data: { published, status } }), `${collection.name}/${file}`);
-    entries.push({ collection: collection.name, file, published });
+// readEntries() is fail-closed: any entry with a published:true + status:draft
+// conflict throws here, identifying the entry.
+const entries = readEntries();
+
+// Route-namespace collision check: projects and notes share the root /<slug>.html
+// namespace via src/pages/[slug].astro. A duplicate slug would silently clobber a page.
+const rootSlugs = new Map();
+for (const entry of entries.filter((e) => e.collection === 'projects' || e.collection === 'notes')) {
+  if (rootSlugs.has(entry.slug)) {
+    assert.fail(`duplicate root slug '${entry.slug}': ${rootSlugs.get(entry.slug)} and ${entry.collection}/${entry.file}`);
   }
+  rootSlugs.set(entry.slug, `${entry.collection}/${entry.file}`);
 }
-assert.equal(entries.length, 83, `expected 83 markdown entries, saw ${entries.length}`);
-const notes = entries.filter((entry) => entry.collection === 'notes');
-assert.equal(notes.filter((entry) => entry.published).length, 5, 'five reviewed notes should be public');
-assert.ok(fs.existsSync(path.join(content, 'notes/historical-universe.mdx')));
-assert.ok(fs.existsSync(path.join(content, 'notes/nmr-thermodynamic-inference.mdx')));
-console.log(`Publication metadata checked for ${entries.length} content entries.`);
+
+const publishedNotes = entries.filter((entry) => entry.collection === 'notes' && entry.published);
+assert.ok(publishedNotes.length > 0, 'expected at least one published note');
+
+// Canonical spot checks: stable anchors, not counts — these never break on additions.
+assert.ok(fs.existsSync(path.join(contentDir, 'notes/historical-universe.mdx')));
+assert.ok(fs.existsSync(path.join(contentDir, 'notes/nmr-thermodynamic-inference.mdx')));
+
+console.log(`Publication metadata checked for ${entries.length} content entries (${publishedNotes.length} published notes).`);

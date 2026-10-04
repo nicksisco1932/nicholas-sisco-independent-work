@@ -3,6 +3,7 @@ import fs from 'node:fs';
 import path from 'node:path';
 import { fileURLToPath } from 'node:url';
 import { parse } from 'parse5';
+import { readEntries, expectedRoute } from './lib/content-inventory.mjs';
 
 const root = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '..');
 const dist = path.join(root, 'dist');
@@ -17,9 +18,16 @@ function walk(dir) {
   }
 }
 walk(dist);
-assert.equal(htmlFiles.length, 101, `expected 101 HTML routes, found ${htmlFiles.length}`);
-const expected = ['historical-universe.html', 'nmr-thermodynamic-inference.html', 'problem-of-evil.html', 'the-moment-is-over.html', 'sci-fi-novels.html', 'the-wisdom-we-give-away.html'];
-for (const route of expected) assert.ok(fs.existsSync(path.join(dist, route)), `missing ${route}`);
+// Every published content entry must have produced its route. This is derived
+// from the content tree, so publishing a new entry never requires a test change —
+// unlike the old hardcoded route count. Stronger than a count: a silently
+// dropped page fails here even when the total looks right.
+const unbuilt = [];
+for (const entry of readEntries().filter((e) => e.published)) {
+  const route = expectedRoute(entry);
+  if (!fs.existsSync(path.join(dist, route))) unbuilt.push(`${entry.collection}/${entry.file} -> ${route}`);
+}
+assert.deepEqual(unbuilt, [], `published entries with no built route:\n${unbuilt.join('\n')}`);
 const problems = [];
 const built = new Map();
 function attrs(node) { return Object.fromEntries((node.attrs ?? []).map(({ name, value }) => [name, value])); }
