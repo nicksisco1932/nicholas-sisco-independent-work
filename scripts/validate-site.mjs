@@ -3,6 +3,7 @@ import fs from 'node:fs';
 import path from 'node:path';
 import { fileURLToPath } from 'node:url';
 import { parse } from 'parse5';
+import { readEntries, expectedRoute } from './lib/content-inventory.mjs';
 
 const root = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '..');
 const dist = path.join(root, 'dist');
@@ -29,6 +30,16 @@ for (const file of assetFiles) {
   assert.ok(fs.statSync(file).size <= 25 * 1024 * 1024, 'Cloudflare Workers Static Assets allows files up to 25 MiB: ' + path.relative(dist, file));
 }
 const inventory = JSON.parse(fs.readFileSync(path.join(root, 'scripts/site-routes.json'), 'utf8'));
+// Every published content entry must have produced its route. This is derived
+// from the content tree, so publishing a new entry never requires a test change —
+// unlike the old hardcoded route count. Stronger than a count: a silently
+// dropped page fails here even when the total looks right.
+const unbuilt = [];
+for (const entry of readEntries().filter((e) => e.published)) {
+  const route = expectedRoute(entry);
+  if (!fs.existsSync(path.join(dist, route))) unbuilt.push(`${entry.collection}/${entry.file} -> ${route}`);
+}
+assert.deepEqual(unbuilt, [], `published entries with no built route:\n${unbuilt.join('\n')}`);
 const problems = [];
 const built = new Map();
 const actualInventory = {};
