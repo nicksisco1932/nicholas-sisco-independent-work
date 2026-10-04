@@ -1,37 +1,200 @@
 ---
-/* Homepage.
- *
- * NOTE: homepage copy and section order were not recovered from the previous
- * site (inventory §8). What is confirmed: the positioning intent (independent
- * scientist-builder across biophysics, imaging, computation, quantitative
- * systems, and scientific tooling), the three flagship project summaries
- * (computational photography = bounded text only, no images/repo links), and
- * a notes listing. Everything below is restrained scaffolding built only
- * from confirmed facts — verify against the live site before finalizing. */
 import { getCollection } from 'astro:content';
 import BaseLayout from '../layouts/BaseLayout.astro';
 import { isPublished } from '../lib/publication.mjs';
 
-const notes = await getCollection('notes', isPublished);
-
-// Base-aware links for the GitHub Pages project subpath.
+const notes = (await getCollection('notes', isPublished)).sort((a, b) =>
+  (b.data.last_updated ?? b.data.date).localeCompare(a.data.last_updated ?? a.data.date)
+  || a.data.title.localeCompare(b.data.title),
+);
+const projects = await getCollection('projects', isPublished);
+const featuredProjects = ['literature', 'odgs'].flatMap((slug) =>
+  projects.filter((project) => project.id.replace(/\.mdx$/, '') === slug),
+);
+const writing = notes.filter((note) => note.data.tags.includes('philosophy'));
+const researchNotes = notes.filter((note) => !note.data.tags.includes('philosophy'));
 const _base = import.meta.env.BASE_URL;
 const base = _base.endsWith('/') ? _base : _base + '/';
+const entryUrl = (id: string) => `${base}${id.replace(/\.mdx$/, '')}.html`;
+const collections = [
+  { title: 'Research & Methods', description: 'Source-backed notes, evidence methods, quantitative research specifications.', href: '#notes' },
+  { title: 'Software & Tools', description: 'Independently owned utilities, workbenches, literature tooling, computational photography systems.', href: '#projects' },
+  { title: 'Physiology & Atlas', description: 'Molecular Physiology of Training, Forged Fitness, and the mechanistic atlas.', href: '#physiology' },
+  { title: 'Writing', description: 'Essays, synthesis, philosophy, and fiction already approved for publication.', href: '#writing' },
+];
 ---
-<BaseLayout title="Nicholas Sisco — Independent Research & Engineering" description="Independent research and engineering across scientific software, physiology, evidence methods, and creative work." ogType="website">
-  <h1>Nicholas Sisco — Independent Research &amp; Engineering</h1>
-  <p class="lead">Independent scientist-builder working across biophysics, imaging, computation, quantitative systems, and scientific tooling. This site is a durable public record of independent work: evidence over performance, trajectory over snapshot.</p>
-  <section id="projects"><h2 class="section-label">Projects</h2>
-    <h3><a href={base + 'literature.html'}>Scientific Literature Intelligence Agent</a></h3><p>A local literature workflow that makes query approval, retrieval, source snapshots, normalization, deduplication, and later appraisal inspectable — with provenance-first records and human-authored appraisal.</p><p class="status-line"><strong>Status:</strong> Active development · Prototype</p>
-    <h3><a href={base + 'odgs.html'}>Operational-Decay &amp; Growth Simulator (ODGS)</a></h3><p>A draft specification package asking whether operating productivity adds predictive information beyond conventional financial and market variables — specification and source-feasibility stage only, no model or result claimed.</p><p class="status-line"><strong>Status:</strong> Draft specification package · Concept / specification</p>
-    <article class="card"><h3>Computational Photography &amp; Image Registration</h3><p>Develop a defensible, reusable computational-photography pipeline that can combine heterogeneous image stacks while preserving evidence, uncertainty, and the option to abstain when alignment or fusion is not trustworthy.</p><p>Real photographic stacks often differ in field of view, pose, focal point, exposure, and local image quality. A useful reconstruction system should not merely produce an attractive composite; it should know what evidence supports the result.</p><p class="fine">Bounded text summary only — no images, raw data, or repository links are published here until rights and a clean evidence destination are established.</p></article>
-  </section>
-  <section id="physiology"><h2 class="section-label">Physiology</h2><h3><a href={base + 'forged-fitness.html'}>Forged Fitness</a></h3><p>Learn the science of training, nutrition and recovery — and turn it into decisions you can use. An open course: 12 weeks, 36 lessons.</p><h3><a href={base + 'molecular-physiology.html'}>Molecular Physiology of Training</a></h3><p>A mechanistic atlas of how training, nutrition, and energetic state become biological adaptation.</p></section>
-  <section id="notes"><h2 class="section-label">Research notes</h2>{notes.map((n) => <article class="card"><h3><a href={base + n.id.replace(/\.mdx$/, '') + '.html'}>{n.data.title}</a></h3><p>{n.data.description}</p><p class="status-line"><strong>Status:</strong> {n.data.status} · {n.data.maturity}</p></article>)}</section>
-  <section id="methods"><h2 class="section-label">Methods</h2><p>Evidence over performance. Trajectory over snapshot.</p><p>Research notes separate questions, evidence, inference, limitations, and unresolved decisions. Project claims stay bounded by the available sources, rights, and implementation state.</p></section>
-  <section id="writing"><h2 class="section-label">Writing</h2><ul><li><a href={base + 'problem-of-evil.html'}>The Problem of Evil</a> — philosophy of religion</li><li><a href={base + 'the-moment-is-over.html'}>The Moment Is Over</a> — short story</li></ul><p><a href={base + 'sci-fi-novels.html'}>Science fiction novels</a></p></section>
-  <section id="about"><h2 class="section-label">About</h2><p>Independent research and engineering, with a focus on careful evidence, transparent methods, and useful tools.</p><p>Contact details are not currently published.</p></section>
+<BaseLayout title="Nicholas Sisco — Independent Research & Engineering" description="Independent research and engineering across scientific software, physiology, evidence methods, and creative work." ogType="website" wide>
+  <div class="archive">
+    <section class="hero" aria-labelledby="archive-title">
+      <div class="hero-copy">
+        <p class="kicker">ARCHIVE OF INDEPENDENT WORK</p>
+        <h1 id="archive-title">A working archive of science, tools, systems, and ideas.</h1>
+        <p class="lead">Explore projects, essays, research threads, and practical systems spanning scientific software, molecular physiology, computational imaging, quantitative methods, and independent technical work.</p>
+        <div class="actions">
+          <a class="primary-action" href="#projects">Explore the work <span aria-hidden="true">↗</span></a>
+          <a href={base + 'molecular-physiology.html'}>Browse the atlas <span aria-hidden="true">→</span></a>
+        </div>
+      </div>
+      <figure class="technical-field">
+        <svg viewBox="0 0 600 520" fill="none" aria-hidden="true" focusable="false">
+          <g class="field-grid">
+            {[100, 200, 300, 400, 500].map((x) => <path d={`M ${x} 40 V 480`} />)}
+            {[80, 160, 240, 320, 400, 480].map((y) => <path d={`M 40 ${y} H 560`} />)}
+          </g>
+          <g class="field-plane">
+            <path d="M 72 300 L 282 104 L 534 238 L 324 434 Z" />
+            <path d="M 72 324 L 282 128 L 534 262 L 324 458 Z" />
+            <path d="M 72 348 L 282 152 L 534 286 L 324 482 Z" />
+            <path d="M 72 300 V 348 M 282 104 V 152 M 534 238 V 286 M 324 434 V 482" />
+          </g>
+          <g class="field-rings" transform="rotate(-27 303 269)">
+            <ellipse cx="303" cy="269" rx="186" ry="108" />
+            <ellipse cx="303" cy="269" rx="147" ry="85" />
+            <ellipse cx="303" cy="269" rx="108" ry="62" />
+            <ellipse cx="303" cy="269" rx="69" ry="39" />
+          </g>
+          <path class="field-axis" d="M 303 48 V 466 M 114 367 L 492 171" />
+          <circle cx="303" cy="269" r="5" fill="currentColor" />
+        </svg>
+        <figcaption>Abstract geometric study <span>Decorative, not scientific evidence</span></figcaption>
+      </figure>
+    </section>
+
+    <section class="archive-section" aria-labelledby="collections-title">
+      <div class="section-heading">
+        <h2 id="collections-title">Collections</h2>
+        <p>Four areas. A wider conversation.</p>
+      </div>
+      <div class="collections">
+        {collections.map((collection) => <article>
+          <h3><a href={collection.href}>{collection.title} <span aria-hidden="true">↗</span></a></h3>
+          <p>{collection.description}</p>
+        </article>)}
+      </div>
+    </section>
+
+    <section id="projects" class="archive-section" aria-labelledby="work-title">
+      <div class="section-heading"><h2 id="work-title">Featured work</h2></div>
+      <div class="work-list">
+        {featuredProjects.map((project) => <article class="work-row">
+          <h3><a href={entryUrl(project.id)}>{project.data.title}</a></h3>
+          <div><p>{project.data.description}</p><p class="status-line"><strong>Status:</strong> {project.data.status}{project.data.maturity && ` · ${project.data.maturity}`}</p></div>
+        </article>)}
+        <article id="physiology" class="work-row">
+          <h3><a href={base + 'molecular-physiology.html'}>Molecular Physiology of Training</a></h3>
+          <div><p>A mechanistic atlas of how training, nutrition, and energetic state become biological adaptation.</p><p><a href={base + 'forged-fitness.html'}>Forged Fitness</a> — Learn the science of training, nutrition and recovery — and turn it into decisions you can use. An open course: 12 weeks, 36 lessons.</p></div>
+        </article>
+        <article class="work-row">
+          <h3>Computational Photography &amp; Image Registration</h3>
+          <div><p>Develop a defensible, reusable computational-photography pipeline that can combine heterogeneous image stacks while preserving evidence, uncertainty, and the option to abstain when alignment or fusion is not trustworthy.</p><p>Real photographic stacks often differ in field of view, pose, focal point, exposure, and local image quality. A useful reconstruction system should not merely produce an attractive composite; it should know what evidence supports the result.</p><p class="fine">Bounded text summary only — no images, raw data, or repository links are published here until rights and a clean evidence destination are established.</p></div>
+        </article>
+      </div>
+    </section>
+
+    <div class="reading-sections">
+      <section id="notes" class="archive-section" aria-labelledby="notes-title">
+        <div class="section-heading"><h2 id="notes-title">Recent research notes</h2></div>
+        {researchNotes.map((note) => <article class="reading-row">
+          <h3><a href={entryUrl(note.id)}>{note.data.title}</a></h3>
+          <p>{note.data.description}</p>
+          <p class="status-line"><strong>Status:</strong> {note.data.status}{note.data.maturity && ` · ${note.data.maturity}`}</p>
+        </article>)}
+      </section>
+      <section id="writing" class="archive-section" aria-labelledby="writing-title">
+        <div class="section-heading"><h2 id="writing-title">Writing</h2></div>
+        {writing.map((note) => <article class="reading-row">
+          <h3><a href={entryUrl(note.id)}>{note.data.title}</a></h3>
+          <p>{note.data.description}</p>
+          <p class="status-line"><strong>Status:</strong> {note.data.status}{note.data.maturity && ` · ${note.data.maturity}`}</p>
+        </article>)}
+        <ul class="writing-links">
+          <li><a href={base + 'problem-of-evil.html'}>The Problem of Evil</a> <span>Philosophy of religion</span></li>
+          <li><a href={base + 'the-moment-is-over.html'}>The Moment Is Over</a> <span>Short story</span></li>
+          <li><a href={base + 'sci-fi-novels.html'}>Science fiction novels</a></li>
+        </ul>
+      </section>
+    </div>
+
+    <section id="about" class="archive-section about" aria-labelledby="about-title">
+      <h2 id="about-title">About</h2>
+      <div><p>Independent research and engineering, with a focus on careful evidence, transparent methods, and useful tools.</p>
+        <div id="methods"><p class="principle">Evidence over performance. Trajectory over snapshot.</p><p>Research notes separate questions, evidence, inference, limitations, and unresolved decisions. Project claims stay bounded by the available sources, rights, and implementation state.</p></div>
+        <p class="fine">Contact details are not currently published.</p>
+      </div>
+    </section>
+  </div>
 </BaseLayout>
 <style>
-  .fine { color: var(--muted); font-size: 0.9rem; }
+  .archive { padding-top: 1.75rem; }
+  .archive a { color: var(--ink); }
+  .archive a:hover { color: var(--accent); }
+  .hero { display: grid; grid-template-columns: 1fr 1fr; gap: 3rem; align-items: center; padding: 1rem 0 5.5rem; }
+  .hero-copy { min-width: 0; }
+  .kicker { font-size: .75rem; font-weight: 600; letter-spacing: .16em; color: var(--muted); margin-bottom: 1.6rem; }
+  h1 { font-size: clamp(2.65rem, 4.5vw, 4.35rem); line-height: 1.08; font-weight: 400; letter-spacing: -.04em; margin: 0 0 1.75rem; text-wrap: balance; }
+  .lead { max-width: 38rem; font-size: 1.0625rem; line-height: 1.8; color: var(--muted); }
+  .actions { display: flex; flex-wrap: wrap; align-items: center; gap: 1rem 1.8rem; margin-top: 2rem; font-size: 1rem; }
+  .actions a { padding: .7rem 0; }
+  .actions .primary-action { display: inline-flex; align-items: center; justify-content: space-between; gap: 1.5rem; border: 1px solid var(--ink); padding: .7rem 1rem; text-decoration: none; }
+  .primary-action:hover { background: var(--surface-tint); }
+  .technical-field { margin: 0; min-width: 0; color: #677266; }
+  .technical-field svg { display: block; width: 100%; height: auto; }
+  .field-grid { stroke: var(--line); stroke-width: .7; }
+  .field-plane { stroke: #a3aca0; stroke-width: 1; }
+  .field-rings { stroke: currentColor; stroke-width: 1.4; }
+  .field-axis { stroke: currentColor; stroke-width: 1; stroke-dasharray: 3 6; }
+  figcaption { display: flex; justify-content: space-between; flex-wrap: wrap; gap: .3rem 1rem; padding-top: .8rem; border-top: 1px solid var(--line); color: var(--muted); font-size: .75rem; }
+  .archive-section { border-top: 1px solid var(--line); padding: 2rem 0 3.5rem; scroll-margin-top: 1.5rem; }
+  .section-heading { display: flex; justify-content: space-between; align-items: baseline; flex-wrap: wrap; gap: .5rem 2rem; margin-bottom: 1.8rem; }
+  h2 { font-size: 2rem; font-weight: 400; margin: 0; }
+  .section-heading p { color: var(--muted); margin: 0; font-size: 1rem; }
+  .collections { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 2rem; }
+  .collections h3 { font-size: 1.25rem; margin: 0 0 .8rem; }
+  .collections a { text-decoration: none; }
+  .collections a:hover { text-decoration: underline; }
+  .collections p { color: var(--muted); margin: 0; font-size: 1rem; }
+  .collections h3 span { font-family: var(--font-body); font-size: .9rem; }
+  .work-row { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1.8fr); gap: 1rem 4rem; padding: 1.5rem 0; border-top: 1px solid var(--line); scroll-margin-top: 1.5rem; }
+  .work-row h3 { font-size: 1.45rem; margin: 0; max-width: 25rem; }
+  .work-row h3 a, .reading-row h3 a { text-decoration: none; }
+  .work-row h3 a:hover, .reading-row h3 a:hover { text-decoration: underline; }
+  .work-row p:last-child { margin-bottom: 0; }
+  .work-row p { max-width: 47rem; }
+  .fine, .status-line { font-size: .9rem; color: var(--muted); }
+  .status-line { display: block; line-height: 1.6; }
+  .reading-sections { display: grid; grid-template-columns: 1fr 1fr; gap: 4rem; }
+  .reading-row { padding: 1.5rem 0; border-top: 1px solid var(--line); }
+  .reading-row h3 { font-size: 1.3rem; margin: 0 0 .75rem; }
+  .reading-row p { margin-bottom: .75rem; }
+  .reading-row p:last-child { margin-bottom: 0; }
+  .writing-links { list-style: none; padding: 1.25rem 0 0; margin: 0; border-top: 1px solid var(--line); }
+  .writing-links li { margin: 0 0 .85rem; }
+  .writing-links span { display: block; color: var(--muted); font-size: .9rem; }
+  .about { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1.8fr); gap: 1rem 4rem; padding-bottom: 0; }
+  .principle { font-family: var(--font-head); font-size: 1.25rem; }
+  @media (max-width: 1000px) {
+    .hero { gap: 1.5rem; }
+    .collections { grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 2rem 3rem; }
+    .work-row, .about { gap: 1rem 2rem; }
+    .reading-sections { gap: 2.5rem; }
+  }
+  @media (max-width: 760px) {
+    .archive { padding-top: 1rem; }
+    .hero { grid-template-columns: 1fr; gap: 2rem; padding-bottom: 3rem; }
+    .hero-copy { max-width: 38rem; }
+    h1 { font-size: clamp(2.65rem, 7vw, 3.8rem); }
+    .technical-field { max-width: 34rem; width: 100%; justify-self: center; }
+    .reading-sections { grid-template-columns: 1fr; gap: 0; }
+    .archive-section { padding-bottom: 2.5rem; }
+    .work-row, .about { grid-template-columns: 1fr; }
+    .work-row h3 { max-width: none; }
+  }
+  @media (max-width: 560px) {
+    .kicker { font-size: .7rem; letter-spacing: .12em; }
+    .collections { grid-template-columns: 1fr; gap: 1.5rem; }
+    .collections article + article { border-top: 1px solid var(--line); padding-top: 1.5rem; }
+    .technical-field { margin-top: -.5rem; }
+    h2 { font-size: 1.8rem; }
+    .section-heading { margin-bottom: 1.5rem; }
+  }
 </style>

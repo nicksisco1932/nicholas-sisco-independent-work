@@ -1,42 +1,28 @@
-/* Design tokens — soft pastel theme.
- *
- * NOTE: the exact palette, fonts, and spacing of the previous site were never
- * recovered (inventory §8: "Live HTML/CSS" UNKNOWN). These tokens are a
- * tasteful soft-pastel reconstruction chosen to match the documented theme
- * ("soft pastel, text-only, responsive"). Adjust freely — every visual choice
- * on the site derives from the tokens below.
- */
-
+/* Shared archive palette. Keep long-form typography independently constrained. */
 :root {
-  /* Surfaces */
-  --bg: #faf7f1;          /* warm ivory page background */
-  --surface: #fffdf8;     /* cards / raised panels */
-  --surface-tint: #f4eee2;/* subtle tinted panels */
+  --bg: #f7f6f2;
+  --surface: #fcfbf8;
+  --surface-tint: #efeee9;
+  --ink: #242623;
+  --muted: #5c6059;
+  --faint: #5c6059;
+  --line: #d3d5cc;
 
-  /* Text */
-  --ink: #35322c;         /* primary text */
-  --muted: #665f55;       /* secondary text, accessible on ivory */
-  --faint: #665f55;       /* tertiary labels remain readable */
+  --accent: #37483e;
+  --accent-soft: #e9ece5;
+  --accent-ink: #242f28;
 
-  /* Lines & borders */
-  --line: #e8dfd1;
+  /* Preserve existing badge/callout tokens with quiet, neutral surfaces. */
+  --pastel-rose: #eeebe7;
+  --pastel-sage: #e6ebe2;
+  --pastel-sky: #e7eae8;
+  --pastel-lilac: #eae8e9;
+  --pastel-sand: #eeeae1;
+  --pastel-gray: #e9e9e3;
 
-  /* Accent (dusty blue) */
-  --accent: #4f6b87;
-  --accent-soft: #dfe9f2;
-  --accent-ink: #3c5469;
-
-  /* Pastel family — used for maturity badges, callouts, section washes */
-  --pastel-rose: #f6dfe1;
-  --pastel-sage: #e2ebda;
-  --pastel-sky: #dde8f2;
-  --pastel-lilac: #e7e1f3;
-  --pastel-sand: #f3e8d3;
-  --pastel-gray: #e9e4d9;
-
-  /* Shape & type */
-  --radius: 10px;
+  --radius: 3px;
   --maxw: 46rem;
+  --shell-maxw: 76rem;
   --font-body: system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
   --font-head: Georgia, "Times New Roman", serif;
   --font-mono: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
