@@ -1,12 +1,6 @@
----
-/* SiteFooter.
- * NOTE: footer content was not recovered from the previous site
- * (inventory §8). Minimal reconstruction: identity line + read-only notice
- * (the site is confirmed read-only with no public participation). */
----
 <footer class="site-footer">
   <div class="inner">
-    <p><strong>Nicholas Sisco — Independent Research &amp; Engineering</strong></p>
+    <p class="identity"><strong>Nicholas J. Sisco</strong><br />Independent Research &amp; Engineering</p>
     <p class="fine">
       A durable public record of independent scientific and technical work.
       Read-only: no comments, accounts, or submissions.
@@ -15,16 +9,11 @@
   </div>
 </footer>
 <style>
-  .site-footer {
-    border-top: 1px solid var(--line);
-    background: var(--surface-tint);
-    margin-top: 3rem;
-  }
-  .inner {
-    max-width: var(--maxw);
-    margin: 0 auto;
-    padding: 1.75rem 1.25rem;
-  }
-  .inner p { margin: 0 0 0.4rem; }
-  .fine { color: var(--muted); font-size: 0.88rem; }
+  .site-footer { border-top: 1px solid var(--line); margin-top: 2rem; }
+  .inner { max-width: var(--shell-maxw); margin: 0 auto; padding: 2rem 1.25rem 3rem; display: flex; justify-content: space-between; gap: 1.5rem 4rem; }
+  .inner p { margin: 0; }
+  .identity { font-size: .9rem; color: var(--muted); }
+  .identity strong { font-family: var(--font-head); font-size: 1.2rem; color: var(--ink); }
+  .fine { max-width: 38rem; color: var(--muted); font-size: .9rem; }
+  @media (max-width: 700px) { .inner { flex-direction: column; padding: 2rem 1rem; } }
 </style>
