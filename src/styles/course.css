@@ -86,6 +86,8 @@
 .course .progress-list { list-style: none; padding: 0; }
 .course .progress-list li { display: flex; justify-content: space-between; gap: 16px; border-bottom: 1px solid var(--line); padding: 14px 0; }
 .course .progress-meter { width: 100%; height: 15px; accent-color: var(--purple); }
+.course .progress-transfer label { min-width: 0; max-width: 100%; }
+.course .progress-transfer input[type=file] { display: block; width: 100%; max-width: 100%; box-sizing: border-box; }
 .course .reference-list li { margin-bottom: 18px; font-size: 14px; }
 .course .exercise { padding: 25px 0; border-top: 1px solid var(--line); }
 .course [hidden] { display: none !important; }
