@@ -32,7 +32,7 @@ const collections = [
         <h1 id="archive-title">A working archive of science, tools, systems, and ideas.</h1>
         <p class="lead">Explore projects, essays, research threads, and practical systems spanning scientific software, molecular physiology, computational imaging, quantitative methods, and independent technical work.</p>
         <div class="actions">
-          <a class="primary-action" href="#projects">Explore the work <span aria-hidden="true">↗</span></a>
+          <a class="primary-action" href="#projects">Explore the work <span aria-hidden="true">→</span></a>
           <a href={base + 'molecular-physiology.html'}>Browse the atlas <span aria-hidden="true">→</span></a>
         </div>
       </div>
@@ -68,7 +68,7 @@ const collections = [
       </div>
       <div class="collections">
         {collections.map((collection) => <article>
-          <h3><a href={collection.href}>{collection.title} <span aria-hidden="true">↗</span></a></h3>
+          <h3><a href={collection.href}>{collection.title} <span aria-hidden="true">→</span></a></h3>
           <p>{collection.description}</p>
         </article>)}
       </div>

@@ -1,35 +1,40 @@
-# Independent Work Portfolio — Website Source of Truth
+# Independent Work Portfolio
 
-Static site for **Nicholas Sisco — Independent Research & Engineering**, built with Astro 7 and MDX. The reading experience is static HTML; JavaScript is limited to optional course self-checks and local progress controls. No image assets are published.
+A public, evidence-led working archive for **Nicholas J. Sisco**, built with **Astro 7, MDX, and content collections**. The design uses a warm off-white surface, restrained near-monochrome colors, serif display headings, hairline rules, and an abstract decorative SVG. Article reading widths remain narrower than the homepage and collection pages.
 
-This repository is the permanent source for the public site. Notion remains the research system of record; the site is a curated synthesis layer, not a live mirror or news feed.
+## What belongs where
 
-## Local development
+- **Notion:** research system of record and publication/evidence review.
+- **GitHub:** canonical website source, version history, tests, and reviewable changes.
+- **Astro:** static HTML, CSS, and published content collections. Existing course self-checks and browser-local progress are the limited client-side interactions.
+- **Cloudflare Workers Static Assets:** intended production host. No application backend, database, authentication, payments, or SSR adapter is required.
+- **Owner:** approves design, the permanent domain, and each release. Coordination does not grant publication permission. Commercial Systeme.io integration is deferred.
 
-Use Node 24 (see `.nvmrc`).
+The site is read-only: no accounts, comments, public submissions, or server-side progress storage. Course controls work locally on the reader's device.
+
+## Work locally
+
+Use **Node 24**, as specified in `.nvmrc`, and the committed npm lockfile.
 
 ```sh
 npm ci
-npm run dev
-npm run validate # Astro check, tests, build, route/link/fragment scan
-npm run preview
+npm run dev -- --host 127.0.0.1
+npm run validate
+npm run preview -- --host 127.0.0.1
 ```
+
+`validate` runs Astro check, tests, a production build, and route/fragment/link/publication checks. It does not establish browser, domain, or release acceptance. The default build uses the GitHub Pages project prefix; a Cloudflare-root build needs explicit configuration. See [local preview and both validation configurations](TECHNICAL_SUPORT.md#preview-and-validate).
 
 ## Content and publication
 
-Long-form content lives in `src/content/`. Each entry requires `published: true` before routes, listings, or course exports include it. Entries marked draft cannot be published accidentally: the shared publication gate rejects contradictory metadata. Draft entries remain in source control but are excluded from the built site.
+Long-form content lives in `src/content/`. The shared [publication gate](src/lib/publication.mjs) only includes entries with `published: true` and rejects contradictory exact `status: draft` metadata. Existing maturity, evidence, source, and rights restrictions remain authoritative. A published specification is not an implemented result.
 
-Add reviewed MDX content in `src/content/notes/` or `src/content/projects/`, follow the front-matter schema in `src/content.config.ts`, and preserve source attribution and limitations. Use `npm run validate` before proposing the change.
+Preserve published `.html` routes and fragments. The [reviewed route inventory](scripts/site-routes.json) must not be regenerated simply to silence a failure. New or changed content needs source, claim, rights, and route review before publication. The collection gate does not control directly authored pages or `public/` assets; review those explicitly too. Only independent, publication-cleared work belongs here; no employer-derived, patient/clinical, or rights-uncleared material.
 
-## URLs and hosting
+## Review and release
 
-Cloudflare Workers Static Assets serves the static dist build. GitHub remains the canonical repository and review layer. The build preserves .html routes and existing fragments. Wrangler disables automatic HTML URL rewrites, serves the homepage at /, and redirects the legacy project prefix to the new domain root. No Astro SSR adapter, application Worker code, or database is required.
+Propose changes on a branch and open a reviewable PR. Merging, production deployment, and replacing the legacy Pages site are separate decisions. Ordinary pushes and PR validation do **not** deploy.
 
-For production, set the GitHub Actions repository variable PUBLIC_SITE_URL to the owner-controlled HTTPS domain with no path. Configure CLOUDFLARE_API_TOKEN and CLOUDFLARE_ACCOUNT_ID as GitHub Actions secrets. Configure the domain as a Worker custom domain in an active Cloudflare zone before production deployment. Wrangler serves the root base path in production; local validation defaults to the GitHub Pages project prefix.
+The existing [Cloudflare production workflow](.github/workflows/deploy-cloudflare.yml) and [Pages migration workflow](.github/workflows/publish-legacy-migration.yml) are manual. Each requires an exact full main-branch commit SHA, its own confirmation, and the owner's approval for that action and destination. An unresolved domain does not block local readiness work.
 
-Ordinary pushes and validation do not deploy to either host. The Cloudflare production workflow requires a full main commit SHA and an explicit deployment confirmation. The separate Pages migration workflow is manual and requires a separate confirmation. It replaces old pages with move notices and keeps the course-progress export page. Course pages wait for an explicit continue so readers can first export browser-local progress. Use it only after the Cloudflare production site passes live route checks.
-
-The old github.io origin cannot issue server-side redirects. Its migration notices provide canonical destinations and browser redirects that retain query strings and fragments; these are not HTTP 301 responses. To roll back Cloudflare, select a previously accepted version in the Worker deployments dashboard and record both revisions in the release notes. Course progress remains in browser storage: export a local JSON file on the old origin and import it on the new origin. Only known lesson IDs with matching content versions are restored. No progress is sent to a server.
-## Design and scope
-
-The site keeps the approved warm ivory and dusty-blue direction, readable contrast, and responsive text layouts. Contact remains unpublished until a destination is supplied. The science-fiction page is a minimal route with the recovered Amazon destination; it does not make availability, licensing, or download claims.
+[TECHNICAL_SUPORT.md](TECHNICAL_SUPORT.md) is the operating guide for previewing, validating, proposing, releasing, diagnosing, and recovering the site. It also records the Website v1 readiness gates and the remaining owner checks. Continue the existing [PR #6](https://github.com/nicksisco1932/nicholas-sisco-independent-work/pull/6) review record rather than creating a second readiness tracker.
