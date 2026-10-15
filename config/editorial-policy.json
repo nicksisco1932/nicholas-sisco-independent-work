@@ -1,0 +1,24 @@
+{
+  "schemaVersion": 1,
+  "enabled": false,
+  "repository": "nicksisco1932/nicholas-sisco-independent-work",
+  "repositoryId": 1396449686,
+  "buildWorkflowId": null,
+  "previewWorkflowId": null,
+  "buildWorkflowPath": ".github/workflows/build-editorial-candidate.yml",
+  "director": null,
+  "production": {
+    "accountId": null,
+    "worker": "nicholas-sisco-independent-work",
+    "origin": null,
+    "environment": "editorial-production"
+  },
+  "review": {
+    "worker": "nicholas-sisco-review",
+    "environment": "editorial-review",
+    "hostname": null,
+    "accessHost": null,
+    "bootstrapEvidence": null,
+    "historicalUrls": []
+  }
+}

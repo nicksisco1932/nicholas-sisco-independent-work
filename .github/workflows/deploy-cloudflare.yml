@@ -4,11 +4,27 @@ on:
   workflow_dispatch:
     inputs:
       commit_sha:
-        description: Full commit SHA to deploy (must already be on main)
+        description: Full current main SHA of the exact final candidate
+        required: true
+        type: string
+      candidate_run_id:
+        description: Exact successful main candidate build run ID
+        required: true
+        type: string
+      candidate_run_attempt:
+        description: Exact successful candidate build attempt
+        required: true
+        type: string
+      preview_receipt_artifact_id:
+        description: Exact immutable preview receipt artifact ID, including human browser evidence
+        required: true
+        type: string
+      browser_evidence_comment_id:
+        description: Director comment ID recording browser acceptance of the exact candidate, digest and preview version
         required: true
         type: string
       confirmation:
-        description: Select DEPLOY only after reviewing this release and authorizing production deployment
+        description: DEPLOY requests the separate Director environment approval for this frozen candidate
         required: true
         type: choice
         options: [DO_NOT_DEPLOY, DEPLOY]
@@ -17,43 +33,113 @@ on:
 permissions:
   contents: read
 
+# The lock includes preparation, approval waiting, and the final publication check.
 concurrency:
   group: cloudflare-production
   cancel-in-progress: false
 
 jobs:
-  deploy:
-    if: github.ref == 'refs/heads/main' && inputs.confirmation == 'DEPLOY'
+  inactive:
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v4
-        with:
-          ref: ${{ inputs.commit_sha }}
-          fetch-depth: 0
-      - name: Verify selected commit is on main
+      - name: Record disabled activation gate
+        run: echo 'Production promotion is disabled. This engineering PR does not authorize a deployment, credentials, environment configuration, or hosting activation.' >> "$GITHUB_STEP_SUMMARY"
+
+  prepare:
+    # Engineering-only PR: this literal guard is independent of existing repository secrets.
+    if: ${{ false }}
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    permissions:
+      contents: read
+      actions: read
+    outputs:
+      artifact_id: ${{ steps.frozen.outputs.artifact-id }}
+      artifact_digest: ${{ steps.frozen.outputs.artifact-digest }}
+    steps:
+      - name: Require exact main dispatch and pinned trusted checkout
         env:
-          COMMIT_SHA: ${{ inputs.commit_sha }}
+          EDITORIAL_TRUSTED_SHA: ${{ vars.EDITORIAL_TRUSTED_SHA }}
+          CONFIRMATION: ${{ inputs.confirmation }}
         run: |
-          [[ "$COMMIT_SHA" =~ ^[0-9a-f]{40}$ ]]
-          git fetch --no-tags origin main
-          git merge-base --is-ancestor "$COMMIT_SHA" origin/main
-      - uses: actions/setup-node@v4
+          [[ "$GITHUB_REF" == 'refs/heads/main' ]]
+          [[ "$CONFIRMATION" == 'DEPLOY' ]]
+          [[ "$GITHUB_RUN_ATTEMPT" == '1' ]]
+          [[ "$EDITORIAL_TRUSTED_SHA" =~ ^[0-9a-f]{40}$ ]]
+      - name: Check out trusted tooling only
+        uses: actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683 # v4.2.2
+        with:
+          ref: ${{ vars.EDITORIAL_TRUSTED_SHA }}
+          persist-credentials: false
+      - uses: actions/setup-node@49933ea5288caeca8642d1e84afbd3f7d6820020 # v4.4.0
         with:
           node-version: 24
-          cache: npm
-      - run: npm ci
-      - name: Require permanent production domain
+      - name: Freeze exact verified release summary without deployment credentials
         env:
-          PUBLIC_SITE_URL: ${{ vars.PUBLIC_SITE_URL }}
-        run: node scripts/check-production-origin.mjs
-      - name: Validate the exact release artifact
-        env:
-          PUBLIC_SITE_BASE: /
-          PUBLIC_SITE_URL: ${{ vars.PUBLIC_SITE_URL }}
-        run: npm run validate
-      - name: Deploy reviewed revision
-        uses: cloudflare/wrangler-action@v3
+          GH_TOKEN: ${{ github.token }}
+          EDITORIAL_TRUSTED_SHA: ${{ vars.EDITORIAL_TRUSTED_SHA }}
+          COMMIT_SHA: ${{ inputs.commit_sha }}
+          CANDIDATE_RUN_ID: ${{ inputs.candidate_run_id }}
+          CANDIDATE_RUN_ATTEMPT: ${{ inputs.candidate_run_attempt }}
+          PREVIEW_RECEIPT_ARTIFACT_ID: ${{ inputs.preview_receipt_artifact_id }}
+          BROWSER_EVIDENCE_COMMENT_ID: ${{ inputs.browser_evidence_comment_id }}
+          CONFIRMATION: ${{ inputs.confirmation }}
+        run: node scripts/editorial-control.mjs prepare-release
+      - name: Preserve frozen approval unit
+        id: frozen
+        uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02 # v4.6.2
         with:
-          apiToken: ${{ secrets.CLOUDFLARE_API_TOKEN }}
-          accountId: ${{ secrets.CLOUDFLARE_ACCOUNT_ID }}
-          command: deploy
+          name: frozen-release-${{ github.run_id }}-${{ github.run_attempt }}
+          path: frozen-release/
+          if-no-files-found: error
+          retention-days: 14
+          overwrite: false
+
+  production:
+    # A separate reviewed activation must retain the protected Director environment.
+    if: ${{ false }}
+    needs: prepare
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    environment: editorial-production
+    permissions:
+      contents: read
+      actions: read
+      deployments: read
+    steps:
+      - name: Require first attempt and pinned trusted checkout
+        env:
+          EDITORIAL_TRUSTED_SHA: ${{ vars.EDITORIAL_TRUSTED_SHA }}
+        run: |
+          [[ "$GITHUB_REF" == 'refs/heads/main' ]]
+          [[ "$GITHUB_RUN_ATTEMPT" == '1' ]]
+          [[ "$EDITORIAL_TRUSTED_SHA" =~ ^[0-9a-f]{40}$ ]]
+      - name: Check out trusted tooling only
+        uses: actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683 # v4.2.2
+        with:
+          ref: ${{ vars.EDITORIAL_TRUSTED_SHA }}
+          persist-credentials: false
+      - uses: actions/setup-node@49933ea5288caeca8642d1e84afbd3f7d6820020 # v4.4.0
+        with:
+          node-version: 24
+      - name: Install trusted locked tooling without lifecycle hooks
+        run: npm ci --ignore-scripts
+      - name: Recheck approval, current main, provenance, and hashes; promote saved bytes
+        env:
+          GH_TOKEN: ${{ github.token }}
+          EDITORIAL_TRUSTED_SHA: ${{ vars.EDITORIAL_TRUSTED_SHA }}
+          FROZEN_ARTIFACT_ID: ${{ needs.prepare.outputs.artifact_id }}
+          FROZEN_RELEASE_ARTIFACT_DIGEST: ${{ needs.prepare.outputs.artifact_digest }}
+          PRODUCTION_CLOUDFLARE_API_TOKEN: ${{ secrets.PRODUCTION_CLOUDFLARE_API_TOKEN }}
+          # Same review-only scope; used solely to verify the frozen preview still exists.
+          REVIEW_CLOUDFLARE_API_TOKEN: ${{ secrets.REVIEW_CLOUDFLARE_API_TOKEN }}
+        run: node scripts/editorial-control.mjs release
+      - name: Preserve publication outcome and verification receipt
+        if: always()
+        uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02 # v4.6.2
+        with:
+          name: release-receipt-${{ github.run_id }}-${{ github.run_attempt }}
+          path: release-receipt/
+          if-no-files-found: warn
+          retention-days: 14
+          overwrite: false

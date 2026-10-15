@@ -23,19 +23,27 @@ concurrency:
 
 jobs:
   publish:
-    if: github.ref == 'refs/heads/main' && inputs.confirmation == 'PUBLISH'
+    # Code-only phase: separate approved Pages activation and owner gate required.
+    if: ${{ false }}
     runs-on: ubuntu-latest
     permissions:
       contents: read
       pages: write
       id-token: write
     environment:
-      name: github-pages
+      name: legacy-pages-migration
     steps:
+      - name: Require separate main-only Pages confirmation
+        env:
+          CONFIRMATION: ${{ inputs.confirmation }}
+        run: |
+          [[ "$GITHUB_REF" == 'refs/heads/main' ]]
+          [[ "$CONFIRMATION" == 'PUBLISH' ]]
       - uses: actions/checkout@v4
         with:
           ref: ${{ inputs.commit_sha }}
           fetch-depth: 0
+          persist-credentials: false
       - name: Verify selected commit is on main
         env:
           COMMIT_SHA: ${{ inputs.commit_sha }}

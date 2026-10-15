@@ -1,0 +1,12 @@
+{
+  "$schema": "node_modules/wrangler/config-schema.json",
+  "name": "nicholas-sisco-review",
+  "compatibility_date": "2026-10-02",
+  "workers_dev": false,
+  "preview_urls": true,
+  "assets": {
+    "directory": "./candidate-assets",
+    "not_found_handling": "404-page",
+    "html_handling": "none"
+  }
+}
