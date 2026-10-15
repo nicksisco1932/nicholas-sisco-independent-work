@@ -1,0 +1,59 @@
+name: Build editorial candidate
+
+on:
+  pull_request:
+    types: [opened, synchronize, reopened]
+  push:
+    branches: [main]
+
+# Candidate source and npm/MDX execute only here, without deployment credentials.
+permissions:
+  contents: read
+
+jobs:
+  build:
+    if: github.event_name == 'push' || github.event.pull_request.head.repo.id == github.event.repository.id
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    steps:
+      - name: Check out standalone source head
+        uses: actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683 # v4.2.2
+        with:
+          ref: ${{ github.event.pull_request.head.sha || github.sha }}
+          persist-credentials: false
+      - uses: actions/setup-node@49933ea5288caeca8642d1e84afbd3f7d6820020 # v4.4.0
+        with:
+          node-version: 24
+      - run: npm ci
+      - name: Validate legacy path configuration
+        run: npm run validate
+      - name: Select reviewed root configuration
+        id: settings
+        run: node scripts/build-editorial-metadata.mjs settings
+      - name: Validate root candidate bytes
+        env:
+          PUBLIC_SITE_BASE: /
+          PUBLIC_SITE_URL: ${{ steps.settings.outputs.site_origin }}
+        run: npm run validate
+      - name: Record standalone and workflow identities
+        env:
+          PUBLIC_SITE_BASE: /
+          PUBLIC_SITE_URL: ${{ steps.settings.outputs.site_origin }}
+        run: node scripts/build-editorial-metadata.mjs
+      - name: Package immutable assets
+        run: node scripts/editorial-candidate.mjs pack dist candidate-output metadata.json
+      - name: Preserve candidate evidence
+        id: artifact
+        uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02 # v4.6.2
+        with:
+          name: editorial-${{ github.run_id }}-${{ github.run_attempt }}
+          path: candidate-output/
+          if-no-files-found: error
+          retention-days: 14
+          overwrite: false
+      - name: Candidate receipt
+        env:
+          ARTIFACT_ID: ${{ steps.artifact.outputs.artifact-id }}
+          ARTIFACT_DIGEST: ${{ steps.artifact.outputs.artifact-digest }}
+          ARTIFACT_URL: ${{ steps.artifact.outputs.artifact-url }}
+        run: node scripts/build-editorial-metadata.mjs summary

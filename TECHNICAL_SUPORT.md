@@ -32,6 +32,8 @@ npm run preview -- --host 127.0.0.1
 
 If the execution environment blocks local servers, browser sockets, or local preview URLs, stop that route. Do not expose a server, publish a preview, change browser security, or deploy to get around the limit. Record the error and hand the current-revision browser checklist below to the owner on a permitted local machine.
 
+The later localhost denial `ERR_NETWORK_ACCESS_DENIED` remains an explicit restriction for this engineering packet. Do not retry that route. A future private preview requires its own approved setup; it is not a bypass for the denied route.
+
 ### What the checks establish
 
 The existing [validate command](package.json) runs:
@@ -50,35 +52,83 @@ Automated passes do not prove visual appearance, focus/keyboard behavior, actual
 2. Keep content and publication review separate from layout or hosting work. Preserve protected claims, maturity, rights, URLs, and fragments.
 3. Make the smallest authorized repair. Escalate new requirements, navigation/copy decisions, architecture, and dependency changes.
 4. Run `npm ci`, both applicable validation configurations above, and `git diff --check`. Inspect the built change and obtain an independent scope review.
-5. Open/update a draft PR with scope, baseline/head, changes, commands and results, browser coverage/limits, and remaining owner decisions. Verify the remote head.
-6. Check CI to a terminal result. For `pull_request`, the existing workflow checks a synthetic merge ref, not automatically the standalone branch head. Record its SHA/base/head and compare Git trees before claiming equivalence.
+5. Open/update a focused review PR with scope, baseline/head, changes, commands and results, independent actual review/fixes, browser coverage/limits, and remaining owner decisions. Verify the remote head after final edits.
+6. Check CI to a terminal result for that final head. For `pull_request`, the existing validation workflow checks a synthetic merge ref, not automatically the standalone branch head. Record its SHA/base/head and compare Git trees before claiming equivalence. The editorial candidate workflow records and builds the standalone PR head explicitly; keep both identities in evidence.
 
 Approval of a PR or this guide does not by itself authorize a merge, release, domain purchase, credential change, DNS change, or Pages replacement.
 
-## Manual release: Phase B, not authorized by readiness work
+## Editorial candidates and controlled publication
 
-### Prerequisites and owner decisions
+The code-only engineering phase adds packaging and policy tests, a secret-free [candidate build](.github/workflows/build-editorial-candidate.yml), a disabled [review upload](.github/workflows/preview-editorial-candidate.yml), and disabled [production promotion](.github/workflows/deploy-cloudflare.yml). The upload/release jobs have literal-false gates; [editorial-policy.json](config/editorial-policy.json) is also disabled with unresolved activation identities. Merging this code cannot activate them or consume existing deployment secrets. Separate external approval and a reviewed activation change are required.
+
+The build runs on same-repository PR updates and main, using Node 24, `npm ci`, the lockfile, and existing validation. It has read-only source permissions and no deployment credentials; checkout does not persist credentials. Branch-controlled MDX/npm code is confined to that unprivileged build. If the permanent origin is unresolved, it uses `https://website-v1.invalid/` for engineering validation and produces a non-promotable artifact. A build pass does not establish private preview or release acceptance.
+
+Each candidate records the source SHA/tree, PR/editorial identity, separate synthetic merge identity where present, workflow/run/attempt/artifact IDs, origin/base/configuration, locked toolchain, validation receipts, creation/expiry, archive SHA-256, and sorted per-file paths/sizes/SHA-256. GitHub's artifact digest is recorded separately. Trusted preparation must bind these to the originating repository ID, known workflow, successful conclusion and exact immutable artifact, independently recompute hashes, reject extra/missing files, and reject unsafe or oversized archives. A neighboring untrusted manifest is not provenance; an automatic download warning is not a passing integrity check.
+
+The local packaging/verification interfaces are:
+
+```sh
+node scripts/editorial-candidate.mjs pack dist candidate-output metadata.json
+node scripts/verify-editorial-candidate.mjs candidate-output expected.json extracted-dir
+```
+
+`metadata.json` records the actual build; `expected.json` supplies independently obtained expectations. Local files do not create authenticated GitHub/Cloudflare evidence or release authority. In privileged preparation, expected repository/workflow/run/attempt/artifact identity must come from trusted policy and API observations. Verified assets are inert input only; candidate files cannot select commands, configuration, Worker, account, routes, or environment.
+
+After approved activation, preview uploads use fixed [review configuration](wrangler.review.json) and trusted default-branch code pinned to the separately approved full `EDITORIAL_TRUSTED_SHA`. They reject forks and unrecognized provenance, upload a distinct review version, and produce an immutable candidate receipt outside the promotable asset bytes. Only a candidate matching the current PR head may be advertised as current; a delayed older build retains its own evidence without replacing the newer receipt. Failed revisions report failure and leave the previous preview clearly stale. Receipts are updated idempotently; comments do not dispatch executors or act as approval.
+
+Read [phone review](docs/editorial/phone-review.md), [setup checklist](docs/editorial/setup-checklist.md), and the [release summary template](docs/editorial/release-summary.md) before activation. Private rendering does not make public source, PR comments, CI logs, or downloadable artifacts confidential. Only public-safe, rights-cleared content enters this workflow. Keep existing publication/rights/maturity gates and reviewed route inventory unchanged; directly authored pages and public assets need review too.
+
+### Setup prerequisites and separate owner decisions
 
 - Owner-selected permanent HTTPS domain and confirmed ownership.
-- Appropriate Cloudflare account, active zone, and the intended Worker `nicholas-sisco-independent-work`.
-- Verified custom-domain binding and any existing DNS conflicts. The checked-in [Wrangler config](wrangler.jsonc) has `workers_dev: false` and no domain/route declaration; the workflow does not create or verify the binding.
+- Confirmed actual Cloudflare account, plan/entitlements/budget, existing intended production Worker `nicholas-sisco-independent-work`, and approved permanent origin. Do not assume these exist from checked-in config or a merged PR.
+- Verified custom-domain binding and any existing DNS conflicts. The checked-in [local config](wrangler.jsonc) and fixed [production config](wrangler.production.json) do not create or verify domain bindings. Production version URLs remain disabled. Review uses a separate `nicholas-sisco-review` Worker, with no v1 custom domain, routes, database, storage, or runtime secrets.
 - If the Worker does not exist, pause for a separately approved first-Worker setup plan before domain binding. Do not improvise a bootstrap deployment. Creating a Worker, binding a domain, and changing DNS/security credentials are not covered by this readiness task.
-- Repository variable `PUBLIC_SITE_URL`: the selected HTTPS origin with no path, query, or fragment. Configure it in GitHub Actions repository settings.
-- GitHub Actions secrets `CLOUDFLARE_API_TOKEN` and `CLOUDFLARE_ACCOUNT_ID`: set through the appropriate secure settings. Never put values in chat, source, this guide, logs, or screenshots. Credential creation/permission changes require their own approval.
+- Exact Director GitHub reviewer identity and Access email/provider. Approve Worker-wide Access, exact identity allowlist and session policy before manuscript upload. Use harmless placeholder bootstrap and verify anonymous/wrong-identity denial on every reachable review hostname/asset path first.
+- Approved policy values for permanent origin, account/Worker identities, trusted workflow SHA/IDs, Director identity, Access/protection receipts, and protected environments. Changing final origin requires a fresh build/preview; no fixture artifact becomes releasable by relabeling it.
+- Two independently scoped tokens, configured only through secure settings: `REVIEW_CLOUDFLARE_API_TOKEN` in `editorial-review`, with the same review-scoped token also placed in protected `editorial-production` solely for read-only preview-version preflight; `PRODUCTION_CLOUDFLARE_API_TOKEN` only in `editorial-production`. These remain two tokens, each Editor for its own existing Worker only. Preview jobs never receive the production token. The duplicate secret placement does not broaden review-token scope and is not configured by this PR. Prove review credentials cannot read/mutate production; neither token may manage DNS/routes, Access, or tokens. If actual scope cannot meet this, stop for a separate account-isolation decision.
+- A pre-created `editorial-production` environment with only the Director as required reviewer, administrator bypass disabled, and main-only access. Leave “Prevent self-review” off for the solo Director. Verify repository visibility/plan support and rerun behavior rather than assuming settings exist.
+- Separately approved removal/restriction of repository-level production credentials, old deploy hooks/tokens, Cloudflare Git builds, and any other bypass route. Protect workflow/config/policy changes with owner review and repository rules. Dashboard administrators remain trusted actors.
 
 [Cloudflare Custom Domains](https://developers.cloudflare.com/workers/configuration/routing/custom-domains/) require an existing Worker and active zone; domain binding creates DNS/certificate state and may conflict with an existing CNAME. [Wrangler's source-of-truth guidance](https://developers.cloudflare.com/workers/wrangler/configuration/#source-of-truth) explains dashboard-managed bindings when routes are omitted. `workers_dev: false` is not proof that every preview/version URL is private or disabled; verify exposure in the approved setup.
 
-The [production-origin guard](scripts/check-production-origin.mjs) checks URL shape and rejects `github.io`/`workers.dev` destinations. It does not prove ownership, DNS, account permissions, domain reachability, or approval. Do not use the local `.invalid` fixture for release.
+Cloudflare's [per-Worker roles](https://developers.cloudflare.com/workers/authorization/workers/) allow Editor read/update/deploy for selected existing Workers, with [granular permission availability](https://developers.cloudflare.com/changelog/post/2026-09-15-granular-worker-permissions/) documented separately. Creation needs separately approved bootstrap privileges; per-Worker Custom Domain support is a documented limitation, and ordinary route changes need additional zone permission. Editor is not read-only: only the trusted production preflight limits its use to reads. Host/Access/DNS provisioning remains outside CI and requires separate approval.
 
-### Release procedure
+The [production-origin guard](scripts/check-production-origin.mjs) checks URL shape and rejects `github.io`/`workers.dev` destinations. It does not prove ownership, DNS, account permissions, domain reachability, or approval. Do not use the local `.invalid` fixture for release. No paid upgrade, recurring charge, DNS change, credential change, external preview, or security configuration is authorized by the code-only packet.
 
-1. Complete code review and the current-revision browser/human gates below. Separately authorize any merge.
-2. Record the exact **full 40-character main commit SHA**, intended Worker/account and HTTPS destination, successful validation evidence, and the owner's explicit release approval. Refresh evidence if source/configuration changes.
-3. Verify the configured destination and secrets through their secure settings. Record no secret values.
-4. On `main`, manually run [Deploy Cloudflare production](.github/workflows/deploy-cloudflare.yml) with that SHA and `confirmation: DEPLOY`. The workflow checks main ancestry, installs dependencies, requires the production origin, sets `PUBLIC_SITE_BASE=/`, validates the selected revision, and deploys its `dist/` assets.
-5. Wait for the deployment result. Record the actual deployed version/commit and URL, then perform live verification. A successful build/CI run is not a successful deployment or live acceptance.
+Wrangler is locked to **4.147.0** in `package-lock.json`. The safe local command-surface checks are:
 
-The workflow's typed choice and ancestry check do not establish the owner's destination approval or prove the live checks passed. Do not dispatch it under the Phase A readiness authorization.
+```sh
+node node_modules/wrangler/bin/wrangler.js --version
+node node_modules/wrangler/bin/wrangler.js versions upload --help
+node node_modules/wrangler/bin/wrangler.js versions deploy --help
+```
+
+These checks perform no upload. Use the reviewed workflow's fixed configuration and pinned invocation after activation; do not substitute an ad-hoc direct `wrangler deploy`, candidate npm hook, or broad token. The engineering PR records the actual help/test results; CLI help does not prove account permissions, Access coverage, asset promotion, or live routing.
+
+For operator review, the trusted control invokes these Wrangler subcommands with the locked CLI; placeholders below identify frozen values, not shell commands to run during the code-only phase:
+
+```text
+versions upload --config wrangler.review.json --name nicholas-sisco-review --message <candidate-id>
+versions upload --config wrangler.production.json --name nicholas-sisco-independent-work --message <frozen-release-identity>
+versions deploy <captured-production-version-id>@100% --config wrangler.production.json --name nicholas-sisco-independent-work --yes
+```
+
+Candidate, preview-receipt, frozen-release, and release-receipt Actions artifacts use **14-day retention** in checked-in workflows. The actual artifact API expiry is authoritative and is bound in the receipt; shorter retention or deletion blocks use. Arrange separately approved preservation of accepted receipts/bundles before expiry.
+
+### Promote a frozen candidate after separate authorization
+
+1. Complete authorized setup, independent code review, required security decisions, actual-browser/phone checks, and any separately authorized merge. Main must produce a new final candidate built with `/` and the permanent production origin; inspect its immutable private preview.
+2. Freeze the [release summary](docs/editorial/release-summary.md): complete manifest, exact artifact/run/attempt IDs, hashes, private-preview/browser receipts, current main SHA, trusted config/workflow identity, and permanent account/Worker/origin. Select saved bytes, never `latest`, a branch alias, or artifact name alone. Expired/deleted artifacts/previews require a new build, preview, and approval.
+3. Record the Director's exact-candidate browser/phone acceptance in a same-repository PR/issue comment containing the literal marker `BROWSER ACCEPTED`, candidate ID, archive SHA-256, and preview version UUID. Retain its evidence links. After approved activation, dispatch the manual production workflow from main with full `commit_sha`, `candidate_run_id`, `candidate_run_attempt`, exact `preview_receipt_artifact_id`, `browser_evidence_comment_id`, and explicit `confirmation: DEPLOY`. The checked-in disabled workflow cannot publish. `DEPLOY` and the evidence comment are not Director deployment authorization.
+4. Trusted preparation independently validates provenance/integrity, permanent origin, protection/browser evidence, current-main equality and release order, then presents the frozen summary. The protected production job waits for the authenticated Director. Chat approval, a PR review, and editable comments cannot unlock it.
+5. After environment approval, recheck the same manifest, authenticated approval identity/run/job/attempt, unchanged frozen Director evidence-comment snapshot, target/configuration and exact current-main equality under the production serialization lock immediately before the publication critical section. Editing/deleting the evidence comment invalidates its frozen snapshot. Using the same review-Worker-scoped token, read the exact review version UUID and remote preview-routing state; require the version's `workers/message` annotation to equal the frozen candidate ID and `previews_enabled` to remain true. Repeat that availability check before the production write. Access denial alone cannot prove version existence; deleted, swapped, or disabled previews block release. Only attempt 1 is eligible for preparation or release; reruns/new attempts need a fresh separately approved release run. Reject stale candidates and out-of-order ordinary releases; rollback is a separate exact-artifact path.
+6. Upload only the verified saved asset bundle with the fixed production config, capture its version ID, and deploy that version at 100%. Run no npm/build hooks after approval. Wrapper/status evidence stays outside the site assets. A source/config/origin/target/asset change requires a new candidate; it cannot alter an in-flight bundle.
+7. Observe actual platform state, independently reconcile deployed assets/live response-body hashes (accounting for transport compression), and complete live verification below. Preserve the accepted receipt/bundle in owner-approved storage before artifact expiry; this packet creates no storage service.
+
+Production concurrency prevents overlapping writes without canceling an active write; freshness/order checks prevent an older finishing release from replacing a newer one. A green job is not independent live acceptance. Never dispatch under code-only readiness authorization.
+
+Version identities belong to their own Worker: the [version GET API](https://developers.cloudflare.com/api/resources/workers/subresources/scripts/subresources/versions/methods/get/) addresses an account/script/version, and the [deployment API](https://developers.cloudflare.com/api/resources/workers/subresources/scripts/subresources/deployments/methods/create/) assigns that Worker's version traffic. Promotion uploads the same verified assets to production and captures production's own UUID; it never tries to deploy the review Worker's UUID to production. These documented API shapes and local CLI checks are not account-level test results.
 
 ### Live verification after an authorized release
 
@@ -94,7 +144,9 @@ Record time, exact deployed revision/version, domain/configuration, browser/vers
 
 Leave GitHub Pages unchanged until the Cloudflare release has passed live checks and the owner separately approves replacing Pages with migration notices for an exact revision and destination.
 
-Only after that separate approval, dispatch [Publish GitHub Pages migration notices](.github/workflows/publish-legacy-migration.yml) from `main` with the approved full `commit_sha` and `confirmation: PUBLISH`. The workflow validates a **fresh legacy-prefix build**, then runs [build-legacy-migration.mjs](scripts/build-legacy-migration.mjs) and publishes `legacy-pages/`. `npm run prepare:legacy-migration` deletes/rebuilds that local output directory; do not run it against a production-root `dist/`, whose progress-page base/asset URLs differ. Preparation is not publishing, and the normal validation suite does not inspect this generated archive.
+The [Pages migration workflow](.github/workflows/publish-legacy-migration.yml) is retained as a manual operation but its publish job is also literal-false until a separate activation/security decision. After that separate authorization and activation, dispatch it from `main` with the approved full `commit_sha` and `confirmation: PUBLISH`. It validates a **fresh legacy-prefix build**, then runs [build-legacy-migration.mjs](scripts/build-legacy-migration.mjs) and publishes `legacy-pages/`. `npm run prepare:legacy-migration` deletes/rebuilds that local output directory; do not run it against a production-root `dist/`, whose progress-page base/asset URLs differ. Preparation is not publishing, and the normal validation suite does not inspect this generated archive.
+
+Pages uses the distinct `legacy-pages-migration` environment/target and is never invoked by candidate, preview, merge, or production automation. A production environment approval or Cloudflare token cannot authorize Pages. Review the actual Pages gate separately before migration; the engineering packet does not dispatch it.
 
 Before approving migration, retain the pre-migration Pages source, available deployment/artifact evidence, and an explicitly agreed restoration procedure. Inspect the generated archive and test the retained progress page, its CSS/JS/course-index dependencies, navigation and export/import between origins. Export from the old origin in the same browser/profile before moving; import on the new origin. Only known lesson IDs with matching content versions are restored, and existing target progress is kept. An origin change never transfers browser storage automatically. Each original origin must export its own data: the Pages exporter cannot read progress stored on the separate original `chatgpt.site` origin. Keep completion exports private; do not attach them to public issues.
 
@@ -119,6 +171,7 @@ Current migration behavior to review explicitly:
 - **Progress missing:** confirm browser/profile/origin and lesson versions; check storage availability. Export before reset or origin migration. Use disposable test data for destructive-control checks.
 - **Browser blocked:** retain the exact error, failed stage, revision, and intended viewport. Static HTML/source checks are not interaction evidence; use the owner checklist rather than a public-preview workaround.
 - **Dependency advisory:** on 2026-10-04, read-only npm audit reported `http-cache-semantics@4.2.0`, pulled in by `astro@7.3.5`, with [GHSA-ch52-4w7c-c8xp](https://github.com/advisories/GHSA-ch52-4w7c-c8xp). An audit fix is available, but dependencies were not changed under this bounded task. Astro is used to build this static site, not deployed as an application server; that does not by itself resolve build-tool exposure. Obtain a separate dependency/security decision before release.
+- **Current dependency recheck, 2026-10-15:** read-only `npm audit --json` reports four high-severity package findings: `http-cache-semantics` under the advisory above, and `sharp` under [GHSA-wq5f-xc86-pv6w](https://github.com/advisories/GHSA-wq5f-xc86-pv6w), with the latter propagated through `miniflare` and `wrangler`. These are four affected package entries, not four distinct advisories. No dependency change or `npm audit fix` was authorized/performed in this engineering packet. Retain the audit receipt with the PR and obtain a separate current security/dependency decision before activation or release.
 - **Warnings:** zero Astro-check warnings is not zero build/tool warnings. Existing MDX directive and action-runtime notices remain recorded separately from validation failures.
 
 ## Website v1 readiness record — 2026-10-04
