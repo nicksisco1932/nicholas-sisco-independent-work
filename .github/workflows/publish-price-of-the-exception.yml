@@ -1,0 +1,64 @@
+name: Publish The Price of the Exception to existing Pages
+
+on:
+  workflow_dispatch:
+    inputs:
+      confirmation:
+        description: Publish the reviewed essay-only release to the existing GitHub Pages site
+        required: true
+        type: choice
+        options: [DO_NOT_PUBLISH, PUBLISH]
+        default: DO_NOT_PUBLISH
+
+permissions:
+  contents: read
+
+concurrency:
+  group: github-pages-essay-release
+  cancel-in-progress: false
+
+jobs:
+  build:
+    if: github.ref == 'refs/heads/main' && inputs.confirmation == 'PUBLISH'
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          # Accepted Oct 4 Pages baseline + approved v0.4 essay + existing security fix.
+          # Do not replace with main: it contains unrelated unpublished work.
+          ref: 16b02c6810a1007607571b372b1f662f3c9944a9
+          fetch-depth: 0
+      - name: Verify exact reviewed release and bounded scope
+        run: |
+          test "$(git rev-parse HEAD)" = "16b02c6810a1007607571b372b1f662f3c9944a9"
+          git diff --name-only 648dde9b509d968413c93292b9076bceeb570c8f HEAD > /tmp/actual-paths
+          printf '%s\n' package-lock.json src/content/notes/the-price-of-the-exception.mdx > /tmp/expected-paths
+          diff -u /tmp/expected-paths /tmp/actual-paths
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 24
+          cache: npm
+      - run: npm ci
+      - run: npm run validate
+      - name: Confirm essay route and exclude unrelated candidate
+        run: |
+          test -f dist/the-price-of-the-exception.html
+          test ! -e dist/the-decoys-have-job-titles-now.html
+          grep -F '/nicholas-sisco-independent-work/the-price-of-the-exception.html' dist/index.html
+      - uses: actions/upload-pages-artifact@v3
+        with:
+          path: ./dist
+
+  deploy:
+    needs: build
+    runs-on: ubuntu-latest
+    permissions:
+      contents: read
+      pages: write
+      id-token: write
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    steps:
+      - uses: actions/deploy-pages@v5
+        id: deployment
