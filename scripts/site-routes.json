@@ -1,8 +1,4 @@
 {
-  "forged-fitness.html": [
-    "curriculum",
-    "main"
-  ],
   "forged-fitness/guides/orientation.html": [
     "a-small-glossary",
     "choose-your-level-of-participation",
@@ -592,6 +588,10 @@
     "main",
     "your-companion-resource"
   ],
+  "forged-fitness.html": [
+    "curriculum",
+    "main"
+  ],
   "historical-universe.html": [
     "main"
   ],
@@ -618,11 +618,6 @@
     "problem-and-approach",
     "public-case-study",
     "schemaversion-note"
-  ],
-  "molecular-physiology.html": [
-    "concepts",
-    "main",
-    "topics"
   ],
   "molecular-physiology/concepts/4e-bp1.html": [
     "human-evidence",
@@ -897,9 +892,6 @@
   "molecular-physiology/topics/training-stimuli.html": [
     "main"
   ],
-  "molecular-physiology/updates.html": [
-    "main"
-  ],
   "molecular-physiology/updates/from-leucine-to-muscle-protein-synthesis.html": [
     "advanced-mechanism-in-context",
     "all-essential-amino-acids",
@@ -985,6 +977,14 @@
     "the-scientific-question",
     "what-changed",
     "why-it-matters"
+  ],
+  "molecular-physiology/updates.html": [
+    "main"
+  ],
+  "molecular-physiology.html": [
+    "concepts",
+    "main",
+    "topics"
   ],
   "nmr-thermodynamic-inference.html": [
     "main"
