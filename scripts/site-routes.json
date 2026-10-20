@@ -1,4 +1,8 @@
 {
+  "forged-fitness.html": [
+    "curriculum",
+    "main"
+  ],
   "forged-fitness/guides/orientation.html": [
     "a-small-glossary",
     "choose-your-level-of-participation",
@@ -588,10 +592,6 @@
     "main",
     "your-companion-resource"
   ],
-  "forged-fitness.html": [
-    "curriculum",
-    "main"
-  ],
   "historical-universe.html": [
     "main"
   ],
@@ -618,6 +618,11 @@
     "problem-and-approach",
     "public-case-study",
     "schemaversion-note"
+  ],
+  "molecular-physiology.html": [
+    "concepts",
+    "main",
+    "topics"
   ],
   "molecular-physiology/concepts/4e-bp1.html": [
     "human-evidence",
@@ -892,6 +897,9 @@
   "molecular-physiology/topics/training-stimuli.html": [
     "main"
   ],
+  "molecular-physiology/updates.html": [
+    "main"
+  ],
   "molecular-physiology/updates/from-leucine-to-muscle-protein-synthesis.html": [
     "advanced-mechanism-in-context",
     "all-essential-amino-acids",
@@ -978,14 +986,6 @@
     "what-changed",
     "why-it-matters"
   ],
-  "molecular-physiology/updates.html": [
-    "main"
-  ],
-  "molecular-physiology.html": [
-    "concepts",
-    "main",
-    "topics"
-  ],
   "nmr-thermodynamic-inference.html": [
     "main"
   ],
@@ -1026,6 +1026,15 @@
     "what-remains-of-a-principle",
     "what-the-bargain-costs",
     "when-a-boundary-stops-holding"
+  ],
+  "the-wealth-we-mistake-for-wisdom.html": [
+    "main",
+    "notes-and-sources",
+    "the-invisible-inheritance",
+    "the-manufacture-of-authority",
+    "the-problem-with-empathy",
+    "what-success-cannot-prove",
+    "when-ownership-becomes-achievement"
   ],
   "the-wisdom-we-give-away.html": [
     "main",
