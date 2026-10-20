@@ -1,0 +1,87 @@
+name: Publish The Wealth We Mistake for Wisdom to existing Pages
+
+on:
+  workflow_dispatch:
+    inputs:
+      release_sha:
+        description: Full release commit SHA (live Pages baseline plus the approved essay only)
+        required: true
+        type: string
+      confirmation:
+        description: Publish only after reviewing the exact bounded release
+        required: true
+        type: choice
+        options: [DO_NOT_PUBLISH, PUBLISH]
+        default: DO_NOT_PUBLISH
+
+permissions:
+  contents: read
+
+concurrency:
+  group: github-pages-wealth-release
+  cancel-in-progress: false
+
+env:
+  LIVE_BASE_SHA: 9daffe72b9872ebb79b8b6014c9f8ecbcdaadd35
+  APPROVED_HEAD_SHA: a4ae86ecffe6a695e6a87c164f9e5c033f5e9f30
+  APPROVED_ESSAY_BLOB: ce3b4b1a83213ca68d4a717434dd6fabaa99083e
+  ESSAY_PATH: src/content/notes/the-wealth-we-mistake-for-wisdom.mdx
+
+jobs:
+  build:
+    if: github.ref == 'refs/heads/main' && inputs.confirmation == 'PUBLISH'
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: ${{ inputs.release_sha }}
+          fetch-depth: 0
+
+      - name: Verify exact bounded release source
+        env:
+          RELEASE_SHA: ${{ inputs.release_sha }}
+        run: |
+          test "$(git rev-parse HEAD)" = "$RELEASE_SHA"
+          test "$(git rev-list --parents -n 1 HEAD)" = "$RELEASE_SHA $LIVE_BASE_SHA"
+          git fetch --no-tags origin "$APPROVED_HEAD_SHA"
+          test "$(git rev-parse "$APPROVED_HEAD_SHA:$ESSAY_PATH")" = "$APPROVED_ESSAY_BLOB"
+          test "$(git rev-parse "HEAD:$ESSAY_PATH")" = "$APPROVED_ESSAY_BLOB"
+          git diff --name-only "$LIVE_BASE_SHA" HEAD > /tmp/actual-paths
+          printf '%s\n' "$ESSAY_PATH" > /tmp/expected-paths
+          diff -u /tmp/expected-paths /tmp/actual-paths
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 24
+          cache: npm
+
+      - run: npm ci
+      - run: npm run validate
+
+      - name: Verify generated route and publication boundary
+        run: |
+          test -f dist/the-wealth-we-mistake-for-wisdom.html
+          grep -F 'The Wealth We Mistake for Wisdom' dist/the-wealth-we-mistake-for-wisdom.html
+          grep -F 'Social class origin and entrepreneurship' dist/the-wealth-we-mistake-for-wisdom.html
+          grep -F 'https://doi.org/10.1177/0963721415599978' dist/the-wealth-we-mistake-for-wisdom.html
+          grep -F 'the-wealth-we-mistake-for-wisdom.html' dist/index.html
+          test ! -e dist/the-decoys-have-job-titles-now.html
+          test "$(git diff --name-only "$LIVE_BASE_SHA" HEAD)" = "$ESSAY_PATH"
+
+      - uses: actions/upload-pages-artifact@v3
+        with:
+          path: ./dist
+
+  deploy:
+    needs: build
+    runs-on: ubuntu-latest
+    permissions:
+      contents: read
+      pages: write
+      id-token: write
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    steps:
+      - uses: actions/deploy-pages@v5
+        id: deployment
