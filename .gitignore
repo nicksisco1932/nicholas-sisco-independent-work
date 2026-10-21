@@ -4,6 +4,13 @@ dist/
 legacy-pages/
 .wrangler-config/
 .wrangler/
+.editorial/
+candidate-assets/
+candidate-output/
+metadata.json
+frozen-release/
+release-receipt/
+__pycache__/
 
 # local build symlink (points at course-recovery/node_modules)
 node_modules

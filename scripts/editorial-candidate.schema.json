@@ -1,0 +1,150 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://github.com/nicksisco1932/nicholas-sisco-independent-work/editorial-candidate.schema.json",
+  "title": "Editorial static candidate manifest and trusted receipt definitions",
+  "$ref": "#/$defs/buildManifest",
+  "$defs": {
+    "sha": { "type": "string", "pattern": "^[a-f0-9]{40}$" },
+    "digest": { "type": "string", "pattern": "^[a-f0-9]{64}$" },
+    "id": { "type": "string", "pattern": "^[1-9][0-9]*$" },
+    "timestamp": { "type": "string", "format": "date-time", "pattern": "^\\d{4}-\\d\\d-\\d\\dT\\d\\d:\\d\\d:\\d\\d(?:\\.\\d{3})?Z$" },
+    "artifactClass": { "enum": ["release-candidate", "engineering-fixture"] },
+    "assetPath": {
+      "type": "string", "minLength": 1, "maxLength": 512,
+      "description": "Verifier additionally rejects traversal, backslashes, dot/hidden paths, reserved configuration/executable names, Windows device names, unsupported static extensions, spelling and file/directory collisions. Paths are sorted, unique and ASCII. Root _redirects alone is preserved; trusted control requires its bytes to equal pinned public/_redirects before extraction."
+    },
+    "file": {
+      "type": "object", "additionalProperties": false,
+      "required": ["path", "size", "sha256"],
+      "properties": {
+        "path": { "$ref": "#/$defs/assetPath" },
+        "size": { "type": "integer", "minimum": 0, "maximum": 16777216 },
+        "sha256": { "$ref": "#/$defs/digest" }
+      }
+    },
+    "metadata": {
+      "type": "object", "additionalProperties": false,
+      "required": ["repository", "repositoryId", "sourceCommitSha", "sourceTreeSha", "sourceIdentity", "syntheticMergeSha", "finalMainSha", "workflowPath", "workflowSha", "runId", "runAttempt", "pullRequest", "editorialVersion", "artifactClass", "createdAt", "toolchain", "build", "validations"],
+      "properties": {
+        "repository": { "type": "string", "pattern": "^[A-Za-z0-9_.-]+/[A-Za-z0-9_.-]+$" },
+        "repositoryId": { "$ref": "#/$defs/id" },
+        "sourceCommitSha": { "$ref": "#/$defs/sha" },
+        "sourceTreeSha": { "$ref": "#/$defs/sha" },
+        "sourceIdentity": { "enum": ["standalone-head", "main"] },
+        "syntheticMergeSha": { "anyOf": [{ "$ref": "#/$defs/sha" }, { "type": "null" }] },
+        "finalMainSha": { "anyOf": [{ "$ref": "#/$defs/sha" }, { "type": "null" }] },
+        "workflowPath": { "const": ".github/workflows/build-editorial-candidate.yml" },
+        "workflowSha": { "$ref": "#/$defs/sha" },
+        "runId": { "$ref": "#/$defs/id" },
+        "runAttempt": { "type": "integer", "minimum": 1 },
+        "pullRequest": { "anyOf": [{ "type": "integer", "minimum": 1 }, { "type": "null" }] },
+        "editorialVersion": { "type": "string", "minLength": 1, "maxLength": 120, "pattern": "^[^\\r\\n\\u0000-\\u001f]+$" },
+        "artifactClass": { "$ref": "#/$defs/artifactClass" },
+        "createdAt": { "$ref": "#/$defs/timestamp" },
+        "toolchain": {
+          "type": "object", "additionalProperties": false,
+          "required": ["node", "packageLockSha256", "wrangler"],
+          "properties": {
+            "node": { "type": "string", "pattern": "^24\\.\\d+\\.\\d+$" },
+            "packageLockSha256": { "$ref": "#/$defs/digest" },
+            "wrangler": { "type": "string", "pattern": "^\\d+\\.\\d+\\.\\d+$" }
+          }
+        },
+        "build": {
+          "type": "object", "additionalProperties": false,
+          "required": ["command", "siteOrigin", "siteBase", "configDigest"],
+          "properties": {
+            "command": { "const": "npm run validate" },
+            "siteOrigin": { "type": "string", "format": "uri", "pattern": "^https://[^/@?#:]+$", "description": "Permanent origin only; credentials, paths, ports, local/IP and fixture origins cannot be released." },
+            "siteBase": { "const": "/" },
+            "configDigest": { "$ref": "#/$defs/digest" }
+          }
+        },
+        "validations": {
+          "type": "array", "minItems": 1, "maxItems": 32,
+          "items": {
+            "type": "object", "additionalProperties": false, "required": ["name", "result"],
+            "properties": { "name": { "type": "string", "pattern": "^[a-z][a-z0-9-]{0,63}$" }, "result": { "const": "passed" } }
+          },
+          "description": "Build validation receipts only. Names cannot assert Access, approval, preview, phone, protection or deployment evidence."
+        }
+      }
+    },
+    "buildManifest": {
+      "type": "object", "additionalProperties": false,
+      "required": ["schemaVersion", "candidateId", "artifactClass", "metadata", "archiveSha256", "files", "totalSize", "fileCount", "createdAt"],
+      "properties": {
+        "schemaVersion": { "const": 1 },
+        "candidateId": { "type": "string", "pattern": "^candidate-[a-f0-9]{32}$" },
+        "artifactClass": { "$ref": "#/$defs/artifactClass" },
+        "metadata": { "$ref": "#/$defs/metadata" },
+        "archiveSha256": { "$ref": "#/$defs/digest", "description": "SHA-256 of canonical candidate.bundle.json bytes; distinct from the GitHub outer artifact ZIP digest." },
+        "files": { "type": "array", "minItems": 1, "maxItems": 10000, "items": { "$ref": "#/$defs/file" } },
+        "totalSize": { "type": "integer", "minimum": 0, "maximum": 67108864 },
+        "fileCount": { "type": "integer", "minimum": 1, "maximum": 10000 },
+        "createdAt": { "$ref": "#/$defs/timestamp" }
+      },
+      "description": "Build-authored manifest. The verifier enforces equality across duplicated identities, exact file set, byte counts, digests and independent trusted API evidence. Build output cannot assert privileged preparation or approval."
+    },
+    "artifactReceipt": {
+      "type": "object", "additionalProperties": false,
+      "required": ["artifactId", "githubArtifactDigest", "expiresAt", "runId", "runAttempt"],
+      "properties": {
+        "artifactId": { "$ref": "#/$defs/id" },
+        "githubArtifactDigest": { "type": "string", "pattern": "^sha256:[a-f0-9]{64}$" },
+        "expiresAt": { "$ref": "#/$defs/timestamp" },
+        "runId": { "$ref": "#/$defs/id" },
+        "runAttempt": { "type": "integer", "minimum": 1 }
+      }
+    },
+    "previewReceipt": {
+      "type": "object", "additionalProperties": false,
+      "required": ["worker", "versionId", "url", "protection", "browserEvidence"],
+      "properties": {
+        "worker": { "type": "string", "minLength": 1 },
+        "versionId": { "type": "string", "minLength": 1 },
+        "url": { "type": "string", "format": "uri", "pattern": "^https://" },
+        "protection": { "const": true },
+        "browserEvidence": { "type": "string", "format": "uri", "pattern": "^https://" }
+      }
+    },
+    "destination": {
+      "type": "object", "additionalProperties": false,
+      "required": ["accountId", "worker", "origin", "environment"],
+      "properties": {
+        "accountId": { "type": "string", "pattern": "^[a-f0-9]{32}$" },
+        "worker": { "type": "string", "minLength": 1 },
+        "origin": { "type": "string", "format": "uri", "pattern": "^https://[^/@?#:]+$" },
+        "environment": { "type": "string", "minLength": 1 }
+      }
+    },
+    "approvalReceipt": {
+      "type": "object", "additionalProperties": false,
+      "required": ["reviewer", "approvedAt", "releaseRunId", "releaseRunAttempt", "environment", "candidateId"],
+      "properties": {
+        "reviewer": { "type": "string", "minLength": 1 },
+        "approvedAt": { "$ref": "#/$defs/timestamp" },
+        "releaseRunId": { "$ref": "#/$defs/id" },
+        "releaseRunAttempt": { "type": "integer", "minimum": 1 },
+        "environment": { "type": "string", "minLength": 1 },
+        "candidateId": { "type": "string", "pattern": "^candidate-[a-f0-9]{32}$" }
+      },
+      "description": "Only trusted environment-review API evidence can populate this receipt; a build, comment or schema-valid JSON is not authorization."
+    },
+    "trustedPreparationReceipt": {
+      "type": "object", "additionalProperties": false,
+      "required": ["schemaVersion", "kind", "manifest", "artifact", "preview", "destination", "preparedAt"],
+      "properties": {
+        "schemaVersion": { "const": 1 },
+        "kind": { "const": "trusted-preparation-receipt" },
+        "manifest": { "$ref": "#/$defs/buildManifest" },
+        "artifact": { "$ref": "#/$defs/artifactReceipt" },
+        "preview": { "$ref": "#/$defs/previewReceipt" },
+        "destination": { "$ref": "#/$defs/destination" },
+        "preparedAt": { "$ref": "#/$defs/timestamp" },
+        "approval": { "$ref": "#/$defs/approvalReceipt" }
+      },
+      "description": "Separate trusted-control-plane receipt definition for approved activation. Never accepted as build metadata. Schema validity does not establish provenance, authorization, Access protection or phone acceptance."
+    }
+  }
+}
