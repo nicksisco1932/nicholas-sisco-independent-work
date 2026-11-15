@@ -1,0 +1,107 @@
+---
+published: true
+title: "Prostate cancer, Bayesian evidence, and competing risks"
+description: "A reproducible analysis of diagnostic denominators, ProtecT outcomes, Bayesian event rates, and multivariable competing-risk prognosis."
+status: "Research prototype — not clinically validated"
+maturity: "Prototype"
+date: "2026-11-15"
+last_updated: "2026-11-15"
+source_notion_pages:
+  - https://app.notion.com/p/419c6b28dc01816c8ec1fd9e4071518a
+  - https://app.notion.com/p/3e4c6b28dc01810286fbd31ce8d4d59d
+evidence_reviewed_through: "2026-11-15"
+unresolved_questions:
+  - "Reconcile the original published PREDICT source code with the article's cause-specific examples."
+  - "Externally validate and calibrate the historical prognosis models in contemporary cohorts."
+  - "Identify active residual cancer at other-cause death and dynamic surveillance-to-treatment transitions."
+  - "Quantify time-dependent treatment effects and functional outcomes without making unsupported causal assumptions."
+tags: ["research-note", "prostate-cancer", "bayesian-analysis", "competing-risks", "methods"]
+---
+
+import ProstateCompetingRiskExplorer from '../../components/ProstateCompetingRiskExplorer.astro';
+
+<p><strong>Independent research note · November 2026.</strong> This is a reproducible exploratory analysis of public literature, not an individualized risk service, contemporary clinical calculator, or treatment recommendation.</p>
+
+<h2>Question</h2>
+
+<p>Given a man's age, tumor features, competing illness, and management, what is the probability that he dies from prostate cancer rather than from another cause? How much of a reduction in prostate-cancer death becomes additional overall survival?</p>
+
+<p>Four distinct questions must be kept separate: whether latent cancer exists, whether cancer is diagnosed during a specific interval, the prognosis once diagnosed, and the cause of death among men who die. A probability from one denominator cannot silently become the prior for another.</p>
+
+<h2>Evidence</h2>
+
+<h3>Population risk</h3>
+
+<p><a href="https://seer.cancer.gov/statfacts/html/prost.html">SEER</a> estimates a 13.2% lifetime probability of prostate-cancer diagnosis among U.S. men. The <a href="https://www.cancer.gov/types/prostate/hp/prostate-screening-pdq">NCI screening evidence summary</a> gives an approximately 2.0% lifetime probability of dying from prostate cancer. The estimates reflect different periods and are not a single diagnosed cohort's fatality rate; neither measures latent histologic cancer today.</p>
+
+<p>Age-interval diagnosis probabilities from <a href="https://pmc.ncbi.nlm.nih.gov/articles/PMC12593258/">Kratzer et al.</a> are approximately 1.8% at ages 50–59, 5.3% at 60–69, 6.5% at 70–79, and 4.0% at 80–89. Every interval conditions on entering it alive and without a previous diagnosis. The percentages should not be summed.</p>
+
+<h3>ProtecT randomized outcomes</h3>
+
+<p>The randomized <a href="https://www.nejm.org/doi/full/10.1056/NEJMoa2214122">ProtecT study</a> followed 1,643 men with PSA-detected localized disease. The figures below are observed event fractions across variable follow-up (median 15 years; range 11–21), <strong>not identical-horizon 15-year cumulative risks</strong>.</p>
+
+<table>
+  <thead><tr><th>Assignment</th><th>PC deaths</th><th>Other-cause deaths</th><th>Metastases</th></tr></thead>
+  <tbody>
+    <tr><th>Active monitoring (545)</th><td>17 (3.12%)</td><td>107 (19.63%)</td><td>51 (9.36%)</td></tr>
+    <tr><th>Prostatectomy (553)</th><td>12 (2.17%)</td><td>105 (18.99%)</td><td>26 (4.70%)</td></tr>
+    <tr><th>Radiotherapy (545)</th><td>16 (2.94%)</td><td>99 (18.17%)</td><td>27 (4.95%)</td></tr>
+  </tbody>
+</table>
+
+<p>Prostate cancer accounted for 45 of 356 observed deaths (12.6%). This is a cause-of-death fraction among men who died, <strong>not</strong> proof that other-cause deaths occurred with active residual tumor.</p>
+
+<h3>A Bayesian reanalysis of event rates</h3>
+
+<p>From the trial's endpoint-specific events and person-time, we model event count D as Poisson(rate × exposure), with Jeffreys prior on each rate. The resulting posterior is Gamma(D + 0.5, rate = exposure). These estimates concern <strong>unadjusted average event-rate ratios</strong> during observed follow-up, not randomized individual treatment benefit, adjusted hazard ratios, or fixed-time cumulative incidence.</p>
+
+<table>
+  <thead><tr><th>Comparison with monitoring</th><th>Median rate ratio</th><th>95% credible interval</th><th>Pr(rate ratio below 1)</th></tr></thead>
+  <tbody>
+    <tr><th>PC death: prostatectomy</th><td>0.70</td><td>0.33–1.44</td><td>83.5%</td></tr>
+    <tr><th>PC death: radiotherapy</th><td>0.94</td><td>0.47–1.86</td><td>56.8%</td></tr>
+    <tr><th>Metastasis: prostatectomy</th><td>0.49</td><td>0.30–0.78</td><td>99.9%</td></tr>
+    <tr><th>Metastasis: radiotherapy</th><td>0.52</td><td>0.32–0.82</td><td>99.8%</td></tr>
+  </tbody>
+</table>
+
+<p>The data provide much stronger evidence of reduced metastasis rates than reduced PC-death rates over this horizon. Only 45 PC deaths occurred. A high posterior probability of a lower <em>group rate</em> is not an individual patient's probability of benefiting from treatment.</p>
+
+<h2>Analysis: competing risks and covariates</h2>
+
+<p>Two cause-specific hazards, for prostate-cancer death and other-cause death, jointly determine the probability of remaining alive. The cumulative incidence of PC death is the time integral of its cause-specific hazard weighted by survival from <em>both</em> causes until that instant. Cancer-specific mortality reductions therefore need not produce equivalent increases in overall survival.</p>
+
+<p>We reimplemented the original <a href="https://journals.plos.org/plosmedicine/article?id=10.1371/journal.pmed.1002758">2019 PREDICT Prostate</a> prognostic coefficients for age, PSA, Grade Group, clinical T category, biopsy involvement, source-defined comorbidity, and historical management category. This observational prognostic model is <strong>not a causal treatment-effect model</strong>. Conservative management combines watchful waiting and surveillance; radical management pools prostatectomy and radiotherapy.</p>
+
+<p>For a hypothetical Grade Group 2, PSA 6.2 ng/mL, cT2, six-of-12-positive-core profile, the reconstructed 15-year overall-survival difference between modeled management categories is +8.48 percentage points at age 52 without source-defined comorbidity, +8.89 at 65, +7.20 at 72, and +3.86 at 72 with source-defined comorbidity.</p>
+
+<p>In the last scenario, our <em>experimental continuous-hazard extension</em> changes modeled PC death from 18.44% to 10.01%, survival from 18.09% to 21.95%, and other-cause death from 63.47% to 68.04%. Other-cause death can increase because a patient avoids cancer death and subsequently dies of another cause. The other-cause hazard itself is unchanged; this is not evidence of treatment toxicity.</p>
+
+<ProstateCompetingRiskExplorer />
+
+<h2>Limitations</h2>
+
+<p><strong>Unresolved replication discrepancy:</strong> for one published example, the PREDICT paper reports PC mortality 19.6% versus 11.1%, reconstruction of the published source's annual-allocation algorithm gives 24.14% versus 14.83%, and our mathematically coherent continuous method gives 18.44% versus 10.01%. Neither method is an updated clinical tool. Overall-survival comparisons are unchanged by the allocation method, but the cause-specific discrepancy is unresolved.</p>
+
+<p>All 12 published PREDICT survival-gain vignettes are reproduced within 0.085 percentage points. The original analysis package passed 44 Python tests and 576 cross-language probability checks. This verifies numerical implementation consistency, <strong>not clinical calibration or external validity</strong>. Its 100,000-person endpoint samples are not a lifetime natural-history microsimulation.</p>
+
+<p>Modern protocol-directed active surveillance is different from ProtecT's PSA-based monitoring. In <a href="https://pmc.ncbi.nlm.nih.gov/articles/PMC11140579/">Canary PASS</a>, estimated 10-year PC death was 0.1%, with approximately 49% undergoing treatment: surveillance includes management transitions, not permanent refusal of treatment. PASS cannot be ranked causally against ProtecT by cross-trial comparison.</p>
+
+<p>The <a href="https://pubmed.ncbi.nlm.nih.gov/42431756/">HEAT/ICE cohorts</a> evaluated focal HIFU and cryotherapy, not TULSA; the <a href="https://www.sciencedirect.com/science/article/pii/S1078143924002503">TACT five-year whole-gland TULSA abstract</a> does not identify long-term comparative mortality effects. None of the present data identifies active residual cancer at noncancer death, individual counterfactual treatment benefit, 40-year tumor trajectories, or functional quality-adjusted survival.</p>
+
+<h2>Takeaway</h2>
+
+<p>Diagnosis risk, progression, prostate-cancer death, and all-cause survival are distinct estimands. Distinguishing them makes the difference between a genuine inference and an attractive but misleading model. The interactive calculator illustrates a historical model's mechanics, while preserving its evidence and uncertainty boundaries.</p>
+
+<h2>Sources and reproducibility</h2>
+
+<ol>
+<li><a href="https://seer.cancer.gov/statfacts/html/prost.html">SEER prostate cancer statistics</a> and <a href="https://www.cancer.gov/types/prostate/hp/prostate-screening-pdq">NCI screening PDQ</a>.</li>
+<li><a href="https://pmc.ncbi.nlm.nih.gov/articles/PMC12593258/">Kratzer et al., prostate cancer statistics (2025)</a>.</li>
+<li><a href="https://www.nejm.org/doi/full/10.1056/NEJMoa2214122">Hamdy et al., ProtecT randomized 15-year outcomes (2023)</a>.</li>
+<li><a href="https://journals.plos.org/plosmedicine/article?id=10.1371/journal.pmed.1002758">Thurtle et al., PREDICT Prostate (2019)</a> and <a href="https://github.com/dt433/Predict-Prostate/blob/master/Source%20code%20for%20Individual%20case%20and%20Cohorts">original source-code archive</a>.</li>
+<li><a href="https://pmc.ncbi.nlm.nih.gov/articles/PMC11140579/">Newcomb et al., Canary PASS (2024)</a>.</li>
+<li><a href="https://pubmed.ncbi.nlm.nih.gov/42431756/">Light et al., focal HIFU/cryotherapy HEAT and ICE (2026)</a> and <a href="https://www.sciencedirect.com/science/article/pii/S1078143924002503">TACT whole-gland TULSA abstract</a>.</li>
+</ol>
+
+<p><strong>Inspectability:</strong> <a href="https://github.com/nicksisco1932/nicholas-sisco-independent-work/blob/main/src/lib/prostate-predict.mjs">browser calculation source</a> and <a href="https://github.com/nicksisco1932/nicholas-sisco-independent-work/blob/main/tests/prostate-predict.test.mjs">automated tests</a>. The full Python implementation, input CSVs, evidence manifest, results, and offline HTML explorer are retained in the dated research artifact. <a href="https://app.notion.com/p/419c6b28dc01816c8ec1fd9e4071518a">Notion research system of record</a> (access subject to the owner's workspace permissions).</p>
