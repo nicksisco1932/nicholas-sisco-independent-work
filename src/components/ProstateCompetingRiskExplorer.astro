@@ -1,0 +1,119 @@
+---
+/* Self-contained, browser-local research experiment: no inputs are transmitted.
+ * The historical model is observational, not clinical decision support. */
+---
+<section class="pc-explorer" data-pc-explorer aria-label="Exploratory competing-risk calculator">
+  <h2>Interactive competing-risk experiment</h2>
+  <p>Change one parameter at a time. Both management strategies use the <strong>historical observational PREDICT Prostate coefficients</strong>; neither result is a personal prognosis or a randomized causal treatment comparison.</p>
+  <form data-pc-form>
+    <div class="pc-fields">
+      <label>Age at diagnosis <input name="age" type="number" min="35" max="95" step="1" value="65" required /></label>
+      <label>PSA (ng/mL) <input name="psa" type="number" min="0" max="99.99" step="0.1" value="6.2" required /></label>
+      <label>Grade Group
+        <select name="grade">
+          <option value="1">1</option><option value="2" selected>2</option>
+          <option value="3">3</option><option value="4">4</option><option value="5">5</option>
+        </select>
+      </label>
+      <label>Clinical T category
+        <select name="stage">
+          <option value="1">cT1</option><option value="2" selected>cT2</option>
+          <option value="3">cT3</option><option value="4">cT4</option>
+        </select>
+      </label>
+      <label>Biopsy involvement
+        <select name="biopsy">
+          <option value="0">Unknown</option>
+          <option value="1">Less than 50% cores positive</option>
+          <option value="2" selected>50% or more cores positive</option>
+        </select>
+      </label>
+      <label>Source-defined comorbidity
+        <select name="comorbidity">
+          <option value="0" selected>No</option><option value="1">Yes</option>
+        </select>
+      </label>
+      <label>Follow-up years
+        <select name="years">
+          <option value="5">5</option><option value="10">10</option><option value="15" selected>15</option>
+        </select>
+      </label>
+      <label>Cause-allocation method
+        <select name="method">
+          <option value="continuous" selected>Continuous-hazard integration (experimental)</option>
+          <option value="legacy">Original annual-allocation reconstruction</option>
+        </select>
+      </label>
+    </div>
+  </form>
+  <p class="pc-annotation">Comorbidity means Charlson score ≥1 <em>and</em> a hospital admission within two years in the original model. “Conservative” combines surveillance and watchful waiting; “radical” pools prostatectomy and radiotherapy.</p>
+  <div class="pc-error" data-pc-error role="alert" hidden></div>
+  <div class="pc-results" data-pc-results aria-live="polite" aria-atomic="true">
+    <div class="pc-row pc-head"><span>Management assignment</span><span>Alive</span><span>PC death</span><span>Other-cause death</span></div>
+    <div class="pc-row"><strong>Conservative</strong><strong data-conservative-alive>—</strong><span data-conservative-pc>—</span><span data-conservative-other>—</span></div>
+    <div class="pc-row"><strong>Radical</strong><strong data-radical-alive>—</strong><span data-radical-pc>—</span><span data-radical-other>—</span></div>
+  </div>
+  <p class="pc-difference">Modeled absolute difference in survival (radical minus conservative): <strong data-survival-difference>—</strong></p>
+  <p class="pc-warning"><strong>Interpretation:</strong> This is a methodological experiment, not a treatment recommendation. A known discrepancy remains between the article and the original published source code for one cause-specific example. The continuous method is our unvalidated mathematical extension, not a correction to the clinical model. No patient information is stored or transmitted.</p>
+</section>
+<script>
+  import { predictProstate } from '../lib/prostate-predict.mjs';
+
+  const section = document.querySelector<HTMLElement>('[data-pc-explorer]');
+  const form = section?.querySelector<HTMLFormElement>('[data-pc-form]');
+  if (section && form) {
+    const setText = (selector: string, value: string) => {
+      const element = section.querySelector<HTMLElement>(selector);
+      if (element) element.textContent = value;
+    };
+    const format = (fraction: number) => (100 * fraction).toFixed(2) + '%';
+    const render = () => {
+      const values = Object.fromEntries(new FormData(form).entries());
+      const patient = {
+        age: Number(values.age), psa: Number(values.psa),
+        grade: Number(values.grade), stage: Number(values.stage),
+        biopsy: Number(values.biopsy), comorbidity: Number(values.comorbidity),
+      };
+      const years = Number(values.years);
+      const method = String(values.method);
+      const error = section.querySelector<HTMLElement>('[data-pc-error]');
+      const results = section.querySelector<HTMLElement>('[data-pc-results]');
+      try {
+        const conservative = predictProstate(patient, { years, method });
+        const radical = predictProstate(patient, { radical: true, years, method });
+        for (const [name, result] of [['conservative', conservative], ['radical', radical]] as const) {
+          setText('[data-' + name + '-alive]', format(result.alive));
+          setText('[data-' + name + '-pc]', format(result.pcDeath));
+          setText('[data-' + name + '-other]', format(result.otherDeath));
+        }
+        setText('[data-survival-difference]', (100 * (radical.alive - conservative.alive)).toFixed(2) + ' percentage points');
+        if (error) error.hidden = true;
+        if (results) results.hidden = false;
+      } catch (exception) {
+        if (error) { error.hidden = false; error.textContent = exception instanceof Error ? exception.message : 'Invalid input.'; }
+        if (results) results.hidden = true;
+        setText('[data-survival-difference]', '—');
+      }
+    };
+    form.addEventListener('input', render);
+    form.addEventListener('change', render);
+    render();
+  }
+</script>
+<style>
+  .pc-explorer { margin: 1.75rem 0; padding: 1.4rem; border: 1px solid var(--line, #cbcfc7); border-radius: .35rem; background: var(--surface-tint, #f8f7f2); }
+  .pc-explorer h2 { margin-top: 0; }
+  .pc-explorer p { line-height: 1.65; }
+  .pc-fields { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 1.1rem; margin: 1.25rem 0 1rem; }
+  .pc-fields label { display: flex; flex-direction: column; gap: .42rem; font-size: .92rem; font-weight: 600; }
+  .pc-fields input, .pc-fields select { width: 100%; max-width: 100%; min-width: 0; background: white; color: #17232a; padding: .55rem .65rem; border: 1px solid #a9ada7; border-radius: .2rem; font: inherit; font-weight: 400; }
+  .pc-fields input:focus-visible, .pc-fields select:focus-visible { outline: 2px solid var(--accent, #415847); outline-offset: 2px; }
+  .pc-annotation, .pc-warning { font-size: .88rem; }
+  .pc-error { padding: 1rem; border: 1px solid #a43c32; color: #8a2c22; }
+  .pc-results { margin: 1.2rem 0; overflow-x: auto; }
+  .pc-row { display: grid; grid-template-columns: minmax(150px, 1.35fr) repeat(3,minmax(85px,1fr)); gap: .7rem; padding: .8rem .3rem; align-items: baseline; border-bottom: 1px solid var(--line, #cbcfc7); font-size: .9rem; }
+  .pc-head { font-size: .74rem; font-weight: 650; text-transform: uppercase; letter-spacing: .035em; color: var(--muted, #5e625d); }
+  .pc-difference { padding: .9rem 0; }
+  .pc-warning { border-left: 3px solid #867754; padding: .7rem 1rem; background: #f4f0e5; color: #34342b; }
+  @media (max-width: 620px) { .pc-fields { grid-template-columns: 1fr; } .pc-explorer { padding: .9rem; } .pc-row { min-width: 510px; } }
+</style>
